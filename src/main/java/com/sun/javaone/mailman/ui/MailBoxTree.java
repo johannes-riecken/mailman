@@ -38,7 +38,7 @@ import java.awt.image.*;
 import java.awt.geom.*;
 import java.awt.event.*;
 import java.beans.*;
-import com.sun.java.swing.plaf.windows.WindowsTreeUI;
+import com.sun.java.swing.plaf.motif.MotifTreeUI;
 
 import com.sun.javaone.mailman.model.MailBox;
 import com.sun.javaone.mailman.ui.image.MessageIconGenerator;
@@ -285,7 +285,7 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
         return value.toString();
     }
     
-    private class MailBoxUI extends WindowsTreeUI {
+    private class MailBoxUI extends MotifTreeUI {
         protected int getRowX(int row, int depth) {
             return super.getRowX(row, depth - 1);
         }
