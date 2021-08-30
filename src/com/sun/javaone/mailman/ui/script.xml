@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stages font="40 Arial">
+    <stage>
+        <message font="bold +4">Extreme GUI Makeover 2006</message>
+        <message></message>
+        <message>Scott Violet</message>
+        <message>Shannon Hickey</message>
+        <message>Romain Guy</message>
+    </stage>
+    <stage pause="1000">
+        <message>This short automated demo will step you through the effects added to this application.</message>
+        <message>At any point you can stop the demo by moving the mouse.</message>
+        <message>Full source is available at</message>
+        <message font="-12">http://weblogs.java.net/blog/zixle/archive/2006.10.21/mailman-1.0-src.zip</message>
+    </stage>
+    <stage>
+        <message>Sit back.</message>
+        <message>Enjoy!</message>
+    </stage>
+    <stage>
+        <message>Add depth by way of drop shadows.</message>
+        <script>
+            <selectPopupItem componentName="toolbar" findEmptyRegion="true" index="0"/>
+        </script>
+    </stage>
+    <stage>
+        <message>Liven up the toolbar and menus.</message>
+        <script>
+            <selectPopupItem componentName="toolbar" findEmptyRegion="true" index="1"/>
+        </script>
+    </stage>
+    <stage>
+        <message>Custom mouse-over effects.</message>
+        <script>
+            <selectPopupItem componentName="toolbar" findEmptyRegion="true" index="2"/>
+            <moveMouse componentName="getMail"/>
+            <moveMouse componentName="stop"/>
+        </script>
+    </stage>
+    <stage>
+        <message>Custom UI and renderer create a modern tree.</message>
+        <script>
+            <selectPopupItem componentName="toolbar" findEmptyRegion="true" index="4"/>
+        </script>
+    </stage>
+    <stage>
+        <message>Custom drag-over feedback.</message>
+        <script>
+            <clickMouse componentName="mailTable" index="1"/>
+            <pressMouse/>
+            <pause time="1000"/>
+            <moveMouse componentName="mailTree" index="1"/>
+            <pause time="1000"/>
+            <moveMouse componentName="mailTree" index="6"/>
+            <pause time="1000"/>
+            <moveMouse componentName="mailTree" index="1"/>
+            <typeKey keyCode="27"/>
+            <releaseMouse/>
+        </script>
+    </stage>
+    <stage>
+        <message>Custom drop effects,</message>
+        <message>and more drop shadows.</message>
+        <script>
+            <selectPopupItem componentName="toolbar" findEmptyRegion="true" index="4"/>
+            <clickMouse componentName="mailTable" index="2"/>
+            <pressMouse/>
+            <pause time="1000"/>
+            <moveMouse componentName="mailTree" index="1"/>
+            <typeKey keyCode="27"/>
+            <releaseMouse/>
+            <clickMouse componentName="mailTable" index="3"/>
+            <pressMouse/>
+            <pause time="1000"/>
+            <moveMouse componentName="mailTree" index="1"/>
+            <pause time="1000"/>
+            <moveMouse componentName="mailTree" index="6"/>
+            <releaseMouse/>
+        </script>
+    </stage>
+    <stage>
+        <message>Add table striping to improve the look of tables.</message>
+        <script>
+            <selectPopupItem componentName="mailTable" findEmptyRegion="true" index="0"/>
+        </script>
+    </stage>
+    <stage>
+        <message>Use a custom table renderer to highlight rows in a table.</message>
+        <script>
+            <clickMouse componentName="mailTree" index="5"/>
+            <clickMouse componentName="mailTable" index="0"/>
+            <selectPopupItem componentName="mailTable" findEmptyRegion="true" index="1.0"/>
+        </script>
+    </stage>
+    <stage pause="1000">
+        <message>Improve the message header by more drop shadows, and a configurable image based on the sender.</message>
+        <script>
+            <selectPopupItem componentName="messageHeader" findEmptyRegion="true" index="0"/>
+            <selectPopupItem componentName="messageHeader" findEmptyRegion="true" index="1"/>
+        </script>
+    </stage>
+    <stage>
+        <message>Message-folding by way of custom text elements and views.</message>
+        <script>
+            <selectPopupItem componentName="messagePane" findEmptyRegion="true" index="0"/>
+            <selectPopupItem componentName="messagePane" findEmptyRegion="true" index="1"/>
+            <clickMouse componentName="mailTable" index="2"/>
+            <external class="com.sun.javaone.mailman.ui.MesageFoldExecutor" index="0"/>
+            <clickMouse/>
+            <clickMouse/>
+            <moveMouse componentName="messagePaneVerticalScrollBar"/>
+            <moveMouse deltaX="0" deltaY="-50"/>
+            <pressMouse/>
+            <moveMouse deltaY="150"/>
+            <moveMouse deltaY="-150"/>
+            <releaseMouse/>
+        </script>
+    </stage>
+    <stage>
+        <message>Firefox-style "find" from SwingLabs</message>
+        <script>
+            <external class="com.sun.javaone.mailman.ui.GlobalActionExecutor" actionName="firefox"/>
+            <pause time="2000"/>
+            <external class="com.sun.javaone.mailman.ui.GlobalActionExecutor" actionName="firefox"/>
+            <pause time="1000"/>
+        </script>
+    </stage>
+    <stage>
+        <message>Extreme "find", aka shower-door "find"</message>
+        <script>
+            <external class="com.sun.javaone.mailman.ui.GlobalActionExecutor" actionName="vista"/>
+            <pause time="2000"/>
+            <moveMouse componentName="vistaTitleBar"/>
+            <pressMouse/>
+            <moveMouse deltaX="-200" deltaY="200"/>
+            <moveMouse deltaX="400" deltaY="0"/>
+            <releaseMouse/>
+            <clickMouse componentName="vistaCloseButton"/>
+        </script>
+    </stage>
+    <stage>
+        <message>Extreme message list</message>
+        <script>
+            <selectPopupItem componentName="toolbar" findEmptyRegion="true" index="7"/>
+        </script>
+    </stage>
+    <stage>
+        <message>Full size, extreme message list</message>
+        <script>
+            <selectPopupItem componentName="toolbar" findEmptyRegion="true" index="8"/>
+            <pause time="1000"/>
+            <clickMouse componentName="mailList" index="0"/>
+            <pause time="2000"/>
+        </script>
+    </stage>
+    <stage>
+        <message>The finale...</message>
+        <script>
+            <clickMouse componentName="composeButton"/>
+            <pause time="1000"/>
+            <clickMouse componentName="sendButton"/>
+            <pause time="7000"/>
+            <external class="com.sun.javaone.mailman.ui.FrameDisposeExecutor"/>
+            <pause time="1000"/>
+        </script>
+    </stage>
+    <stage>
+        <message font="bold +4">Extreme GUI Makeover 2006</message>
+        <message></message>
+        <message>Scott Violet</message>
+        <message>Shannon Hickey</message>
+        <message>Romain Guy</message>
+    </stage>
+</stages>

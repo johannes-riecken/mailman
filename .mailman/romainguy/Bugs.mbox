@@ -1,0 +1,1844 @@
+From - Wed Aug 16 10:10:41 2006
+X-Mozilla-Status: 0001
+X-Mozilla-Status2: 00000000
+Return-path: <swing@j.k.dev.null>
+Received: from jd-kj-09.dev.null ([192.18.39.119])
+ by foo-mail1.jk.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTP id <0J3T009L13VAW600@foo-mail1.jk.dev.null>; Thu,
+ 10 Aug 2006 16:57:10 -0700 (PDT)
+Received: from conversion-daemon.jd-kj-09.dev.null by jd-kj-09.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ id <0J3T00L013RPT800@jd-kj-09.dev.null>; Thu,
+ 10 Aug 2006 16:57:10 -0700 (PDT)
+Received: from foo-bar3-2.k.dev.null ([10.4.135.22])
+ by jd-kj-09.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTP id <0J3T00KG13V7QX50@jd-kj-09.dev.null>; Thu,
+ 10 Aug 2006 16:57:07 -0700 (PDT)
+Received: from kjh.k.dev.null ([129.145.155.42])
+ by foo-mail1.jk.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTP id <0J3T009OU3V7WA00@foo-mail1.jk.dev.null>; Thu,
+ 10 Aug 2006 16:57:07 -0700 (PDT)
+Received: from j.k.dev.null (mail@j.k.dev.null [10.5.25.87])
+	by kjh.k.dev.null (8.13.6+Sun/8.12.10/ENSMAIL,v2.2)
+ with ESMTP id k7ANv7ga026882; Thu, 10 Aug 2006 16:57:07 -0700 (PDT)
+Received: from swing by j.k.dev.null with local (Exim 3.36 #1 (Debian))
+	id 1GBKOT-0005C0-00; Thu, 10 Aug 2006 16:56:53 -0700
+Date: Thu, 10 Aug 2006 16:56:53 -0700
+From: scott_violet@dev.null
+Subject: [6459213.v0] dolphin request for review
+Sender: swing <swing@j.k.dev.null>
+To: brent_christian@dev.null, shannon_hickey@dev.null
+Cc: 6459213-archive@j.k.dev.null, scott_violet@dev.null
+Message-id: <E1GBKOT-0005C0-00@j.k.dev.null>
+Content-type: TEXT/PLAIN
+
+Note this is for dolphin, no rush.
+
+Thanks,
+
+    -Scott
+
+
+================================
+webrev:
+http://j.k.dev.null/projects/swing_data/dolphin/6459213.0
+mail-archive:
+http://j.k.dev.null/mail-archive/6459213
+bug description:
+http://descs.k.dev.null/detail.jsp?cr=6459213
+bug summary:
+http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=6459213
+robot documentation:
+http://j.k.dev.null/projects/swing/
+
+To approve this request please reply to all with the word 'approved' added to the subject
+
+From - Wed Aug 16 10:10:41 2006
+X-Mozilla-Status: 0013
+X-Mozilla-Status2: 00000000
+Return-path: <brent_christian@dev.null>
+Received: from jd-kj-09.dev.null ([192.18.39.119])
+ by foo-mail1.jk.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTP id <0J3U00MFQU2EQOE0@foo-mail1.jk.dev.null> for
+ scott_violet@dev.null; Fri, 11 Aug 2006 15:20:38 -0700 (PDT)
+Received: from conversion-daemon.jd-kj-09.dev.null by jd-kj-09.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ id <0J3U00D01U1RK000@jd-kj-09.dev.null>
+ (original mail from brent_christian@dev.null)
+ for scott_violet@dev.null (ORCPT scott_violet@dev.null); Fri,
+ 11 Aug 2006 15:20:38 -0700 (PDT)
+Received: from [129.150.20.177] by jd-kj-09.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTPSA id <0J3U00F9YU2D19H1@jd-kj-09.dev.null>; Fri,
+ 11 Aug 2006 15:20:38 -0700 (PDT)
+Date: Fri, 11 Aug 2006 15:19:57 -0700
+From: Brent Christian <brent_christian@dev.null>
+Subject: Re: [6459213.v0] dolphin request for review
+In-reply-to: <E1GBKOT-0005C0-00@j.k.dev.null>
+Sender: brent_christian@dev.null
+To: scott_violet@dev.null
+Cc: shannon_hickey@dev.null, 6459213-archive@j.k.dev.null
+Message-id: <44DD028D.60609@dev.null>
+Organization: Sun Microsystems, Inc.
+MIME-version: 1.0
+Content-type: text/plain; format=flowed; charset=ISO-8859-1
+Content-transfer-encoding: 7BIT
+References: <E1GBKOT-0005C0-00@j.k.dev.null>
+User-Agent: Thunderbird 1.5.0.2 (Windows/20060308)
+Original-recipient: rfc822;scott_violet@dev.null
+
+Hi, Scott
+
+So, the fix prevents multiple revalidate() Runnables from being posted to the 
+EDT for a particular JComponent.  Are you seeing a lot of revalidate() calls 
+being made to the same component from off the EDT?  I'm curious as to what 
+scenario this is aiming to improve - startup?  Background tasks?
+
+Thanks,
+
+-Brent
+
+scott_violet@dev.null wrote:
+> Note this is for dolphin, no rush.
+> 
+> Thanks,
+> 
+>     -Scott
+> 
+> 
+> ================================
+> webrev:
+> http://j.k.dev.null/projects/swing_data/dolphin/6459213.0
+> mail-archive:
+> http://j.k.dev.null/mail-archive/6459213
+> bug description:
+> http://descs.k.dev.null/detail.jsp?cr=6459213
+> bug summary:
+> http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=6459213
+> robot documentation:
+> http://j.k.dev.null/projects/swing/
+> 
+> To approve this request please reply to all with the word 'approved' added to the subject
+
+From - Wed Aug 16 10:10:41 2006
+X-Mozilla-Status: 0013
+X-Mozilla-Status2: 00000000
+Return-path: <scott_violet@dev.null>
+Received: from jd-kj-10.dev.null ([192.18.39.120])
+ by foo-mail1.jk.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTP id <0J3U007ANV38P310@foo-mail1.jk.dev.null>; Fri,
+ 11 Aug 2006 15:42:44 -0700 (PDT)
+Received: from conversion-daemon.jd-kj-10.dev.null by jd-kj-10.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ id <0J3U00L01V2CUI00@jd-kj-10.dev.null>
+ (original mail from scott_violet@dev.null); Fri,
+ 11 Aug 2006 15:42:44 -0700 (PDT)
+Received: from [129.145.161.113] by jd-kj-10.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTPSA id <0J3U0013LV38WMC0@jd-kj-10.dev.null>; Fri,
+ 11 Aug 2006 15:42:44 -0700 (PDT)
+Date: Fri, 11 Aug 2006 15:42:43 -0700
+From: Scott Violet <scott_violet@dev.null>
+Subject: Re: [6459213.v0] dolphin request for review
+In-reply-to: <44DD028D.60609@dev.null>
+Sender: scott_violet@dev.null
+To: Brent Christian <brent_christian@dev.null>
+Cc: shannon_hickey@dev.null, 6459213-archive@j.k.dev.null
+Message-id: <44DD07E3.6060805@dev.null>
+MIME-version: 1.0
+Content-type: text/plain; format=flowed; charset=ISO-8859-1
+Content-transfer-encoding: 7BIT
+References: <E1GBKOT-0005C0-00@j.k.dev.null> <44DD028D.60609@dev.null>
+User-Agent: Thunderbird 1.5.0.4 (Windows/20060516)
+
+Hi Brent,
+
+This is primarily for startup of apps, and only those doing stuff on the 
+main thread. Sadly it's very common for folks to try and startup on the 
+main thread, so that it seems worth optimizing.
+
+	-Scott
+
+Brent Christian wrote:
+> Hi, Scott
+> 
+> So, the fix prevents multiple revalidate() Runnables from being posted 
+> to the EDT for a particular JComponent.  Are you seeing a lot of 
+> revalidate() calls being made to the same component from off the EDT?  
+> I'm curious as to what scenario this is aiming to improve - startup?  
+> Background tasks?
+> 
+> Thanks,
+> 
+> -Brent
+> 
+> scott_violet@dev.null wrote:
+>> Note this is for dolphin, no rush.
+>>
+>> Thanks,
+>>
+>>     -Scott
+>>
+>>
+>> ================================
+>> webrev:
+>> http://j.k.dev.null/projects/swing_data/dolphin/6459213.0
+>> mail-archive:
+>> http://j.k.dev.null/mail-archive/6459213
+>> bug description:
+>> http://descs.k.dev.null/detail.jsp?cr=6459213
+>> bug summary:
+>> http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=6459213
+>> robot documentation:
+>> http://j.k.dev.null/projects/swing/
+>>
+>> To approve this request please reply to all with the word 'approved' 
+>> added to the subject
+
+
+From - Wed Aug 16 10:10:41 2006
+X-Mozilla-Status: 0011
+X-Mozilla-Status2: 00000000
+Return-path: <scott_violet@dev.null>
+Received: from jd-kj-09.dev.null ([192.18.39.119])
+ by foo-mail1.jk.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTP id <0J3U007ABVXGP230@foo-mail1.jk.dev.null>; Fri,
+ 11 Aug 2006 16:00:52 -0700 (PDT)
+Received: from conversion-daemon.jd-kj-09.dev.null by jd-kj-09.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ id <0J3U00801VXGRF00@jd-kj-09.dev.null>
+ (original mail from scott_violet@dev.null); Fri,
+ 11 Aug 2006 16:00:52 -0700 (PDT)
+Received: from [129.145.161.113] by jd-kj-09.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTPSA id <0J3U00FSJVXG1131@jd-kj-09.dev.null>; Fri,
+ 11 Aug 2006 16:00:52 -0700 (PDT)
+Date: Fri, 11 Aug 2006 16:00:51 -0700
+From: Scott Violet <scott_violet@dev.null>
+Subject: Re: [6459213.v0] dolphin request for review
+In-reply-to: <44DD07E3.6060805@dev.null>
+Sender: scott_violet@dev.null
+To: Brent Christian <brent_christian@dev.null>
+Cc: shannon_hickey@dev.null, 6459213-archive@j.k.dev.null
+Message-id: <44DD0C23.507@dev.null>
+MIME-version: 1.0
+Content-type: text/plain; format=flowed; charset=ISO-8859-1
+Content-transfer-encoding: 7BIT
+References: <E1GBKOT-0005C0-00@j.k.dev.null> <44DD028D.60609@dev.null>
+ <44DD07E3.6060805@dev.null>
+User-Agent: Thunderbird 1.5.0.4 (Windows/20060516)
+
+Here's some numbers from my machine: this saves 350 Runnables from 
+getting created with SwingSet2, 129 for Stylepad, 5 for Metalworks, and 
+0 for Notepad.
+
+	-Scott
+
+Scott Violet wrote:
+> Hi Brent,
+> 
+> This is primarily for startup of apps, and only those doing stuff on the 
+> main thread. Sadly it's very common for folks to try and startup on the 
+> main thread, so that it seems worth optimizing.
+> 
+>     -Scott
+> 
+> Brent Christian wrote:
+>> Hi, Scott
+>>
+>> So, the fix prevents multiple revalidate() Runnables from being posted 
+>> to the EDT for a particular JComponent.  Are you seeing a lot of 
+>> revalidate() calls being made to the same component from off the EDT?  
+>> I'm curious as to what scenario this is aiming to improve - startup?  
+>> Background tasks?
+>>
+>> Thanks,
+>>
+>> -Brent
+>>
+>> scott_violet@dev.null wrote:
+>>> Note this is for dolphin, no rush.
+>>>
+>>> Thanks,
+>>>
+>>>     -Scott
+>>>
+>>>
+>>> ================================
+>>> webrev:
+>>> http://j.k.dev.null/projects/swing_data/dolphin/6459213.0
+>>> mail-archive:
+>>> http://j.k.dev.null/mail-archive/6459213
+>>> bug description:
+>>> http://descs.k.dev.null/detail.jsp?cr=6459213
+>>> bug summary:
+>>> http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=6459213
+>>> robot documentation:
+>>> http://j.k.dev.null/projects/swing/
+>>>
+>>> To approve this request please reply to all with the word 'approved' 
+>>> added to the subject
+> 
+
+
+
+From - Wed Aug 16 10:10:41 2006
+X-Mozilla-Status: 0013
+X-Mozilla-Status2: 00000000
+Return-path: <brent_christian@dev.null>
+Received: from jd-kj-09.dev.null ([192.18.39.119])
+ by foo-mail1.jk.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTP id <0J3U007LYWY3P430@foo-mail1.jk.dev.null> for
+ scott_violet@dev.null; Fri, 11 Aug 2006 16:22:51 -0700 (PDT)
+Received: from conversion-daemon.jd-kj-09.dev.null by jd-kj-09.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ id <0J3U00501WVOB400@jd-kj-09.dev.null>
+ (original mail from brent_christian@dev.null)
+ for scott_violet@dev.null (ORCPT scott_violet@dev.null); Fri,
+ 11 Aug 2006 16:22:51 -0700 (PDT)
+Received: from [129.150.20.177] by jd-kj-09.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTPSA id <0J3U00FGKWY20XE1@jd-kj-09.dev.null>; Fri,
+ 11 Aug 2006 16:22:51 -0700 (PDT)
+Date: Fri, 11 Aug 2006 16:22:10 -0700
+From: Brent Christian <brent_christian@dev.null>
+Subject: Re: [6459213.v0] dolphin request for review - approved
+In-reply-to: <44DD07E3.6060805@dev.null>
+Sender: brent_christian@dev.null
+To: Scott Violet <scott_violet@dev.null>
+Cc: shannon_hickey@dev.null, 6459213-archive@j.k.dev.null
+Message-id: <44DD1122.3030608@dev.null>
+Organization: Sun Microsystems, Inc.
+MIME-version: 1.0
+Content-type: text/plain; format=flowed; charset=ISO-8859-1
+Content-transfer-encoding: 7BIT
+References: <E1GBKOT-0005C0-00@j.k.dev.null> <44DD028D.60609@dev.null>
+ <44DD07E3.6060805@dev.null>
+User-Agent: Thunderbird 1.5.0.2 (Windows/20060308)
+Original-recipient: rfc822;scott_violet@dev.null
+
+Scott Violet wrote:
+> This is primarily for startup of apps
+
+Well, hooray for that! :)
+
+> and only those doing stuff on the 
+> main thread. Sadly it's very common for folks to try and startup on the 
+> main thread, so that it seems worth optimizing.
+
+Alright, I get it now after peeking into a couple of Swing classes - you get a 
+revalidate() whenever you change your component.  So doing:
+
+JButton b = new JButton();
+b.setName("Button");
+b.setIcon(someIcon);
+
+will do two revalidate() calls on the JButton.
+
+
+I'm very mildly concerned about adding the synchronization, but putting it into 
+...um...dolphin... so early should shake out anything.
+
+-Brent
+
+> Brent Christian wrote:
+>> Hi, Scott
+>>
+>> So, the fix prevents multiple revalidate() Runnables from being posted 
+>> to the EDT for a particular JComponent.  Are you seeing a lot of 
+>> revalidate() calls being made to the same component from off the EDT?  
+>> I'm curious as to what scenario this is aiming to improve - startup?  
+>> Background tasks?
+>>
+>> Thanks,
+>>
+>> -Brent
+>>
+>> scott_violet@dev.null wrote:
+>>> Note this is for dolphin, no rush.
+>>>
+>>> Thanks,
+>>>
+>>>     -Scott
+>>>
+>>>
+>>> ================================
+>>> webrev:
+>>> http://j.k.dev.null/projects/swing_data/dolphin/6459213.0
+>>> mail-archive:
+>>> http://j.k.dev.null/mail-archive/6459213
+>>> bug description:
+>>> http://descs.k.dev.null/detail.jsp?cr=6459213
+>>> bug summary:
+>>> http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=6459213
+>>> robot documentation:
+>>> http://j.k.dev.null/projects/swing/
+>>>
+>>> To approve this request please reply to all with the word 'approved' 
+>>> added to the subject
+> 
+
+From - Wed Aug 16 10:10:42 2006
+X-Mozilla-Status: 0013
+X-Mozilla-Status2: 00000000
+Return-path: <brent_christian@dev.null>
+Received: from jd-kj-09.dev.null ([192.18.39.119])
+ by foo-mail1.jk.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTP id <0J3U007G1XP0P250@foo-mail1.jk.dev.null> for
+ scott_violet@dev.null; Fri, 11 Aug 2006 16:39:00 -0700 (PDT)
+Received: from conversion-daemon.jd-kj-09.dev.null by jd-kj-09.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ id <0J3U00I01XJW8200@jd-kj-09.dev.null>
+ (original mail from brent_christian@dev.null)
+ for scott_violet@dev.null (ORCPT scott_violet@dev.null); Fri,
+ 11 Aug 2006 16:39:00 -0700 (PDT)
+Received: from [129.150.20.177] by jd-kj-09.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTPSA id <0J3U00FGSXP019Q1@jd-kj-09.dev.null>; Fri,
+ 11 Aug 2006 16:39:00 -0700 (PDT)
+Date: Fri, 11 Aug 2006 16:38:19 -0700
+From: Brent Christian <brent_christian@dev.null>
+Subject: Re: [6459213.v0] dolphin request for review
+In-reply-to: <44DD0C23.507@dev.null>
+Sender: brent_christian@dev.null
+To: Scott Violet <scott_violet@dev.null>
+Cc: shannon_hickey@dev.null, 6459213-archive@j.k.dev.null
+Message-id: <44DD14EB.4090403@dev.null>
+Organization: Sun Microsystems, Inc.
+MIME-version: 1.0
+Content-type: text/plain; format=flowed; charset=ISO-8859-1
+Content-transfer-encoding: 7BIT
+References: <E1GBKOT-0005C0-00@j.k.dev.null> <44DD028D.60609@dev.null>
+ <44DD07E3.6060805@dev.null> <44DD0C23.507@dev.null>
+User-Agent: Thunderbird 1.5.0.2 (Windows/20060308)
+Original-recipient: rfc822;scott_violet@dev.null
+
+Does that mean we're build the GUI off the EDT in all of those apps? :\
+
+I was going to ask if GUI builders usually set GUI properties using a long 
+series of setXXX() calls, such that this fix could help them.  But hopefully, 
+the generated code doesn't build the GUI off the EDT anyway.
+
+-Brent
+
+Scott Violet wrote:
+> Here's some numbers from my machine: this saves 350 Runnables from 
+> getting created with SwingSet2, 129 for Stylepad, 5 for Metalworks, and 
+> 0 for Notepad.
+> 
+>     -Scott
+> 
+> Scott Violet wrote:
+>> Hi Brent,
+>>
+>> This is primarily for startup of apps, and only those doing stuff on 
+>> the main thread. Sadly it's very common for folks to try and startup 
+>> on the main thread, so that it seems worth optimizing.
+>>
+>>     -Scott
+>>
+>> Brent Christian wrote:
+>>> Hi, Scott
+>>>
+>>> So, the fix prevents multiple revalidate() Runnables from being 
+>>> posted to the EDT for a particular JComponent.  Are you seeing a lot 
+>>> of revalidate() calls being made to the same component from off the 
+>>> EDT?  I'm curious as to what scenario this is aiming to improve - 
+>>> startup?  Background tasks?
+>>>
+>>> Thanks,
+>>>
+>>> -Brent
+>>>
+>>> scott_violet@dev.null wrote:
+>>>> Note this is for dolphin, no rush.
+>>>>
+>>>> Thanks,
+>>>>
+>>>>     -Scott
+>>>>
+>>>>
+>>>> ================================
+>>>> webrev:
+>>>> http://j.k.dev.null/projects/swing_data/dolphin/6459213.0
+>>>> mail-archive:
+>>>> http://j.k.dev.null/mail-archive/6459213
+>>>> bug description:
+>>>> http://descs.k.dev.null/detail.jsp?cr=6459213
+>>>> bug summary:
+>>>> http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=6459213
+>>>> robot documentation:
+>>>> http://j.k.dev.null/projects/swing/
+>>>>
+>>>> To approve this request please reply to all with the word 'approved' 
+>>>> added to the subject
+>>
+> 
+> 
+
+From - Wed Aug 16 10:10:42 2006
+X-Mozilla-Status: 0011
+X-Mozilla-Status2: 00000000
+Return-path: <scott_violet@dev.null>
+Received: from jd-kj-09.dev.null ([192.18.39.119])
+ by foo-mail1.jk.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTP id <0J3U0076MXUMP060@foo-mail1.jk.dev.null>; Fri,
+ 11 Aug 2006 16:42:22 -0700 (PDT)
+Received: from conversion-daemon.jd-kj-09.dev.null by jd-kj-09.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ id <0J3U00L01XP6AR00@jd-kj-09.dev.null>
+ (original mail from scott_violet@dev.null); Fri,
+ 11 Aug 2006 16:42:22 -0700 (PDT)
+Received: from [129.145.161.113] by jd-kj-09.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTPSA id <0J3U00F7TXUL1191@jd-kj-09.dev.null>; Fri,
+ 11 Aug 2006 16:42:21 -0700 (PDT)
+Date: Fri, 11 Aug 2006 16:42:20 -0700
+From: Scott Violet <scott_violet@dev.null>
+Subject: Re: [6459213.v0] dolphin request for review
+In-reply-to: <44DD14EB.4090403@dev.null>
+Sender: scott_violet@dev.null
+To: Brent Christian <brent_christian@dev.null>
+Cc: shannon_hickey@dev.null, 6459213-archive@j.k.dev.null
+Message-id: <44DD15DC.1060809@dev.null>
+MIME-version: 1.0
+Content-type: text/plain; format=flowed; charset=ISO-8859-1
+Content-transfer-encoding: 7BIT
+References: <E1GBKOT-0005C0-00@j.k.dev.null> <44DD028D.60609@dev.null>
+ <44DD07E3.6060805@dev.null> <44DD0C23.507@dev.null> <44DD14EB.4090403@dev.null>
+User-Agent: Thunderbird 1.5.0.4 (Windows/20060516)
+
+This goes hand in hand we me saying we need to nuke the demos. Yep, 
+nearly all these demos do stuff on the main thread (or a thread other 
+than the EDT).
+
+Matisse generated code does the invokeLater for yet. That doesn't mean 
+folks keep it, but at least they generate the right thing.
+
+	-Scott
+
+Brent Christian wrote:
+> Does that mean we're build the GUI off the EDT in all of those apps? :\
+> 
+> I was going to ask if GUI builders usually set GUI properties using a 
+> long series of setXXX() calls, such that this fix could help them.  But 
+> hopefully, the generated code doesn't build the GUI off the EDT anyway.
+> 
+> -Brent
+> 
+> Scott Violet wrote:
+>> Here's some numbers from my machine: this saves 350 Runnables from 
+>> getting created with SwingSet2, 129 for Stylepad, 5 for Metalworks, 
+>> and 0 for Notepad.
+>>
+>>     -Scott
+>>
+>> Scott Violet wrote:
+>>> Hi Brent,
+>>>
+>>> This is primarily for startup of apps, and only those doing stuff on 
+>>> the main thread. Sadly it's very common for folks to try and startup 
+>>> on the main thread, so that it seems worth optimizing.
+>>>
+>>>     -Scott
+>>>
+>>> Brent Christian wrote:
+>>>> Hi, Scott
+>>>>
+>>>> So, the fix prevents multiple revalidate() Runnables from being 
+>>>> posted to the EDT for a particular JComponent.  Are you seeing a lot 
+>>>> of revalidate() calls being made to the same component from off the 
+>>>> EDT?  I'm curious as to what scenario this is aiming to improve - 
+>>>> startup?  Background tasks?
+>>>>
+>>>> Thanks,
+>>>>
+>>>> -Brent
+>>>>
+>>>> scott_violet@dev.null wrote:
+>>>>> Note this is for dolphin, no rush.
+>>>>>
+>>>>> Thanks,
+>>>>>
+>>>>>     -Scott
+>>>>>
+>>>>>
+>>>>> ================================
+>>>>> webrev:
+>>>>> http://j.k.dev.null/projects/swing_data/dolphin/6459213.0
+>>>>> mail-archive:
+>>>>> http://j.k.dev.null/mail-archive/6459213
+>>>>> bug description:
+>>>>> http://descs.k.dev.null/detail.jsp?cr=6459213
+>>>>> bug summary:
+>>>>> http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=6459213
+>>>>> robot documentation:
+>>>>> http://j.k.dev.null/projects/swing/
+>>>>>
+>>>>> To approve this request please reply to all with the word 
+>>>>> 'approved' added to the subject
+>>>
+>>
+>>
+
+
+From - Wed Aug 16 10:10:42 2006
+X-Mozilla-Status: 0011
+X-Mozilla-Status2: 00000000
+Return-path: <scott_violet@dev.null>
+Received: from jd-kj-09.dev.null ([192.18.39.119])
+ by foo-mail1.jk.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTP id <0J3U007DOXWSP450@foo-mail1.jk.dev.null>; Fri,
+ 11 Aug 2006 16:43:40 -0700 (PDT)
+Received: from conversion-daemon.jd-kj-09.dev.null by jd-kj-09.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ id <0J3U00101XVMP800@jd-kj-09.dev.null>
+ (original mail from scott_violet@dev.null); Fri,
+ 11 Aug 2006 16:43:40 -0700 (PDT)
+Received: from [129.145.161.113] by jd-kj-09.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTPSA id <0J3U00FBVXWR0XH1@jd-kj-09.dev.null>; Fri,
+ 11 Aug 2006 16:43:39 -0700 (PDT)
+Date: Fri, 11 Aug 2006 16:43:38 -0700
+From: Scott Violet <scott_violet@dev.null>
+Subject: Re: [6459213.v0] dolphin request for review - approved
+In-reply-to: <44DD1122.3030608@dev.null>
+Sender: scott_violet@dev.null
+To: Brent Christian <brent_christian@dev.null>
+Cc: shannon_hickey@dev.null, 6459213-archive@j.k.dev.null
+Message-id: <44DD162A.9090504@dev.null>
+MIME-version: 1.0
+Content-type: text/plain; format=flowed; charset=ISO-8859-1
+Content-transfer-encoding: 7BIT
+References: <E1GBKOT-0005C0-00@j.k.dev.null> <44DD028D.60609@dev.null>
+ <44DD07E3.6060805@dev.null> <44DD1122.3030608@dev.null>
+User-Agent: Thunderbird 1.5.0.4 (Windows/20060516)
+
+Brent Christian wrote:
+> Scott Violet wrote:
+>> This is primarily for startup of apps
+> 
+> Well, hooray for that! :)
+> 
+>> and only those doing stuff on the main thread. Sadly it's very common 
+>> for folks to try and startup on the main thread, so that it seems 
+>> worth optimizing.
+> 
+> Alright, I get it now after peeking into a couple of Swing classes - you 
+> get a revalidate() whenever you change your component.  So doing:
+> 
+> JButton b = new JButton();
+> b.setName("Button");
+> b.setIcon(someIcon);
+> 
+> will do two revalidate() calls on the JButton.
+> 
+> 
+> I'm very mildly concerned about adding the synchronization, but putting 
+> it into ...um...dolphin... so early should shake out anything.
+
+I agree with you on both counts.
+
+It would be less risky if introduced a new Object for each JComponent 
+and synchronized on that; but ewww!!! That's defeating the purpose.
+
+	-Scott
+
+>> Brent Christian wrote:
+>>> Hi, Scott
+>>>
+>>> So, the fix prevents multiple revalidate() Runnables from being 
+>>> posted to the EDT for a particular JComponent.  Are you seeing a lot 
+>>> of revalidate() calls being made to the same component from off the 
+>>> EDT?  I'm curious as to what scenario this is aiming to improve - 
+>>> startup?  Background tasks?
+>>>
+>>> Thanks,
+>>>
+>>> -Brent
+>>>
+>>> scott_violet@dev.null wrote:
+>>>> Note this is for dolphin, no rush.
+>>>>
+>>>> Thanks,
+>>>>
+>>>>     -Scott
+>>>>
+>>>>
+>>>> ================================
+>>>> webrev:
+>>>> http://j.k.dev.null/projects/swing_data/dolphin/6459213.0
+>>>> mail-archive:
+>>>> http://j.k.dev.null/mail-archive/6459213
+>>>> bug description:
+>>>> http://descs.k.dev.null/detail.jsp?cr=6459213
+>>>> bug summary:
+>>>> http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=6459213
+>>>> robot documentation:
+>>>> http://j.k.dev.null/projects/swing/
+>>>>
+>>>> To approve this request please reply to all with the word 'approved' 
+>>>> added to the subject
+>>
+
+
+From - Wed Aug 16 10:10:42 2006
+X-Mozilla-Status: 0011
+X-Mozilla-Status2: 00000000
+Return-path: <shannon_hickey@dev.null>
+Received: from fe-amer-lol.dev.null ([192.18.108.178])
+ by foo-mail1.jk.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTP id <0J4300G7AOQML1D0@foo-mail1.jk.dev.null>; Wed,
+ 16 Aug 2006 10:03:58 -0700 (PDT)
+Received: from conversion-daemon.mail-bar.dev.null by mail-bar.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ id <0J4300J01OKPTA00@mail-bar.dev.null>
+ (original mail from shannon_hickey@dev.null); Wed,
+ 16 Aug 2006 11:03:58 -0600 (MDT)
+Received: from [129.150.32.128] by mail-bar.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTPSA id <0J4300K0GOQLKBR4@mail-bar.dev.null>; Wed,
+ 16 Aug 2006 11:03:58 -0600 (MDT)
+Date: Wed, 16 Aug 2006 13:03:14 -0400
+From: Shannon Hickey <shannon_hickey@dev.null>
+Subject: Re: [6459213.v0] dolphin request for review - APPROVED
+In-reply-to: <E1GBKOT-0005C0-00@j.k.dev.null>
+Sender: shannon_hickey@dev.null
+To: scott_violet@dev.null
+Cc: brent_christian@dev.null, 6459213-archive@j.k.dev.null
+Message-id: <44E34FD2.7010706@dev.null>
+MIME-version: 1.0
+Content-type: text/plain; format=flowed; charset=ISO-8859-1
+Content-transfer-encoding: 7BIT
+X-Accept-Language: en-us, en
+References: <E1GBKOT-0005C0-00@j.k.dev.null>
+User-Agent: Mozilla Thunderbird 1.0.2 (Windows/20050317)
+
+
+
+scott_violet@dev.null wrote:
+> Note this is for dolphin, no rush.
+> 
+> Thanks,
+> 
+>     -Scott
+> 
+> 
+> ================================
+> webrev:
+> http://j.k.dev.null/projects/swing_data/dolphin/6459213.0
+> mail-archive:
+> http://j.k.dev.null/mail-archive/6459213
+> bug description:
+> http://descs.k.dev.null/detail.jsp?cr=6459213
+> bug summary:
+> http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=6459213
+> robot documentation:
+> http://j.k.dev.null/projects/swing/
+> 
+> To approve this request please reply to all with the word 'approved' added to the subject
+
+-- 
+Shannon Hickey
+shannon_hickey@dev.null
+Swing Team  http://TheSwingConnection.com  http://TheJavaTutorial.com
+Java Software,  a division of Sun Microsystems, Inc.
+
+From - Fri Apr 14 06:48:10 2006
+X-Mozilla-Status: 0001
+X-Mozilla-Status2: 00000000
+Return-path: <swing@j.k.dev.null>
+Received: from conversion-daemon.jdh-mail1.kjh.dev.null by
+ jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ id <0IWZ00301XW22D@jdh-mail1.kjh.dev.null>
+ (original mail from swing@j.k.dev.null); Fri,
+ 31 Mar 2006 06:40:03 -0800 (PST)
+Received: from j.k.dev.null (kjh.k.dev.null [10.5.25.87])
+ by jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ with ESMTP id <0IWZ00G09Y2QGJ@jdh-mail1.kjh.dev.null>; Fri,
+ 31 Mar 2006 06:40:02 -0800 (PST)
+Received: from swing by j.k.dev.null with local (Exim 3.36 #1 (Debian))
+	id 1FPKm7-0003uT-00; Fri, 31 Mar 2006 06:38:55 -0800
+Date: Fri, 31 Mar 2006 06:38:55 -0800
+From: scott_violet@dev.null
+Subject: [4942216.v0] mustang request for review
+Sender: swing <swing@j.k.dev.null>
+To: romain_guy@dev.null, shannon_hickey@dev.null
+Cc: 4942216-archive@j.k.dev.null, scott_violet@dev.null
+Message-id: <E1FPKm7-0003uT-00@j.k.dev.null>
+Content-type: TEXT/PLAIN
+
+Please review my fix for 4942216
+[ http://descs.k.dev.null/detail.jsp?cr=4942216 ] 
+
+http://j.k.dev.null/projects/swing_data/mustang/4942216.0
+
+Thanks
+
+
+================================
+webrev:
+http://j.k.dev.null/projects/swing_data/mustang/4942216.0
+mail-archive:
+http://j.k.dev.null/mail-archive/4942216
+bug description:
+http://descs.k.dev.null/detail.jsp?cr=4942216
+bug summary:
+http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=4942216
+robot documentation:
+http://j.k.dev.null/projects/swing/
+
+To approve this request please reply to all with the word 'approved' added to the subject
+
+From - Fri Apr 14 06:48:10 2006
+X-Mozilla-Status: 0011
+X-Mozilla-Status2: 00000000
+Return-path: <shannon_hickey@dev.null>
+Received: from conversion-daemon.jdh-mail1.kjh.dev.null by
+ jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ id <0IX000B014WOKZ@jdh-mail1.kjh.dev.null>; Fri,
+ 31 Mar 2006 09:08:49 -0800 (PST)
+Received: from kjh.k.dev.null
+ (kjh.k.dev.null [129.145.155.42]) by jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ with ESMTP id <0IX000C294YP1G@jdh-mail1.kjh.dev.null>; Fri,
+ 31 Mar 2006 09:08:49 -0800 (PST)
+Received: from kjh.k.dev.null
+ (kjh.k.dev.null [129.149.247.180])	by kjh.k.dev.null
+ (8.12.10+Sun/8.12.10/ENSMAIL,v2.2) with ESMTP id k2VH7iLn000203; Fri,
+ 31 Mar 2006 09:07:44 -0800 (PST)
+Received: from nwk-avmta-kjh.k.dev.null
+ (nwk-avmta-kjh.k.dev.null [129.149.247.22])	by kjh.k.dev.null
+ (8.11.7p1+Sun/8.11.7/ENSMAIL,v2.2) with ESMTP id k2VH7ha06726; Fri,
+ 31 Mar 2006 09:07:43 -0800 (PST)
+Received: from pmxchannel-daemon.nwk-avmta-kjh.k.dev.null by
+ nwk-avmta-kjh.k.dev.null
+ (Sun Java System Messaging Server 6.2-3.04 (built Jul 15 2005))
+ id <0IX000I014WT6M00@nwk-avmta-kjh.k.dev.null>; Fri,
+ 31 Mar 2006 09:07:41 -0800 (PST)
+Received: from brmea-mai-lol.dev.null ([192.18.98.34])
+ by nwk-avmta-kjh.k.dev.null
+ (Sun Java System Messaging Server 6.2-3.04 (built Jul 15 2005))
+ with ESMTP id <0IX0008KB4WT2AC0@nwk-avmta-kjh.k.dev.null>; Fri,
+ 31 Mar 2006 09:07:41 -0800 (PST)
+Received: from fe-amer-lol.dev.null ([192.18.108.177])
+	by brmea-mai-lol.dev.null (8.12.10/8.12.9) with ESMTP id k2VH7dQj005261; Fri,
+ 31 Mar 2006 10:07:41 -0700 (MST)
+Received: from conversion-daemon.mail-bar.dev.null by mail-bar.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ id <0IX0008014LZ2500@mail-bar.dev.null>
+ (original mail from shannon_hickey@dev.null); Fri,
+ 31 Mar 2006 10:07:39 -0700 (MST)
+Received: from [129.150.35.169] by mail-bar.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTPSA id <0IX0001OA4WQ4KY3@mail-bar.dev.null>; Fri,
+ 31 Mar 2006 10:07:39 -0700 (MST)
+Date: Fri, 31 Mar 2006 12:07:11 -0500
+From: Shannon Hickey <shannon_hickey@dev.null>
+Subject: Re: [4942216.v0] mustang request for review - approved
+In-reply-to: <E1FPKm7-0003uT-00@j.k.dev.null>
+Sender: shannon_hickey@dev.null
+To: scott_violet@dev.null
+Cc: romain_guy@dev.null, 4942216-archive@kjh.k.dev.null
+Message-id: <442D61BF.3000604@dev.null>
+MIME-version: 1.0
+Content-type: text/plain; format=flowed; charset=ISO-8859-1
+Content-transfer-encoding: 7BIT
+X-Accept-Language: en-us, en
+User-Agent: Mozilla Thunderbird 1.0.2 (Windows/20050317)
+X-PMX-Version: 5.1.2.240295
+References: <E1FPKm7-0003uT-00@j.k.dev.null>
+
+
+
+scott_violet@dev.null wrote:
+> Please review my fix for 4942216
+> [ http://descs.k.dev.null/detail.jsp?cr=4942216 ] 
+> 
+> http://j.k.dev.null/projects/swing_data/mustang/4942216.0
+> 
+> Thanks
+> 
+> 
+> ================================
+> webrev:
+> http://j.k.dev.null/projects/swing_data/mustang/4942216.0
+> mail-archive:
+> http://j.k.dev.null/mail-archive/4942216
+> bug description:
+> http://descs.k.dev.null/detail.jsp?cr=4942216
+> bug summary:
+> http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=4942216
+> robot documentation:
+> http://j.k.dev.null/projects/swing/
+> 
+> To approve this request please reply to all with the word 'approved' added to the subject
+
+-- 
+Shannon Hickey
+shannon_hickey@dev.null
+Swing Team  http://TheSwingConnection.com  http://TheJavaTutorial.com
+Java Software,  a division of Sun Microsystems, Inc.
+
+From - Fri Apr 14 06:48:10 2006
+X-Mozilla-Status: 0013
+X-Mozilla-Status2: 00000000
+Return-path: <romain_guy@dev.null>
+Received: from conversion-daemon.jdh-mail1.kjh.dev.null by
+ jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ id <0IX0000019MY7W@jdh-mail1.kjh.dev.null>
+ (original mail from romain_guy@dev.null); Fri, 31 Mar 2006 10:51:55 -0800 (PST)
+Received: from [129.145.161.243]
+ (d-usca22-161-kjh.k.dev.null [129.145.161.243])
+ by jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ with ESMTP id <0IX0008M29QJ2L@jdh-mail1.kjh.dev.null>; Fri,
+ 31 Mar 2006 10:51:55 -0800 (PST)
+Date: Fri, 31 Mar 2006 10:50:48 -0800
+From: Romain Guy <romain_guy@dev.null>
+Subject: Re: [4942216.v0] mustang request for review - approved
+In-reply-to: <E1FPKm7-0003uT-00@j.k.dev.null>
+To: scott_violet@dev.null
+Cc: romain_guy@dev.null, shannon_hickey@dev.null, 4942216-archive@j.k.dev.null
+Message-id: <442D7A08.2080603@dev.null>
+MIME-version: 1.0
+Content-type: text/plain; charset=ISO-8859-1; format=flowed
+Content-transfer-encoding: 7BIT
+User-Agent: Thunderbird 1.5 (Windows/20051201)
+References: <E1FPKm7-0003uT-00@j.k.dev.null>
+
+
+
+scott_violet@dev.null wrote:
+> Please review my fix for 4942216
+> [ http://descs.k.dev.null/detail.jsp?cr=4942216 ] 
+> 
+> http://j.k.dev.null/projects/swing_data/mustang/4942216.0
+> 
+> Thanks
+> 
+> 
+> ================================
+> webrev:
+> http://j.k.dev.null/projects/swing_data/mustang/4942216.0
+> mail-archive:
+> http://j.k.dev.null/mail-archive/4942216
+> bug description:
+> http://descs.k.dev.null/detail.jsp?cr=4942216
+> bug summary:
+> http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=4942216
+> robot documentation:
+> http://j.k.dev.null/projects/swing/
+> 
+> To approve this request please reply to all with the word 'approved' added to the subject
+
+-- 
+Romain GUY <romain_guy@dev.null>
+http://jroller.com/page/gfx
+http://weblogs.java.net/blog/gfx/
+http://www.progx.org
+http://www.jext.org
+
+From - Mon Feb 27 13:43:54 2006
+X-Mozilla-Status: 0001
+X-Mozilla-Status2: 00000000
+Return-path: <swing@j.k.dev.null>
+Received: from conversion-daemon.jdh-mail1.kjh.dev.null by
+ jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ id <0IVC00B01WS74C@jdh-mail1.kjh.dev.null>
+ (original mail from swing@j.k.dev.null); Mon,
+ 27 Feb 2006 09:34:03 -0800 (PST)
+Received: from j.k.dev.null (kjh.k.dev.null [10.5.25.87])
+ by jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ with ESMTP id <0IVC0022FWSRZT@jdh-mail1.kjh.dev.null>; Mon,
+ 27 Feb 2006 09:34:03 -0800 (PST)
+Received: from swing by j.k.dev.null with local (Exim 3.36 #1 (Debian))
+	id 1FDmF5-0002V0-00; Mon, 27 Feb 2006 09:33:03 -0800
+Date: Mon, 27 Feb 2006 09:33:03 -0800
+From: scott_violet@dev.null
+Subject: [6386223.v0] mustang request for review
+Sender: swing <swing@j.k.dev.null>
+To: brent_christian@dev.null, igor_kushnirskiy@dev.null
+Cc: 6386223-archive@j.k.dev.null, scott_violet@dev.null
+Message-id: <E1FDmF5-0002V0-00@j.k.dev.null>
+Content-type: TEXT/PLAIN
+
+Please review my fix for 6386223
+[ http://descs.k.dev.null/detail.jsp?cr=6386223 ] 
+
+http://j.k.dev.null/projects/swing_data/mustang/6386223.0
+
+Thanks
+
+
+================================
+webrev:
+http://j.k.dev.null/projects/swing_data/mustang/6386223.0
+mail-archive:
+http://j.k.dev.null/mail-archive/6386223
+bug description:
+http://descs.k.dev.null/detail.jsp?cr=6386223
+bug summary:
+http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=6386223
+robot documentation:
+http://j.k.dev.null/projects/swing/
+
+To approve this request please reply to all with the word 'approved' added to the subject
+
+From - Mon Feb 27 13:43:54 2006
+X-Mozilla-Status: 0003
+X-Mozilla-Status2: 00000000
+Return-path: <igor_kushnirskiy@dev.null>
+Received: from conversion-daemon.jdh-mail1.kjh.dev.null by
+ jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ id <0IVD007011QY9L@jdh-mail1.kjh.dev.null>
+ (original mail from igor_kushnirskiy@dev.null); Mon,
+ 27 Feb 2006 11:23:12 -0800 (PST)
+Received: from [192.168.1.3] (vpn-129-150-66-13.E-lol.dev.null [129.150.66.13])
+ by jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ with ESMTP id <0IVD00INF1UKGL@jdh-mail1.kjh.dev.null>; Mon,
+ 27 Feb 2006 11:23:09 -0800 (PST)
+Date: Mon, 27 Feb 2006 14:22:01 -0500
+From: Igor Kushnirskiy <igor_kushnirskiy@dev.null>
+Subject: approved Re: [6386223.v0] mustang request for review
+In-reply-to: <E1FDmF5-0002V0-00@j.k.dev.null>
+To: scott_violet@dev.null
+Cc: brent_christian@dev.null, 6386223-archive@j.k.dev.null
+Message-id: <44035159.8050003@dev.null>
+MIME-version: 1.0
+Content-type: text/plain; charset=ISO-8859-1
+Content-transfer-encoding: 7BIT
+X-Accept-Language: en-us, en
+User-Agent: Debian Thunderbird 1.0.7 (X11/20051017)
+References: <E1FDmF5-0002V0-00@j.k.dev.null>
+
+Hi,
+
+Looks fine.
+
+-Igor
+
+scott_violet@dev.null wrote:
+> Please review my fix for 6386223
+> [ http://descs.k.dev.null/detail.jsp?cr=6386223 ] 
+> 
+> http://j.k.dev.null/projects/swing_data/mustang/6386223.0
+> 
+> Thanks
+> 
+> 
+> ================================
+> webrev:
+> http://j.k.dev.null/projects/swing_data/mustang/6386223.0
+> mail-archive:
+> http://j.k.dev.null/mail-archive/6386223
+> bug description:
+> http://descs.k.dev.null/detail.jsp?cr=6386223
+> bug summary:
+> http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=6386223
+> robot documentation:
+> http://j.k.dev.null/projects/swing/
+> 
+> To approve this request please reply to all with the word 'approved' added to the subject
+
+From - Mon Feb 27 13:43:54 2006
+X-Mozilla-Status: 0011
+X-Mozilla-Status2: 00000000
+Return-path: <scott_violet@dev.null>
+Received: from conversion-daemon.jdh-mail1.kjh.dev.null by
+ jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ id <0IVD00L012VAG9@jdh-mail1.kjh.dev.null>
+ (original mail from scott_violet@dev.null); Mon,
+ 27 Feb 2006 11:46:19 -0800 (PST)
+Received: from [129.145.161.113]
+ (d-usca22-161-kjh.k.dev.null [129.145.161.113])
+ by jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ with ESMTP id <0IVD00BUB2X6FJ@jdh-mail1.kjh.dev.null>; Mon,
+ 27 Feb 2006 11:46:19 -0800 (PST)
+Date: Mon, 27 Feb 2006 11:45:18 -0800
+From: Scott Violet <scott_violet@dev.null>
+Subject: Re: approved Re: [6386223.v0] mustang request for review
+In-reply-to: <44035159.8050003@dev.null>
+To: Igor Kushnirskiy <igor_kushnirskiy@dev.null>
+Message-id: <440356CE.1090902@dev.null>
+MIME-version: 1.0
+Content-type: text/plain; charset=ISO-8859-1; format=flowed
+Content-transfer-encoding: 7BIT
+User-Agent: Thunderbird 1.5 (Windows/20051201)
+References: <E1FDmF5-0002V0-00@j.k.dev.null> <44035159.8050003@dev.null>
+
+Thanks!
+
+Could you review: http://review.server/6386223
+
+	-Scott
+
+Igor Kushnirskiy wrote:
+> Hi,
+> 
+> Looks fine.
+> 
+> -Igor
+> 
+> scott_violet@dev.null wrote:
+>> Please review my fix for 6386223
+>> [ http://descs.k.dev.null/detail.jsp?cr=6386223 ] 
+>>
+>> http://j.k.dev.null/projects/swing_data/mustang/6386223.0
+>>
+>> Thanks
+>>
+>>
+>> ================================
+>> webrev:
+>> http://j.k.dev.null/projects/swing_data/mustang/6386223.0
+>> mail-archive:
+>> http://j.k.dev.null/mail-archive/6386223
+>> bug description:
+>> http://descs.k.dev.null/detail.jsp?cr=6386223
+>> bug summary:
+>> http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=6386223
+>> robot documentation:
+>> http://j.k.dev.null/projects/swing/
+>>
+>> To approve this request please reply to all with the word 'approved' added to the subject
+
+
+From - Mon Feb 27 13:43:54 2006
+X-Mozilla-Status: 0013
+X-Mozilla-Status2: 00000000
+Return-path: <igor_kushnirskiy@dev.null>
+Received: from conversion-daemon.jdh-mail1.kjh.dev.null by
+ jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ id <0IVD004015GBLW@jdh-mail1.kjh.dev.null>
+ (original mail from igor_kushnirskiy@dev.null); Mon,
+ 27 Feb 2006 12:41:01 -0800 (PST)
+Received: from [192.168.1.3] (vpn-129-150-66-13.E-lol.dev.null [129.150.66.13])
+ by jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ with ESMTP id <0IVD004E65GC0D@jdh-mail1.kjh.dev.null>; Mon,
+ 27 Feb 2006 12:41:01 -0800 (PST)
+Date: Mon, 27 Feb 2006 15:39:53 -0500
+From: Igor Kushnirskiy <igor_kushnirskiy@dev.null>
+Subject: Re: approved Re: [6386223.v0] mustang request for review
+In-reply-to: <440356CE.1090902@dev.null>
+To: Scott Violet <scott_violet@dev.null>
+Message-id: <44036399.3090701@dev.null>
+MIME-version: 1.0
+Content-type: text/plain; charset=ISO-8859-1
+Content-transfer-encoding: 7BIT
+X-Accept-Language: en-us, en
+User-Agent: Debian Thunderbird 1.0.7 (X11/20051017)
+References: <E1FDmF5-0002V0-00@j.k.dev.null> <44035159.8050003@dev.null>
+ <440356CE.1090902@dev.null>
+
+> Could you review: http://review.server/6386223
+
+Sure thing. Done.
+
+-Igor
+
+Scott Violet wrote:
+> Thanks!
+> 
+> Could you review: http://review.server/6386223
+> 
+>     -Scott
+> 
+> Igor Kushnirskiy wrote:
+> 
+>> Hi,
+>>
+>> Looks fine.
+>>
+>> -Igor
+>>
+>> scott_violet@dev.null wrote:
+>>
+>>> Please review my fix for 6386223
+>>> [ http://descs.k.dev.null/detail.jsp?cr=6386223 ]
+>>> http://j.k.dev.null/projects/swing_data/mustang/6386223.0
+>>>
+>>> Thanks
+>>>
+>>>
+>>> ================================
+>>> webrev:
+>>> http://j.k.dev.null/projects/swing_data/mustang/6386223.0
+>>> mail-archive:
+>>> http://j.k.dev.null/mail-archive/6386223
+>>> bug description:
+>>> http://descs.k.dev.null/detail.jsp?cr=6386223
+>>> bug summary:
+>>> http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=6386223
+>>> robot documentation:
+>>> http://j.k.dev.null/projects/swing/
+>>>
+>>> To approve this request please reply to all with the word 'approved'
+>>> added to the subject
+> 
+> 
+
+From - Mon Feb 27 13:43:54 2006
+X-Mozilla-Status: 0011
+X-Mozilla-Status2: 00000000
+Return-path: <scott_violet@dev.null>
+Received: from conversion-daemon.jdh-mail1.kjh.dev.null by
+ jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ id <0IVD009015Y0WX@jdh-mail1.kjh.dev.null>
+ (original mail from scott_violet@dev.null); Mon,
+ 27 Feb 2006 12:51:44 -0800 (PST)
+Received: from [129.145.161.113]
+ (d-usca22-161-kjh.k.dev.null [129.145.161.113])
+ by jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ with ESMTP id <0IVD004OP5Y80D@jdh-mail1.kjh.dev.null>; Mon,
+ 27 Feb 2006 12:51:44 -0800 (PST)
+Date: Mon, 27 Feb 2006 12:50:43 -0800
+From: Scott Violet <scott_violet@dev.null>
+Subject: Re: approved Re: [6386223.v0] mustang request for review
+In-reply-to: <44036399.3090701@dev.null>
+To: Igor Kushnirskiy <igor_kushnirskiy@dev.null>
+Message-id: <44036623.9070508@dev.null>
+MIME-version: 1.0
+Content-type: text/plain; charset=ISO-8859-1; format=flowed
+Content-transfer-encoding: 7BIT
+User-Agent: Thunderbird 1.5 (Windows/20051201)
+References: <E1FDmF5-0002V0-00@j.k.dev.null> <44035159.8050003@dev.null>
+ <440356CE.1090902@dev.null> <44036399.3090701@dev.null>
+
+Thanks again!
+
+	-Scott
+
+Igor Kushnirskiy wrote:
+>> Could you review: http://review.server/6386223
+> 
+> Sure thing. Done.
+> 
+> -Igor
+> 
+> Scott Violet wrote:
+>> Thanks!
+>>
+>> Could you review: http://review.server/6386223
+>>
+>>     -Scott
+>>
+>> Igor Kushnirskiy wrote:
+>>
+>>> Hi,
+>>>
+>>> Looks fine.
+>>>
+>>> -Igor
+>>>
+>>> scott_violet@dev.null wrote:
+>>>
+>>>> Please review my fix for 6386223
+>>>> [ http://descs.k.dev.null/detail.jsp?cr=6386223 ]
+>>>> http://j.k.dev.null/projects/swing_data/mustang/6386223.0
+>>>>
+>>>> Thanks
+>>>>
+>>>>
+>>>> ================================
+>>>> webrev:
+>>>> http://j.k.dev.null/projects/swing_data/mustang/6386223.0
+>>>> mail-archive:
+>>>> http://j.k.dev.null/mail-archive/6386223
+>>>> bug description:
+>>>> http://descs.k.dev.null/detail.jsp?cr=6386223
+>>>> bug summary:
+>>>> http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=6386223
+>>>> robot documentation:
+>>>> http://j.k.dev.null/projects/swing/
+>>>>
+>>>> To approve this request please reply to all with the word 'approved'
+>>>> added to the subject
+>>
+
+
+From - Mon Feb 27 13:43:54 2006
+X-Mozilla-Status: 0013
+X-Mozilla-Status2: 00000000
+Return-path: <brent_christian@dev.null>
+Received: from conversion-daemon.jdh-mail1.kjh.dev.null by
+ jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ id <0IVD0020178W5Y@jdh-mail1.kjh.dev.null>
+ (original mail from brent_christian@dev.null); Mon,
+ 27 Feb 2006 13:20:19 -0800 (PST)
+Received: from [129.150.27.1] (vpn-129-150-27-kjh.k.dev.null [129.150.27.1])
+ by jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ with ESMTP id <0IVD004LW79V0D@jdh-mail1.kjh.dev.null>; Mon,
+ 27 Feb 2006 13:20:19 -0800 (PST)
+Date: Mon, 27 Feb 2006 13:19:18 -0800
+From: Brent Christian <brent_christian@dev.null>
+Subject: Re: [6386223.v0] mustang request for review - approved
+In-reply-to: <E1FDmF5-0002V0-00@j.k.dev.null>
+To: scott_violet@dev.null
+Cc: igor_kushnirskiy@dev.null, 6386223-archive@j.k.dev.null
+Message-id: <44036CD6.3000001@dev.null>
+Organization: Sun Microsystems, Inc.
+MIME-version: 1.0
+Content-type: text/plain; charset=ISO-8859-1; format=flowed
+Content-transfer-encoding: 7BIT
+X-Accept-Language: en-us, en
+User-Agent: Mozilla Thunderbird 1.0.7 (Windows/20050923)
+References: <E1FDmF5-0002V0-00@j.k.dev.null>
+
+Looks good.
+
+I assume that the example code near the top is still okay, since it creates a 
+concrete RowFilter:
+
+  RowFilter startsWithAFilter = new RowFilter<Object,Object>() {
+    public boolean include(Entry<? extends Object, ? extends Object> entry) {
+      ...
+
+and doesn't, for instance, need to be changed to:
+
+  RowFilter startsWithAFilter = new RowFilter<M, I>() {
+
+-Brent
+
+scott_violet@dev.null wrote:
+> Please review my fix for 6386223
+> [ http://descs.k.dev.null/detail.jsp?cr=6386223 ] 
+> 
+> http://j.k.dev.null/projects/swing_data/mustang/6386223.0
+> 
+> Thanks
+> 
+> 
+> ================================
+> webrev:
+> http://j.k.dev.null/projects/swing_data/mustang/6386223.0
+> mail-archive:
+> http://j.k.dev.null/mail-archive/6386223
+> bug description:
+> http://descs.k.dev.null/detail.jsp?cr=6386223
+> bug summary:
+> http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=6386223
+> robot documentation:
+> http://j.k.dev.null/projects/swing/
+> 
+> To approve this request please reply to all with the word 'approved' added to the subject
+
+From - Mon Feb 27 13:43:54 2006
+X-Mozilla-Status: 0013
+X-Mozilla-Status2: 00000000
+Return-path: <brent_christian@dev.null>
+Received: from conversion-daemon.jdh-mail1.kjh.dev.null by
+ jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ id <0IVD007017NP4H@jdh-mail1.kjh.dev.null>
+ (original mail from brent_christian@dev.null); Mon,
+ 27 Feb 2006 13:29:51 -0800 (PST)
+Received: from [129.150.27.1] (vpn-129-150-27-kjh.k.dev.null [129.150.27.1])
+ by jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ with ESMTP id <0IVD0040D7PR0D@jdh-mail1.kjh.dev.null>; Mon,
+ 27 Feb 2006 13:29:51 -0800 (PST)
+Date: Mon, 27 Feb 2006 13:28:50 -0800
+From: Brent Christian <brent_christian@dev.null>
+Subject: Re: [6386223.v0] mustang request for review - approved
+In-reply-to: <44036CD6.3000001@dev.null>
+Cc: scott_violet@dev.null, igor_kushnirskiy@dev.null
+Message-id: <44036F12.30408@dev.null>
+Organization: Sun Microsystems, Inc.
+MIME-version: 1.0
+Content-type: text/plain; charset=ISO-8859-1; format=flowed
+Content-transfer-encoding: 7BIT
+X-Accept-Language: en-us, en
+User-Agent: Mozilla Thunderbird 1.0.7 (Windows/20050923)
+References: <E1FDmF5-0002V0-00@j.k.dev.null> <44036CD6.3000001@dev.null>
+
+Actually, one other thing I noticed about that demo code:
+
+  RowFilter startsWithAFilter = new RowFilter<Object,Object>() {
+    public boolean include(Entry<? extends Object, ? extends Object> entry) {
+      for (int i = entry.getValueCount() - 1; i >= 0; i--) {
+        if (entry.getStringValue(i).startsWith("a")) {
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+          // The value starts with "a", include it
+          return true;
+        }
+      }
+
+The @returns tag of RowFilter.Entry.getStringValue() doesn't specify whether or 
+not null is a legal return value.  For the sake of people who want to override 
+getStringValue(), it would be good to state explicitly whether or not null can 
+be returned.  If null can be returned from getStringValue(), you might also 
+consider updating the demo code to check entry.getStringValue(i) for null.
+
+-Brent
+
+Brent Christian wrote:
+> Looks good.
+> 
+> I assume that the example code near the top is still okay, since it 
+> creates a concrete RowFilter:
+> 
+>  RowFilter startsWithAFilter = new RowFilter<Object,Object>() {
+>    public boolean include(Entry<? extends Object, ? extends Object> 
+> entry) {
+>      ...
+> 
+> and doesn't, for instance, need to be changed to:
+> 
+>  RowFilter startsWithAFilter = new RowFilter<M, I>() {
+> 
+> -Brent
+> 
+> scott_violet@dev.null wrote:
+> 
+>> Please review my fix for 6386223
+>> [ http://descs.k.dev.null/detail.jsp?cr=6386223 ]
+>> http://j.k.dev.null/projects/swing_data/mustang/6386223.0
+>>
+>> Thanks
+>>
+>>
+>> ================================
+>> webrev:
+>> http://j.k.dev.null/projects/swing_data/mustang/6386223.0
+>> mail-archive:
+>> http://j.k.dev.null/mail-archive/6386223
+>> bug description:
+>> http://descs.k.dev.null/detail.jsp?cr=6386223
+>> bug summary:
+>> http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=6386223
+>> robot documentation:
+>> http://j.k.dev.null/projects/swing/
+>>
+>> To approve this request please reply to all with the word 'approved' 
+>> added to the subject
+> 
+> 
+
+From - Mon Feb 27 13:43:55 2006
+X-Mozilla-Status: 0011
+X-Mozilla-Status2: 00000000
+Return-path: <scott_violet@dev.null>
+Received: from conversion-daemon.jdh-mail1.kjh.dev.null by
+ jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ id <0IVD00D0185BA2@jdh-mail1.kjh.dev.null>
+ (original mail from scott_violet@dev.null); Mon,
+ 27 Feb 2006 13:39:33 -0800 (PST)
+Received: from [129.145.161.113]
+ (d-usca22-161-kjh.k.dev.null [129.145.161.113])
+ by jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ with ESMTP id <0IVD004BT85X0D@jdh-mail1.kjh.dev.null>; Mon,
+ 27 Feb 2006 13:39:33 -0800 (PST)
+Date: Mon, 27 Feb 2006 13:38:32 -0800
+From: Scott Violet <scott_violet@dev.null>
+Subject: Re: [6386223.v0] mustang request for review - approved
+In-reply-to: <44036CD6.3000001@dev.null>
+To: Brent Christian <brent_christian@dev.null>
+Cc: igor_kushnirskiy@dev.null, 6386223-archive@j.k.dev.null
+Message-id: <44037158.6020502@dev.null>
+MIME-version: 1.0
+Content-type: text/plain; charset=ISO-8859-1; format=flowed
+Content-transfer-encoding: 7BIT
+User-Agent: Thunderbird 1.5 (Windows/20051201)
+References: <E1FDmF5-0002V0-00@j.k.dev.null> <44036CD6.3000001@dev.null>
+
+Thanks Brent.
+
+The demo should really be changed to RowFilter<Object,Object> = xxx.
+
+I'll do that shortly.
+
+	-Scott
+
+Brent Christian wrote:
+> Looks good.
+> 
+> I assume that the example code near the top is still okay, since it 
+> creates a concrete RowFilter:
+> 
+>  RowFilter startsWithAFilter = new RowFilter<Object,Object>() {
+>    public boolean include(Entry<? extends Object, ? extends Object> 
+> entry) {
+>      ...
+> 
+> and doesn't, for instance, need to be changed to:
+> 
+>  RowFilter startsWithAFilter = new RowFilter<M, I>() {
+> 
+> -Brent
+> 
+> scott_violet@dev.null wrote:
+>> Please review my fix for 6386223
+>> [ http://descs.k.dev.null/detail.jsp?cr=6386223 ]
+>> http://j.k.dev.null/projects/swing_data/mustang/6386223.0
+>>
+>> Thanks
+>>
+>>
+>> ================================
+>> webrev:
+>> http://j.k.dev.null/projects/swing_data/mustang/6386223.0
+>> mail-archive:
+>> http://j.k.dev.null/mail-archive/6386223
+>> bug description:
+>> http://descs.k.dev.null/detail.jsp?cr=6386223
+>> bug summary:
+>> http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=6386223
+>> robot documentation:
+>> http://j.k.dev.null/projects/swing/
+>>
+>> To approve this request please reply to all with the word 'approved' 
+>> added to the subject
+
+
+From - Mon Feb 27 13:43:55 2006
+X-Mozilla-Status: 0011
+X-Mozilla-Status2: 00000000
+Return-path: <scott_violet@dev.null>
+Received: from conversion-daemon.jdh-mail1.kjh.dev.null by
+ jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ id <0IVD00F018AG3B@jdh-mail1.kjh.dev.null>
+ (original mail from scott_violet@dev.null); Mon,
+ 27 Feb 2006 13:43:38 -0800 (PST)
+Received: from [129.145.161.113]
+ (d-usca22-161-kjh.k.dev.null [129.145.161.113])
+ by jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ with ESMTP id <0IVD004YC8CQ0D@jdh-mail1.kjh.dev.null>; Mon,
+ 27 Feb 2006 13:43:38 -0800 (PST)
+Date: Mon, 27 Feb 2006 13:42:37 -0800
+From: Scott Violet <scott_violet@dev.null>
+Subject: Re: [6386223.v0] mustang request for review - approved
+In-reply-to: <44036F12.30408@dev.null>
+To: Brent Christian <brent_christian@dev.null>
+Cc: igor_kushnirskiy@dev.null, 6386223-archive@j.k.dev.null
+Message-id: <4403724D.8050005@dev.null>
+MIME-version: 1.0
+Content-type: text/plain; charset=ISO-8859-1; format=flowed
+Content-transfer-encoding: 7BIT
+User-Agent: Thunderbird 1.5 (Windows/20051201)
+References: <E1FDmF5-0002V0-00@j.k.dev.null> <44036CD6.3000001@dev.null>
+ <44036F12.30408@dev.null>
+
+Hi again,
+
+Null shouldn't be returned. I'll firm up the spec there.
+
+	-Scott
+
+Brent Christian wrote:
+> Actually, one other thing I noticed about that demo code:
+> 
+>  RowFilter startsWithAFilter = new RowFilter<Object,Object>() {
+>    public boolean include(Entry<? extends Object, ? extends Object> 
+> entry) {
+>      for (int i = entry.getValueCount() - 1; i >= 0; i--) {
+>        if (entry.getStringValue(i).startsWith("a")) {
+>            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>          // The value starts with "a", include it
+>          return true;
+>        }
+>      }
+> 
+> The @returns tag of RowFilter.Entry.getStringValue() doesn't specify 
+> whether or not null is a legal return value.  For the sake of people who 
+> want to override getStringValue(), it would be good to state explicitly 
+> whether or not null can be returned.  If null can be returned from 
+> getStringValue(), you might also consider updating the demo code to 
+> check entry.getStringValue(i) for null.
+> 
+> -Brent
+> 
+> Brent Christian wrote:
+>> Looks good.
+>>
+>> I assume that the example code near the top is still okay, since it 
+>> creates a concrete RowFilter:
+>>
+>>  RowFilter startsWithAFilter = new RowFilter<Object,Object>() {
+>>    public boolean include(Entry<? extends Object, ? extends Object> 
+>> entry) {
+>>      ...
+>>
+>> and doesn't, for instance, need to be changed to:
+>>
+>>  RowFilter startsWithAFilter = new RowFilter<M, I>() {
+>>
+>> -Brent
+>>
+>> scott_violet@dev.null wrote:
+>>
+>>> Please review my fix for 6386223
+>>> [ http://descs.k.dev.null/detail.jsp?cr=6386223 ]
+>>> http://j.k.dev.null/projects/swing_data/mustang/6386223.0
+>>>
+>>> Thanks
+>>>
+>>>
+>>> ================================
+>>> webrev:
+>>> http://j.k.dev.null/projects/swing_data/mustang/6386223.0
+>>> mail-archive:
+>>> http://j.k.dev.null/mail-archive/6386223
+>>> bug description:
+>>> http://descs.k.dev.null/detail.jsp?cr=6386223
+>>> bug summary:
+>>> http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=6386223
+>>> robot documentation:
+>>> http://j.k.dev.null/projects/swing/
+>>>
+>>> To approve this request please reply to all with the word 'approved' 
+>>> added to the subject
+>>
+>>
+
+
+
+From - Fri Apr 14 06:49:33 2006
+X-Mozilla-Status: 0001
+X-Mozilla-Status2: 00000000
+Return-path: <swing@j.k.dev.null>
+Received: from conversion-daemon.jdh-mail1.kjh.dev.null by
+ jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ id <0IVD00H018GKVA@jdh-mail1.kjh.dev.null>
+ (original mail from swing@j.k.dev.null); Mon,
+ 27 Feb 2006 13:46:51 -0800 (PST)
+Received: from j.k.dev.null (kjh.k.dev.null [10.5.25.87])
+ by jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ with ESMTP id <0IVD004588I30D@jdh-mail1.kjh.dev.null>; Mon,
+ 27 Feb 2006 13:46:51 -0800 (PST)
+Received: from swing by j.k.dev.null with local (Exim 3.36 #1 (Debian))
+	id 1FDqBj-0004vv-00; Mon, 27 Feb 2006 13:45:51 -0800
+Date: Mon, 27 Feb 2006 13:45:51 -0800
+From: scott_violet@dev.null
+Subject: [6386223.v1] mustang request for review
+Sender: swing <swing@j.k.dev.null>
+To: brent_christian@dev.null
+Cc: 6386223-archive@j.k.dev.null, scott_violet@dev.null,
+ igor_kushnirskiy@dev.null
+Message-id: <E1FDqBj-0004vv-00@j.k.dev.null>
+Content-type: TEXT/PLAIN
+
+Only change is to the docs as suggested by Brent.
+
+Thanks!
+
+   -Scott
+
+
+================================
+webrev:
+http://j.k.dev.null/projects/swing_data/mustang/6386223.1
+mail-archive:
+http://j.k.dev.null/mail-archive/6386223
+bug description:
+http://descs.k.dev.null/detail.jsp?cr=6386223
+bug summary:
+http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=6386223
+robot documentation:
+http://j.k.dev.null/projects/swing/
+
+To approve this request please reply to all with the word 'approved' added to the subject
+
+From - Fri Apr 14 06:49:33 2006
+X-Mozilla-Status: 0013
+X-Mozilla-Status2: 00000000
+Return-path: <brent_christian@dev.null>
+Received: from conversion-daemon.jdh-mail1.kjh.dev.null by
+ jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ id <0IVD00J018LWUC@jdh-mail1.kjh.dev.null>
+ (original mail from brent_christian@dev.null); Mon,
+ 27 Feb 2006 13:52:18 -0800 (PST)
+Received: from [129.150.27.1] (vpn-129-150-27-kjh.k.dev.null [129.150.27.1])
+ by jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ with ESMTP id <0IVD0046U8R60D@jdh-mail1.kjh.dev.null>; Mon,
+ 27 Feb 2006 13:52:18 -0800 (PST)
+Date: Mon, 27 Feb 2006 13:51:17 -0800
+From: Brent Christian <brent_christian@dev.null>
+Subject: Re: [6386223.v1] mustang request for review - approved
+In-reply-to: <E1FDqBj-0004vv-00@j.k.dev.null>
+To: scott_violet@dev.null
+Cc: 6386223-archive@j.k.dev.null, igor_kushnirskiy@dev.null
+Message-id: <44037455.9060201@dev.null>
+Organization: Sun Microsystems, Inc.
+MIME-version: 1.0
+Content-type: text/plain; charset=ISO-8859-1; format=flowed
+Content-transfer-encoding: 7BIT
+X-Accept-Language: en-us, en
+User-Agent: Mozilla Thunderbird 1.0.7 (Windows/20050923)
+References: <E1FDqBj-0004vv-00@j.k.dev.null>
+
+Thanks :)
+
+-B
+
+scott_violet@dev.null wrote:
+> Only change is to the docs as suggested by Brent.
+> 
+> Thanks!
+> 
+>    -Scott
+> 
+> 
+> ================================
+> webrev:
+> http://j.k.dev.null/projects/swing_data/mustang/6386223.1
+> mail-archive:
+> http://j.k.dev.null/mail-archive/6386223
+> bug description:
+> http://descs.k.dev.null/detail.jsp?cr=6386223
+> bug summary:
+> http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=6386223
+> robot documentation:
+> http://j.k.dev.null/projects/swing/
+> 
+> To approve this request please reply to all with the word 'approved' added to the subject
+
+From - Fri Apr 14 06:49:33 2006
+X-Mozilla-Status: 0011
+X-Mozilla-Status2: 00000000
+Return-path: <scott_violet@dev.null>
+Received: from conversion-daemon.jdh-mail1.kjh.dev.null by
+ jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ id <0IVD00L018RAVK@jdh-mail1.kjh.dev.null>
+ (original mail from scott_violet@dev.null); Mon,
+ 27 Feb 2006 13:53:30 -0800 (PST)
+Received: from [129.145.161.113]
+ (d-usca22-161-kjh.k.dev.null [129.145.161.113])
+ by jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ with ESMTP id <0IVD004LR8T60D@jdh-mail1.kjh.dev.null>; Mon,
+ 27 Feb 2006 13:53:30 -0800 (PST)
+Date: Mon, 27 Feb 2006 13:52:29 -0800
+From: Scott Violet <scott_violet@dev.null>
+Subject: Re: [6386223.v1] mustang request for review - approved
+In-reply-to: <44037455.9060201@dev.null>
+To: Brent Christian <brent_christian@dev.null>
+Message-id: <4403749D.4080906@dev.null>
+MIME-version: 1.0
+Content-type: text/plain; charset=ISO-8859-1; format=flowed
+Content-transfer-encoding: 7BIT
+User-Agent: Thunderbird 1.5 (Windows/20051201)
+References: <E1FDqBj-0004vv-00@j.k.dev.null> <44037455.9060201@dev.null>
+
+Thank you!
+
+	-Scott
+
+Brent Christian wrote:
+> Thanks :)
+> 
+> -B
+> 
+> scott_violet@dev.null wrote:
+>> Only change is to the docs as suggested by Brent.
+>>
+>> Thanks!
+>>
+>>    -Scott
+>>
+>>
+>> ================================
+>> webrev:
+>> http://j.k.dev.null/projects/swing_data/mustang/6386223.1
+>> mail-archive:
+>> http://j.k.dev.null/mail-archive/6386223
+>> bug description:
+>> http://descs.k.dev.null/detail.jsp?cr=6386223
+>> bug summary:
+>> http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=6386223
+>> robot documentation:
+>> http://j.k.dev.null/projects/swing/
+>>
+>> To approve this request please reply to all with the word 'approved' 
+>> added to the subject
+
+
+From - Fri Apr 14 06:49:33 2006
+X-Mozilla-Status: 0001
+X-Mozilla-Status2: 00000000
+Return-path: <igor_kushnirskiy@dev.null>
+Received: from conversion-daemon.jdh-mail1.kjh.dev.null by
+ jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ id <0IVD000018VZAE@jdh-mail1.kjh.dev.null>
+ (original mail from igor_kushnirskiy@dev.null); Mon,
+ 27 Feb 2006 13:56:45 -0800 (PST)
+Received: from [192.168.1.3] (vpn-129-150-66-13.E-lol.dev.null [129.150.66.13])
+ by jdh-mail1.kjh.dev.null
+ (iPlanet Messaging Server 5.2 HotFix 1.24 (built Dec 19 2003))
+ with ESMTP id <0IVD00M2E8YJSG@jdh-mail1.kjh.dev.null>; Mon,
+ 27 Feb 2006 13:56:45 -0800 (PST)
+Date: Mon, 27 Feb 2006 16:55:36 -0500
+From: Igor Kushnirskiy <igor_kushnirskiy@dev.null>
+Subject: approved Re: [6386223.v1] mustang request for review
+In-reply-to: <E1FDqBj-0004vv-00@j.k.dev.null>
+To: scott_violet@dev.null
+Cc: brent_christian@dev.null, 6386223-archive@j.k.dev.null
+Message-id: <44037558.7060109@dev.null>
+MIME-version: 1.0
+Content-type: text/plain; charset=ISO-8859-1
+Content-transfer-encoding: 7BIT
+X-Accept-Language: en-us, en
+User-Agent: Debian Thunderbird 1.0.7 (X11/20051017)
+References: <E1FDqBj-0004vv-00@j.k.dev.null>
+
+
+
+scott_violet@dev.null wrote:
+> Only change is to the docs as suggested by Brent.
+> 
+> Thanks!
+> 
+>    -Scott
+> 
+> 
+> ================================
+> webrev:
+> http://j.k.dev.null/projects/swing_data/mustang/6386223.1
+> mail-archive:
+> http://j.k.dev.null/mail-archive/6386223
+> bug description:
+> http://descs.k.dev.null/detail.jsp?cr=6386223
+> bug summary:
+> http://j.k.dev.null/projects/swing/bugid_summary.pl?bugid=6386223
+> robot documentation:
+> http://j.k.dev.null/projects/swing/
+> 
+> To approve this request please reply to all with the word 'approved' added to the subject
+

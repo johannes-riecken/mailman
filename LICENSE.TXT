@@ -1,0 +1,21 @@
+The mailman source code is released under the BSD license. See
+LICENSE-MAILMAN.TXT for specifics.
+
+Mailman makes use of the following libraries, which are available
+under differing licenses:
+
+swingx.jar: A version of SwingX, available under LGPL.
+            See LICENSE-SWINGX.TXT for license information.
+            http://swingx.dev.java.net/
+Filter.jar: This is JH Lab's "Java Image Processing" library. This code
+            is provided under the Apache 2.0 license.
+            See LICENSE-FILTER.TXT for license information.
+            http://www.jhlabs.com/ip/index.html
+TimingFramework.jar: Chet's timing framework, available under the BSD
+            license.
+            See LICENSE-TIMING_FRAMEWORK.TXT for license information.
+            http://timingframework.dev.java.net/
+binding.jar: Early prototype of JSR 295, available under LGPL.
+            See LICENSE-BINDING_FRAMEWORK.TXT for license information.
+swing-layout-1.0.jar: Swing Layout Extensions, available under LGPL.
+            See LICENSE-SWING_LAYOUT.TXT for license information.

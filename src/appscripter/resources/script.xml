@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stages font="36 Arial">
+    <stage>
+        <message font="bold +4">Extreme GUI Makeover</message>
+        <message></message>
+        <message>Scott Violet</message>
+        <message>Shannon Hickey</message>
+        <message>Romain Guy</message>
+    </stage>
+    <stage>
+        <message>This demo will step you through the effects added to this application.</message>
+        <message></message>
+        <message>At any point you can stop the demo to play with the app.</message>
+    </stage>
+    <stage>
+        <message>Links to code are provided at each point.</message>
+    </stage>
+    <stage>
+        <message>Sit back.</message>
+    </stage>
+    <stage>
+        <message>Enjoy!</message>
+    </stage>
+    <stage>
+        <message>Add depth by way of drop shadows.</message>
+        <script>
+            <selectPopupItem target="foo" item="3"/>
+        </script>
+    </stage>
+</stages>

@@ -1,0 +1,379 @@
+From - Wed Sep 06 08:48:41 2006
+X-Mozilla-Status: 0001
+X-Mozilla-Status2: 00000000
+Return-path: <hans_muller@dev.null>
+Received: from jd-kj-10.dev.null ([192.18.39.120])
+ by foo-mail1.jk.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTP id <0J550045KBVV1GA0@foo-mail1.jk.dev.null> for
+ scott_violet@dev.null; Tue, 05 Sep 2006 17:55:07 -0700 (PDT)
+Received: from conversion-daemon.jd-kj-10.dev.null by jd-kj-10.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ id <0J5500A01BQJBE00@jd-kj-10.dev.null>
+ (original mail from hans_muller@dev.null)
+ for scott_violet@dev.null (ORCPT scott_violet@dev.null); Tue,
+ 05 Sep 2006 17:55:07 -0700 (PDT)
+Received: from [129.145.161.84] by jd-kj-10.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTPSA id <0J5500MX8BVV63CI@jd-kj-10.dev.null>; Tue,
+ 05 Sep 2006 17:55:07 -0700 (PDT)
+Date: Tue, 05 Sep 2006 17:55:04 -0700
+From: Hans Muller <hans_muller@dev.null>
+Subject: More information about JSR-296, Swing Application Framework
+Sender: hans_muller@dev.null
+To: Scott Violet <scott_violet@dev.null>
+Message-id: <44FE1C68.8010405@dev.null>
+MIME-version: 1.0
+Content-type: text/plain; format=flowed; charset=ISO-8859-1
+Content-transfer-encoding: 7BIT
+User-Agent: Thunderbird 1.5.0.5 (Windows/20060719)
+Original-recipient: rfc822;scott_violet@dev.null
+
+
+Here's a brief description of JSR-296 with some useful links to the
+blogs, presentations, and docs that are available at the moment.  Feel
+free to forward this to all and sundry.
+
+
+ From Hans Muller, JSR-296 Spec Lead:
+
+I was the technical lead for the Swing project during its formative
+years and have stayed close to the project in one capacity or another
+ever since.  During that time I've been often reminded that Swing
+developers are given very little support or guidance for building and
+deploying desktop applications.  And more often than that, I've been
+told that the job of building apps is too difficult or too
+complicated, and that the situation is particularly hard on novices.
+This project is about changing that situation.
+
+As I'm sure you've read in (section 2.1) of the JSR,
+http://jcp.org/en/jsr/detail?id=296, I'd like to solve this problem by
+creating a small framework API that addresses the requirements of
+typical Swing applications and makes them substantially easier to
+build.  I'm proud to say that the members of the expert group for
+JSR296 have as much Swing application building experience as any group
+I've ever had the pleasure of being associated with.  I've very
+optimistic about being able to get this job done.
+
+At JavaOne this year, Scott Violet I did a technical session about
+a prototype of the app framework.  I've been working on it for
+the past 6 months or so, although not with the kind of laser-focus
+you might expect.  I wrote about all that in a blog:
+http://weblogs.java.net/blog/hansmuller/archive/2006/06/jsr_296_bows_sw.html
+
+The PDFs for the JavaOne slides can be found here:
+http://weblogs.java.net/blog/hansmuller/archive/ts-3399-final.pdf
+
+The prototype represents my initial cut at the problems I outlined in
+the JSR: "... startup and shutdown, and for managing resources, actions,
+and session state", with the exception of session state.  I believe
+we'll want to grow the scope of the project a little to accomodate
+app/web-start/applet deployment.  And I'm sure there will be other
+reasons to grow a little.  That said, I remain committed to keeping
+the framework easy to understand and use, by virtue of it's small
+size as well as (of course) good design.
+
+
+- Hans
+
+
+From - Thu Aug 31 08:55:23 2006
+X-Mozilla-Status: 0003
+X-Mozilla-Status2: 00000000
+Return-path: <chet_haase@dev.null>
+Received: from fe-amer-lol.dev.null ([192.18.108.178])
+ by foo-mail1.jk.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTP id <0J4V00399D77FTB0@foo-mail1.jk.dev.null>; Thu,
+ 31 Aug 2006 08:47:31 -0700 (PDT)
+Received: from conversion-daemon.mail-bar.dev.null by mail-bar.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ id <0J4V00B01CWBV600@mail-bar.dev.null>
+ (original mail from chet_haase@dev.null); Thu, 31 Aug 2006 09:47:31 -0600 (MDT)
+Received: from [10.59.1.8] ([24.4.37.17])
+ by mail-bar.dev.null (Sun Java System Messaging Server 6.2-4.02 (built Sep  9
+ 2005)) with ESMTPSA id <0J4V0015OD77G0E6@mail-bar.dev.null>; Thu,
+ 31 Aug 2006 09:47:31 -0600 (MDT)
+Date: Thu, 31 Aug 2006 08:47:30 -0700
+From: Chet Haase <chet_haase@dev.null>
+Subject: new TimingFramework version
+Sender: chet_haase@dev.null
+To: Scott Violet <scott_violet@dev.null>
+Message-id: <44F70492.6080908@dev.null>
+MIME-version: 1.0
+Content-type: text/plain; format=flowed; charset=ISO-8859-1
+Content-transfer-encoding: 7BIT
+X-Accept-Language: en-us, en
+User-Agent: Mozilla Thunderbird 1.0.7 (Windows/20050923)
+
+
+Hey Scott,
+
+Thanks for the feedback; I've made some of the changes you
+suggested (and fixed various other issues) and the new version
+is ready.  You can grab the latest project/source/jarfile
+at:
+	http://timingframework.dev.java.net
+
+It's still due for a pretty big refactoring to simplify the
+API, but the basic functionality of timing, nonlinearity,
+keyframes, property-setters, and event Triggers are all
+there itching to get to work for you...
+
+Chet.
+
+
+From - Thu Aug 31 09:09:39 2006
+X-Mozilla-Status: 0001
+X-Mozilla-Status2: 00000000
+Return-path: <chet_haase@dev.null>
+Received: from fe-amer-lol.dev.null ([192.18.108.175])
+ by foo-mail1.jk.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTP id <0J4V003GNE0LFTC0@foo-mail1.jk.dev.null>; Thu,
+ 31 Aug 2006 09:05:09 -0700 (PDT)
+Received: from conversion-daemon.mail-bar.dev.null by mail-bar.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ id <0J4V00H01DLVEZ00@mail-bar.dev.null>
+ (original mail from chet_haase@dev.null); Thu, 31 Aug 2006 10:05:09 -0600 (MDT)
+Received: from [10.59.1.8] ([24.4.37.17])
+ by mail-bar.dev.null (Sun Java System Messaging Server 6.2-4.02 (built Sep  9
+ 2005)) with ESMTPSA id <0J4V00I6FE0KGKR2@mail-bar.dev.null>; Thu,
+ 31 Aug 2006 10:05:09 -0600 (MDT)
+Date: Thu, 31 Aug 2006 09:05:05 -0700
+From: Chet Haase <chet_haase@dev.null>
+Subject: AnimatedTransitions
+Sender: chet_haase@dev.null
+To: Scott Violet <scott_violet@dev.null>
+Message-id: <44F708B1.8020605@dev.null>
+MIME-version: 1.0
+Content-type: text/plain; format=flowed; charset=ISO-8859-1
+Content-transfer-encoding: 7BIT
+X-Accept-Language: en-us, en
+User-Agent: Mozilla Thunderbird 1.0.7 (Windows/20050923)
+
+
+Scott,
+
+By the way, you might check out the animtrans package in Aerith
+for the transitions you're working on.
+
+It's somewhat embedded in that project for now, but should be
+quite useable standalone for a different project.  I'd like to
+fold it into the timing framework eventually, but until it's
+there just grab the Aerith project instead.
+
+Chet.
+
+
+From - Thu Aug 31 09:45:56 2006
+X-Mozilla-Status: 0001
+X-Mozilla-Status2: 00000000
+Return-path: <Arseniy@dev.null>
+Received: from d1-emea-lol.dev.null ([192.18.2.120])
+ by foo-mail1.jk.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTP id <0J4V003FCFUEFRE0@foo-mail1.jk.dev.null> for
+ scott_violet@dev.null; Thu, 31 Aug 2006 09:44:38 -0700 (PDT)
+Received: from conversion-daemon.d1-emea-lol.dev.null by d1-emea-lol.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ id <0J4V00401FO1EK00@d1-emea-lol.dev.null> (original mail from Arseniy@dev.null)
+ for scott_violet@dev.null (ORCPT scott_violet@dev.null); Thu,
+ 31 Aug 2006 17:44:38 +0100 (BST)
+Received: from [129.157.75.200] by d1-emea-lol.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTPSA id <0J4V004RBFUD43B7@d1-emea-lol.dev.null> for scott_violet@dev.null
+ (ORCPT scott_violet@dev.null); Thu, 31 Aug 2006 17:44:38 +0100 (BST)
+Date: Thu, 31 Aug 2006 18:44:37 +0200
+From: Arseniy Kuznetsov <Arseniy@dev.null>
+Subject: Matisse Update Pack
+Sender: Arseniy.Kuznetsov@dev.null
+To: Scott Violet <scott_violet@dev.null>
+Reply-to: Arseniy@dev.null
+Message-id: <44F711F5.1000004@dev.null>
+Organization: Sun Microsystems
+MIME-version: 1.0
+Content-type: text/plain; format=flowed; charset=ISO-8859-1
+Content-transfer-encoding: 7BIT
+User-Agent: Thunderbird 1.5.0.5 (Windows/20060719)
+Original-recipient: rfc822;scott_violet@dev.null
+
+  Hey Scott,
+I thought you might be interested in taking a look at Matisse Update 
+Pack, it contains a couple of things that we've been discussing in the 
+recent roadmap-related discussions.
+Just download NetBeans 5.0 and then take the Pack from NetBeans Update 
+Center Beta.
+
+We will be doing a similar thing for the upcoming NetBeans 5.5 release 
+soon, needles to say support for the new Java SE 6 layout features is 
+already in there -- as you can see via downloading the latest 5.5 Beta2.
+
+Check it out and let us know,
+Arseniy
+
+
+From - Fri Sep 01 09:18:52 2006
+X-Mozilla-Status: 1003
+X-Mozilla-Status2: 00000000
+Return-path: <romain_guy@dev.null>
+Received: from jd-kj-10.dev.null ([192.18.39.120])
+ by foo-mail1.jk.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTP id <0J4V00HIMZGO8NE0@foo-mail1.jk.dev.null>; Thu,
+ 31 Aug 2006 16:48:24 -0700 (PDT)
+Received: from conversion-daemon.jd-kj-10.dev.null by jd-kj-10.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ id <0J4V00G01ZEQPY00@jd-kj-10.dev.null>; Thu,
+ 31 Aug 2006 16:48:24 -0700 (PDT)
+Received: from foo-bar3-2.k.dev.null ([10.4.135.22])
+ by jd-kj-10.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTP id <0J4V00MCMZGO63N1@jd-kj-10.dev.null>; Thu,
+ 31 Aug 2006 16:48:24 -0700 (PDT)
+Received: from kjh.k.dev.null ([129.145.155.42])
+ by foo-mail1.jk.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTP id <0J4V00HIKZGN8NE0@foo-mail1.jk.dev.null>; Thu,
+ 31 Aug 2006 16:48:24 -0700 (PDT)
+Received: from sunmail1brm.Cent-lol.dev.null
+ (sunmail1brm.Cent-lol.dev.null [129.147.62.17])	by kjh.k.dev.null
+ (8.13.6+Sun/8.12.10/ENSMAIL,v2.2) with ESMTP id k7VNmMCR012002; Thu,
+ 31 Aug 2006 16:48:22 -0700 (PDT)
+Received: from nwk-avmta-kjh.k.dev.null
+ (nwk-avmta-kjh.k.dev.null [129.149.246.28])	by sunmail1brm.Cent-lol.dev.null
+ (8.11.7p1+Sun/8.11.7/ENSMAIL,v2.2) with ESMTP id k7VNmLh14810; Thu,
+ 31 Aug 2006 17:48:21 -0600 (MDT)
+Received: from pmxchannel-daemon.nwk-avmta-kjh.k.dev.null by
+ nwk-avmta-kjh.k.dev.null
+ (Sun Java System Messaging Server 6.2 (built Dec  2 2004))
+ id <0J4V00107ZGL7E00@nwk-avmta-kjh.k.dev.null>; Thu,
+ 31 Aug 2006 16:48:21 -0700 (PDT)
+Received: from nwkea-mai-lol.dev.null ([192.18.42.27])
+ by nwk-avmta-kjh.k.dev.null
+ (Sun Java System Messaging Server 6.2 (built Dec  2 2004))
+ with ESMTP id <0J4V00JWQZGKLCC0@nwk-avmta-kjh.k.dev.null>; Thu,
+ 31 Aug 2006 16:48:20 -0700 (PDT)
+Received: from rela-lol.dev.null
+ (ip192-12-251-74.block6.us.syntegra.com [192.12.251.74])
+	by nwkea-mai-lol.dev.null (8.13.6+Sun/8.12.9) with ESMTP id k7VNmKU6005248; Thu,
+ 31 Aug 2006 16:48:20 -0700 (PDT)
+Received: from mms2-lol.dev.null (mms2-lol.dev.null [150.143.232.134])
+ by rela-lol.dev.null with ESMTP; Thu, 31 Aug 2006 23:42:18 +0000 (Z)
+Received: from rela-lol.dev.null (rela-lol.dev.null [192.12.251.14])
+ by mms2-lol.dev.null with ESMTP; Thu, 31 Aug 2006 23:42:18 +0000 (Z)
+Received: from smtpout.mac.com (smtpout.mac.com [17.250.248.176])
+ by rela-lol.dev.null with ESMTP; Thu, 31 Aug 2006 23:42:18 +0000 (Z)
+Received: from mac.com (smtpin07-en2 [10.13.10.152])
+	by smtpout.mac.com (Xserve/8.12.11/smtpout06/MantshX 4.0)
+ with ESMTP id k7VNgHtZ026321; Thu, 31 Aug 2006 16:42:17 -0700 (PDT)
+Received: from [192.168.1.43]
+ (alyon-254-1-13-237.w86-193.abo.wanadoo.fr [86.193.44.237])
+	(authenticated bits=0)	by mac.com (Xserve/smtpin07/MantshX 4.0)
+ with ESMTP id k7VNg2Xk023825
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO); Thu,
+ 31 Aug 2006 16:42:08 -0700 (PDT)
+Date: Fri, 01 Sep 2006 01:41:59 +0200
+From: Romain Guy <romain_guy@dev.null>
+Subject: Next photos from China
+To: Scott VIOLET <scott_violet@dev.null>
+Reply-to: romain_guy@dev.null
+Message-id: <44F773C7.5060306@dev.null>
+MIME-version: 1.0
+Content-type: text/plain; format=flowed; charset=ISO-8859-1
+Content-transfer-encoding: 7BIT
+X-PMX-Version: 5.2.0.264296
+X-Brightmail-Tracker: AAAAAQAAA+k=
+X-Language-Identified: TRUE
+User-Agent: Thunderbird 1.5.0.5 (Windows/20060719)
+
+Hi,
+
+Here is another batch of pictures: 
+http://jroller.com/page/gfx?entry=china_second_batch_of_pictures
+
+I did not include all of them. You can see them all here:
+http://www.flickr.com/photos/romainguy/sets/72157594258488591/
+
+-- 
+Romain GUY <romain_guy@dev.null>
+http://jroller.com/page/gfx
+http://www.progx.org
+
+
+
+
+From - Tue Sep 05 13:04:34 2006
+X-Mozilla-Status: 0009
+X-Mozilla-Status2: 00000000
+Return-path: <hans_muller@dev.null>
+Received: from jd-kj-09.dev.null ([192.18.39.119])
+ by foo-mail1.jk.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTP id <0J54006T9VDLOYD0@foo-mail1.jk.dev.null> for
+ scott_violet@dev.null; Tue, 05 Sep 2006 11:58:34 -0700 (PDT)
+Received: from conversion-daemon.jd-kj-09.dev.null by jd-kj-09.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ id <0J5400D01VCXHO00@jd-kj-09.dev.null>
+ (original mail from hans_muller@dev.null)
+ for scott_violet@dev.null (ORCPT scott_violet@dev.null); Tue,
+ 05 Sep 2006 11:58:34 -0700 (PDT)
+Received: from [129.145.161.84] by jd-kj-09.dev.null
+ (Sun Java System Messaging Server 6.2-4.02 (built Sep  9 2005))
+ with ESMTPSA id <0J5400F9XVDE19IY@jd-kj-09.dev.null>; Tue,
+ 05 Sep 2006 11:58:26 -0700 (PDT)
+Date: Tue, 05 Sep 2006 11:58:23 -0700
+From: Hans Muller <hans_muller@dev.null>
+Subject: JSR-296
+Sender: hans_muller@dev.null
+To: Scott Violet <scott_violet@dev.null>
+Message-id: <44FDC8CF.7050304@dev.null>
+MIME-version: 1.0
+Content-type: text/plain; format=flowed; charset=ISO-8859-1
+Content-transfer-encoding: 7BIT
+User-Agent: Thunderbird 1.5.0.5 (Windows/20060719)
+Original-recipient: rfc822;scott_violet@dev.null
+
+Here's the text of section 2.1 of JSR-296 that you asked for.  Feel free 
+to frame it.
+
+- Hans
+
+
+Well written Swing applications tend to have the same core elements for 
+startup and shutdown, and for managing resources, actions, and session 
+state. New applications create all of these core elements from scratch. 
+Java SE does not provide any support for structuring applications, and 
+this often leaves new developers feeling a bit adrift, particularly when 
+they're contemplating building an application whose scale goes well 
+beyond the examples provided in the SE documentation.
+
+This specification will (finally) fill that void by defining the basic 
+structure of a Swing application. It will define a small set of 
+extensible classes or "framework" that define infrastructure that's 
+common to most desktop applications:
+
+The essential application lifecyle, startup and shutdown, with well 
+defined milestones so that applications can insert startup or shutdown 
+work when the application has reached a well known state.
+
+Support for loading localized resources. Desktop applications deal with 
+a set of common resource types beyond message strings, notably images, 
+colors, and fonts. Resources can also be specific to the platform or to 
+the application's "branding".
+
+Persistent session state. Most applications need a way to persist things 
+like top level window geometry across sessions. Automatic support for 
+such common cases as well as for loading and storing arbitrary session 
+data at startup and shutdown time, would be useful in most Swing 
+applications.
+
+Actions define the behavior of Swing application from the user's 
+perspective. In all but the smallest applications, it's useful to be 
+able to loosely couple an Action's (localized, branded, etc) 
+presentation from its implementation. Action implementations often must 
+perform some work asychronously wrt to the Swing event dispatching 
+thread. The application framework would provide support for doing so and 
+for providing GUI feedback while significant work is being done on the 
+user's behalf.
+
