@@ -33,7 +33,7 @@ package com.sun.javaone.mailman.ui;
 
 import binding.BindingContext;
 import binding.BindingDescription;
-import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
+import javax.swing.plaf.basic.BasicLookAndFeel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -59,6 +59,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -152,7 +153,7 @@ public class MessagePane extends JTextPane {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    UIManager.setLookAndFeel(new WindowsLookAndFeel());
+                    UIManager.setLookAndFeel(new MetalLookAndFeel());
                 } catch (Exception e) {
                 }
                 JFrame frame = new JFrame();
