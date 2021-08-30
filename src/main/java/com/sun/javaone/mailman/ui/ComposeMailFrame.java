@@ -74,41 +74,41 @@ public class ComposeMailFrame extends javax.swing.JFrame {
     }
 
     private void initTextArea() {
-        messageTextArea.setText(">Oué j'ai vu, justement je croyais que c'était un non gentiment tourné ^\n" +
+        messageTextArea.setText(">OuÃ© j'ai vu, justement je croyais que c'Ã©tait un non gentiment tournÃ© ^\n" +
                                 "\n" +
-                                "Ahah j'avais pas calé. En fait j'ai vu un popup avec ta tête annonçant\n" +
-                                "ton mail au moment où je cliquais envoyer message sur ton blog :))\n" +
+                                "Ahah j'avais pas calÃ©. En fait j'ai vu un popup avec ta tÃªte annonÃ§ant\n" +
+                                "ton mail au moment oÃ¹ je cliquais envoyer message sur ton blog :))\n" +
                                 "\n" +
                                 "On 27 avr. 06, at 04:03, Fabrice Veniard wrote:\n" +
                                 "\n" +
-                                "> Oué j'ai vu, justement je croyais que c'était un non gentiment tourné ^^ Bon\n" +
-                                "> alors normalement je débarque à san francisco le 5 mai à 12h30 au terminal 1\n" +
+                                "> OuÃ© j'ai vu, justement je croyais que c'Ã©tait un non gentiment tournÃ© ^^ Bon\n" +
+                                "> alors normalement je dÃ©barque Ã  san francisco le 5 mai Ã  12h30 au terminal 1\n" +
                                 "> :D\n" +
                                 ">\n" +
                                 "> MERCI !!\n" +
                                 ">\n" +
                                 "> -----Message d'origine-----\n" +
                                 "> De : Romain GUY [mailto:romain_guy@dev.null]\n" +
-                                "> Envoyé : jeudi 27 avril 2006 12:27\n" +
-                                "> À : Fabrice Veniard\n" +
+                                "> EnvoyÃ© : jeudi 27 avril 2006 12:27\n" +
+                                "> Ã€ : Fabrice Veniard\n" +
                                 "> Objet : Re: YEEEHAAAAAAAAAAAAAAAAAAAAAAAA\n" +
                                 ">\n" +
-                                "> \\o/ Je viens de répondre sur ton blog. Sinon ramène-toi ici y'a aucun\n" +
+                                "> \\o/ Je viens de rÃ©pondre sur ton blog. Sinon ramÃ¨ne-toi ici y'a aucun\n" +
                                 "> souci, dis-moi quand et c'est bon.\n" +
                                 ">\n" +
                                 "> On 27 avr. 06, at 02:58, Fabrice Veniard wrote:\n" +
                                 ">\n" +
                                 ">>\n" +
-                                ">> Je suis pris au campus ubisoft, à moi montréal, le Canada, la neige\n" +
+                                ">> Je suis pris au campus ubisoft, Ã  moi montrÃ©al, le Canada, la neige\n" +
                                 ">> et les\n" +
                                 ">> caribous !\n" +
-                                ">> Bon, ne te sens absolument pas obligé de répondre oui mais du coup\n" +
+                                ">> Bon, ne te sens absolument pas obligÃ© de rÃ©pondre oui mais du coup\n" +
                                 ">> que je\n" +
-                                ">> suis en vacances je repense à mes billets d'avions pour et en\n" +
+                                ">> suis en vacances je repense Ã  mes billets d'avions pour et en\n" +
                                 ">> partance de\n" +
-                                ">> san francisco entre le 5 et le 19 mai. Si t'as prévu autre chose\n" +
+                                ">> san francisco entre le 5 et le 19 mai. Si t'as prÃ©vu autre chose\n" +
                                 ">> c'est pas\n" +
-                                ">> grave, je comprendrais vu que j'ai pas été d'une clarté limpide\n" +
+                                ">> grave, je comprendrais vu que j'ai pas Ã©tÃ© d'une clartÃ© limpide\n" +
                                 ">> dans mes\n" +
                                 ">> intentions.\n" +
                                 ">>\n" +
