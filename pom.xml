@@ -7,7 +7,43 @@
     <groupId>groupId</groupId>
     <artifactId>mailman-1.0-src</artifactId>
     <version>1.0-SNAPSHOT</version>
-
+    <dependencies>
+        <dependency>
+            <groupId>groupId</groupId>
+            <artifactId>binding</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/binding.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>groupId</groupId>
+            <artifactId>Filters</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/Filters.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>groupId</groupId>
+            <artifactId>swing-layout</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/swing-layout-1.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>groupId</groupId>
+            <artifactId>swingx</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/swingx.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>groupId</groupId>
+            <artifactId>TimingFramework</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/TimingFramework.jar</systemPath>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
