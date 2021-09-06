@@ -344,8 +344,8 @@ public class ShadowFactory {
         }
         
         changeSupport.firePropertyChange(SIZE_CHANGED_PROPERTY,
-                                         new Integer(oldSize),
-                                         new Integer(this.size));
+                                         Integer.valueOf(oldSize),
+                                         Integer.valueOf(this.size));
     }
 
     /**
