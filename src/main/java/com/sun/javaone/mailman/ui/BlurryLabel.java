@@ -1,21 +1,21 @@
 /**
  * Copyright (c) 2006, Sun Microsystems, Inc
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
  *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following 
- *     disclaimer in the documentation and/or other materials provided 
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
  *   * Neither the name of the TimingFramework project nor the names of its
- *     contributors may be used to endorse or promote products derived 
+ *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -54,7 +54,7 @@ public class BlurryLabel extends JLabel {
     private int shiftW;
     private int shiftH;
     private boolean drawBlur;
-    
+
     /** Creates a new instance of BlurryLabel */
     public BlurryLabel() {
         kw = kh = 5;
@@ -66,77 +66,77 @@ public class BlurryLabel extends JLabel {
         setBorder(new EmptyBorder(0, 5, 2, 5));
         drawBlur = true;
     }
-    
+
     public void setDrawBlur(boolean drawBlur) {
         this.drawBlur = drawBlur;
         repaint();
     }
-    
+
     public boolean getDrawBlur() {
         return drawBlur;
     }
-    
+
     public void setShiftW(int shiftW) {
         this.shiftW = shiftW;
         image = null;
         revalidate();
         repaint();
     }
-    
+
     public int getShiftW() {
         return shiftW;
     }
-    
+
     public void setShiftH(int shiftH) {
         this.shiftH = shiftH;
         image = null;
         revalidate();
         repaint();
     }
-    
+
     public int getShiftH() {
         return shiftH;
     }
-    
+
     public Dimension getPreferredSize() {
         return super.getPreferredSize();
     }
-    
+
     public void setKernelWidth(int width) {
         this.kw = width;
         image = null;
         repaint();
     }
-    
+
     public int getKernelWidth() {
         return kw;
     }
-    
+
     public void setKernelHeight(int height) {
         this.kh = height;
         image = null;
         repaint();
     }
-    
+
     public int getKernelHeight() {
         return kh;
     }
-    
+
     public void setBlurFactor(float factor) {
         blurFactor = factor;
         image = null;
         repaint();
     }
-    
+
     public float getBlurFactor() {
         return blurFactor;
     }
-    
+
     public void setText(String text) {
         image = null;
         super.setText(text);
     }
-    
+
     protected void paintComponent(Graphics g) {
         if (!drawBlur) {
             super.paintComponent(g);
@@ -147,7 +147,7 @@ public class BlurryLabel extends JLabel {
             }
         }
     }
-    
+
     private void updateImageIfNecessary() {
         String text = getText();
         if (text != null && !" ".equals(text)) {
@@ -157,7 +157,7 @@ public class BlurryLabel extends JLabel {
             }
         }
     }
-    
+
     private void updateImage() {
         image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
         fg = Color.BLACK;
@@ -165,7 +165,7 @@ public class BlurryLabel extends JLabel {
         g.setFont(getFont());
         getUI().paint(g, this);
         g.dispose();
-        
+
         float[] kernelData = new float[kw * kh];
         for (int i = 0; i < kernelData.length; i++) {
             kernelData[i] = blurFactor;

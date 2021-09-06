@@ -1,21 +1,21 @@
 /**
  * Copyright (c) 2006, Sun Microsystems, Inc
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
  *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following 
- *     disclaimer in the documentation and/or other materials provided 
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
  *   * Neither the name of the TimingFramework project nor the names of its
- *     contributors may be used to endorse or promote products derived 
+ *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -67,8 +67,8 @@ public class MailBox {
     private static final byte[] H_SUBJECT = "ubject:".getBytes();
     private static final byte[] H_TO = "o:".getBytes();
     private InputByteBuffer buffer;
-    
-    
+
+
 
     public enum Type {
         FOLDER, INBOX, TRASH, SENT, DRAFTS, OTHER
@@ -77,57 +77,57 @@ public class MailBox {
     private String name;
     private Type type;
     private MailBox parent;
-    
+
     private final List<Message> messages = BindingCollections.observableList(new ArrayList<Message>());
     private final List<MailBox> folders = BindingCollections.observableList(new ArrayList<MailBox>());
-    
+
     public MailBox(Type type, String name, MailBox parent,
             File path) throws FileNotFoundException, IOException {
         if (name == null || name.length() == 0) {
             throw new IllegalArgumentException("Name cannot be null or empty.");
         }
-        
+
         this.name = name;
         this.type = type;
         this.parent = parent;
         this.path = path;
         loadMessages();
     }
-    
+
     public void addMessage(Message message) {
         if (message == null) {
             throw new IllegalArgumentException("Message cannot be null.");
         }
         messages.add(message);
     }
-    
+
     public void removeMessage(Message message) {
         if (message == null) {
             throw new IllegalArgumentException("Message cannot be null.");
         }
         messages.remove(message);
     }
-    
+
     public void addFolder(MailBox folder) {
         if (folder == null || folder.getType() != Type.FOLDER) {
             throw new IllegalArgumentException(
                     "Folder must be non-null and a MailBox of" +
                     "type Folder.");
         }
-        
+
         folders.add(folder);
     }
-    
+
     public void removeFolder(MailBox folder) {
         if (folder == null || folder.getType() != Type.FOLDER) {
             throw new IllegalArgumentException(
                     "Folder must be non-null and a MailBox of" +
                     "type Folder.");
         }
-        
+
         folders.remove(folder);
     }
-    
+
     /**
      * Recursive find
      */
@@ -138,7 +138,7 @@ public class MailBox {
         }
         return messages.toArray(new Message[0]);
     }
-    
+
     /**
      * Recursive find
      */
@@ -153,13 +153,13 @@ public class MailBox {
                 messages.add(message);
             }
         }
-        
+
         for (MailBox mbox : folders) {
             Collections.addAll(messages, mbox.findBySender(sender));
         }
         return messages.toArray(new Message[0]);
     }
-    
+
     /**
      * Recursive find
      */
@@ -175,13 +175,13 @@ public class MailBox {
                 }
             }
         }
-        
+
         for (MailBox mbox : folders) {
             Collections.addAll(messages, mbox.findByRecipient(recipient));
         }
         return messages.toArray(new Message[0]);
     }
-    
+
     /**
      * Recursive find
      */
@@ -192,13 +192,13 @@ public class MailBox {
                 messages.add(message);
             }
         }
-        
+
         for (MailBox mbox : folders) {
             Collections.addAll(messages, mbox.findBySubject(subject));
         }
         return messages.toArray(new Message[0]);
     }
-    
+
     /**
      * Recursive find
      */
@@ -209,51 +209,51 @@ public class MailBox {
                 messages.add(message);
             }
         }
-        
+
         for (MailBox mbox : folders) {
             Collections.addAll(messages, mbox.findByContent(content));
         }
         return messages.toArray(new Message[0]);
     }
-    
+
     /**
      * Used to reparent a mailbox in the tree view
      */
     public void setParent(MailBox parent) {
         this.parent = parent;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public String getName() {
         return name;
     }
-    
+
     public Type getType() {
         return type;
     }
-    
+
     public MailBox getParent() {
         return parent;
     }
-    
+
     public List<Message> getMessages() {
         return messages;
     }
-    
+
     public List<MailBox> getFolders() {
         return folders;
     }
-    
+
     @Override
             public String toString() {
         return getName() + " [" + " messages=" + messages +
                 " folder=" + folders +
                 "]";
     }
-    
+
     private void loadMessages() throws FileNotFoundException, IOException {
         // Search for starting with ^From
         // Header separated with a newline
@@ -278,7 +278,7 @@ public class MailBox {
         }
         long endTime = System.currentTimeMillis();
     }
-    
+
     private boolean parseHeader(InputByteBuffer buffer, Message message) throws IOException {
         while (true) {
             switch(buffer.get()) {
@@ -335,7 +335,7 @@ public class MailBox {
             }
         }
     }
-    
+
     private boolean isEndOfHeader(InputByteBuffer buffer) throws IOException {
         if (buffer.atEnd()) {
             return true;
@@ -362,7 +362,7 @@ public class MailBox {
         buffer.rewind(delta);
         return false;
     }
-    
+
     private boolean parseToNextMessage(InputByteBuffer buffer) throws IOException {
         while (!buffer.atEnd()) {
             if (buffer.get() == '\r') {
@@ -513,7 +513,7 @@ public class MailBox {
         String to = getHeaderString(buffer);
         return getContacts(to);
     }
-    
+
     private Contact[] getContacts(String string) {
         String[] names = split(string);
         Contact[] contacts = new Contact[names.length];
@@ -534,15 +534,15 @@ public class MailBox {
                 firstName = parts[0];
                 lastName = parts[1];
             }
-            
+
             return Contact.getContact(firstName, lastName, displayName,
                     contactMatcher.group(2));
         }
         return Contact.getContact(null, null, name, name);
     }
-    
+
     private String[] split(String text) {
         return text.split(",\\w+");
     }
-    
+
 }

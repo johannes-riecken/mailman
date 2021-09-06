@@ -1,21 +1,21 @@
 /**
  * Copyright (c) 2006, Sun Microsystems, Inc
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
  *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following 
- *     disclaimer in the documentation and/or other materials provided 
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
  *   * Neither the name of the TimingFramework project nor the names of its
- *     contributors may be used to endorse or promote products derived 
+ *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -50,7 +50,7 @@ public final class UIController {
     UIController() {
         changeSupport = new PropertyChangeSupport(this);
     }
-    
+
     public void setSelectedElement(Object selectedElement) {
         if (selectedElement instanceof MailBox) {
             setSelectedMailBox((MailBox)selectedElement);
@@ -58,60 +58,60 @@ public final class UIController {
             setSelectedMailBox(null);
         }
     }
-    
+
     public Object getSelectedElement() {
         return getSelectedMailBox();
     }
-    
+
     public void setAccount(Account account) {
         Account lastAccount = this.account;
         this.account = account;
         firePropertyChange("account", lastAccount, account);
     }
-    
+
     public Account getAccount() {
         return account;
     }
-    
+
     public void setSelectedMailBox(MailBox mailBox) {
         MailBox lastMailBox = this.selectedMailBox;
         this.selectedMailBox = mailBox;
         firePropertyChange("selectedMailBox", lastMailBox, mailBox);
         setSelectedMessage(null);
     }
-    
+
     public MailBox getSelectedMailBox() {
         return selectedMailBox;
     }
-    
+
     public void setSelectedMessage(Message message) {
         Message lastMessage = this.selectedMessage;
         this.selectedMessage = message;
         firePropertyChange("selectedMessage", lastMessage, message);
     }
-    
+
     public Message getSelectedMessage() {
         return selectedMessage;
     }
-    
+
     public void addPropertyChangeListener(PropertyChangeListener l) {
         changeSupport.addPropertyChangeListener(l);
     }
-    
+
     public void removePropertyChangeListener(PropertyChangeListener l) {
         changeSupport.removePropertyChangeListener(l);
     }
-    
+
     public void addPropertyChangeListener(String key,
             PropertyChangeListener l) {
         changeSupport.addPropertyChangeListener(key, l);
     }
-    
+
     public void removePropertyChangeListener(String key,
             PropertyChangeListener l) {
         changeSupport.removePropertyChangeListener(key, l);
     }
-    
+
     protected void firePropertyChange(String key, Object oldValue, Object newValue) {
         changeSupport.firePropertyChange(key, oldValue, newValue);
     }

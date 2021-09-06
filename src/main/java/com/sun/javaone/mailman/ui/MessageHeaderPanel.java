@@ -1,21 +1,21 @@
 /**
  * Copyright (c) 2006, Sun Microsystems, Inc
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
  *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following 
- *     disclaimer in the documentation and/or other materials provided 
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
  *   * Neither the name of the TimingFramework project nor the names of its
- *     contributors may be used to endorse or promote products derived 
+ *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -58,25 +58,25 @@ import org.jdesktop.swingx.border.DropShadowBorder;
  */
 public class MessageHeaderPanel extends JPanel {
     private static final int IS = 96;
-    
+
     private BlurryLabel subject;
     private JLabel from;
     private JLabel to;
     private JLabel cc;
-    
+
     private JLabel subjectLabel;
     private JLabel fromLabel;
     private JLabel toLabel;
     private JLabel ccLabel;
-    
+
     private QuotedPathPanel pathPanel;
-    
+
     private JImagePanel imagePanel;
 
     private Message message;
 
     private boolean showImagePanel;
-    
+
     public MessageHeaderPanel() {
         initComponents();
         configureBindings();
@@ -84,19 +84,19 @@ public class MessageHeaderPanel extends JPanel {
         enableEvents(MouseEvent.MOUSE_EVENT_MASK);
         setName("messageHeader");
     }
-    
+
     protected void processMouseEvent(MouseEvent e) {
         super.processMouseEvent(e);
         if (!e.isConsumed() && e.isPopupTrigger()) {
             showPopup(e);
         }
     }
-    
+
     private void showPopup(MouseEvent e) {
         getPopupMenu().show(this, e.getX(), e.getY());
     }
-    
-    
+
+
     private JPopupMenu getPopupMenu() {
         JPopupMenu popupMenu = new JPopupMenu();
         JCheckBoxMenuItem bigSubjectCI = new JCheckBoxMenuItem("Big Subject");
@@ -118,14 +118,14 @@ public class MessageHeaderPanel extends JPanel {
         popupMenu.add(imagePanelCB);
         return popupMenu;
     }
-    
+
     private void setShowImagePanel(boolean showImagePanel) {
         this.showImagePanel = showImagePanel;
         imagePanel.getParent().setVisible(showImagePanel);
         revalidate();
         repaint();
     }
-    
+
     private boolean getShowImagePanel() {
         return imagePanel.getParent().isVisible();
     }
@@ -148,7 +148,7 @@ public class MessageHeaderPanel extends JPanel {
     public QuotedPathPanel getPathPanel() {
         return pathPanel;
     }
-    
+
     private void configureBindings() {
         BindingContext context = new BindingContext();
         BindingDescription sBD = context.addDescription(new BindingDescription(
@@ -189,21 +189,21 @@ public class MessageHeaderPanel extends JPanel {
         editDescription.setConverter(new BooleanConverter());
         context.addDescription(editDescription);
         context.addDescription(new BindingDescription(
-                this, "message.from.imageLocation", 
+                this, "message.from.imageLocation",
                 imagePanel, "imagePath"));
         context.bind();
     }
-    
+
     public void setMessage(Message message) {
         Message oldMessage = this.message;
         this.message = message;
         firePropertyChange("message", oldMessage, message);
     }
-    
+
     public Message getMessage() {
         return message;
     }
-    
+
     private void configureLayout() {
         setBorder(new EmptyBorder(0, 0, 3, 0));
         JPanel imagePanelWrapper = new JPanel(new BorderLayout());
@@ -215,10 +215,10 @@ public class MessageHeaderPanel extends JPanel {
         imagePanelWrapper.setVisible(false);
 
         add(imagePanelWrapper);
-        
+
         resetLayout();
     }
-    
+
     private void resetLayout() {
         Component imagePanelWrapper = imagePanel.getParent();
         GroupLayout layout = new GroupLayout(this);
@@ -262,7 +262,7 @@ public class MessageHeaderPanel extends JPanel {
            addComponent(imagePanelWrapper, IS, IS, IS);
         }
         layout.setHorizontalGroup(hg);
-        
+
         GroupLayout.ParallelGroup vg = layout.createParallelGroup();
         if (subject.getDrawBlur()) {
         vg.addComponent(imagePanelWrapper, GroupLayout.Alignment.CENTER, IS, IS, IS).
@@ -299,7 +299,7 @@ public class MessageHeaderPanel extends JPanel {
         }
         layout.setVerticalGroup(vg);
     }
-    
+
     private void initComponents() {
         subject = new BlurryLabel();//new JLabel(" ");
         subject.setBorder(null);
@@ -313,7 +313,7 @@ public class MessageHeaderPanel extends JPanel {
         ccLabel = new JLabel("CC:");
         subjectLabel = new JLabel("Subject:");
         imagePanel = new JImagePanel();
-        
+
         Font labelFont = fromLabel.getFont().deriveFont(Font.BOLD);
         fromLabel.setFont(labelFont);
         toLabel.setFont(labelFont);
@@ -323,7 +323,7 @@ public class MessageHeaderPanel extends JPanel {
         pathPanel.setVisible(false);
     }
 
-    
+
 
     private static final class BooleanConverter extends BindingConverter {
         public Object getValueForIncompleteSource(BindingDescription description) {
@@ -334,8 +334,8 @@ public class MessageHeaderPanel extends JPanel {
             return (value != null) ? true : false;
         }
     }
-    
-    
+
+
     private static final class ContactConverter extends BindingConverter {
         public Object convertToTarget(BindingDescription description,
                 Object value) {
@@ -361,7 +361,7 @@ public class MessageHeaderPanel extends JPanel {
             }
             return builder.toString();
         }
-        
+
         private String getContactText0(Contact contact) {
             return contact.getAddress();
         }

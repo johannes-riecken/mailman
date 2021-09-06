@@ -1,21 +1,21 @@
 /**
  * Copyright (c) 2006, Sun Microsystems, Inc
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
  *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following 
- *     disclaimer in the documentation and/or other materials provided 
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
  *   * Neither the name of the TimingFramework project nor the names of its
- *     contributors may be used to endorse or promote products derived 
+ *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -53,7 +53,7 @@ import javax.swing.JPanel;
  * with a {@link org.jdesktop.swingx.StackLayout} and a
  * {@link org.jdesktop.swingx.CheckboardPanel} to create interesting effects.</p>
  * <p><b>IMPORTANT NOTICE:</b> this component has not yet been fully tested.</p>
- * 
+ *
  * @author Romain Guy <romain.guy@mac.com>
  */
 
@@ -65,12 +65,12 @@ public class DropShadowPanel extends JPanel implements PropertyChangeListener {
     // cached values for fast painting
     private int distance_x = 0;
     private int distance_y = 0;
-    
+
     // when shadow member is equaled to null, the factory is asked to
     // re-generated it
     public BufferedImage shadow = null;
     private ShadowFactory factory = null;
-    
+
     /**
      * <p>Creates a new checkboard panel with a flow layout. The drop shadow has
      * the following default properties:
@@ -95,7 +95,7 @@ public class DropShadowPanel extends JPanel implements PropertyChangeListener {
     }
 
     /**
-     * <p>Creates a new checkboard panel the specified layout. The drop shadow 
+     * <p>Creates a new checkboard panel the specified layout. The drop shadow
      * has the following default properties:
      * <ul>
      *   <li><i>angle</i>: 45°</li>
@@ -116,7 +116,7 @@ public class DropShadowPanel extends JPanel implements PropertyChangeListener {
     public DropShadowPanel(final LayoutManager layout) {
         this(new ShadowFactory(), layout);
     }
-    
+
     /**
      * <p>Creates a new checkboard panel the specified layout and shadow factory.
      * The drop shadow has the following default properties:
@@ -137,19 +137,19 @@ public class DropShadowPanel extends JPanel implements PropertyChangeListener {
 
     /**
      * <p>Gets the shadow factory used to generate the shadow.</p>
-     * 
+     *
      * @return this panel's shadow factory
      */
     public ShadowFactory getShadowFactory() {
         return factory;
     }
-    
+
     /**
      * <p>Sets the shadow factory used by this panel to generate the shadows.</p>
      * <p>If the specified factory is null, the default shadow factory is used
      * instead (see
      * {@link org.jdesktop.swingx.util.ShadowFactory#ShadowFactory()}.</p>
-     * 
+     *
      * @param factory the factory used to generate the shadows for this
      * panel's content
      */
@@ -157,7 +157,7 @@ public class DropShadowPanel extends JPanel implements PropertyChangeListener {
         if (factory == null) {
             factory = new ShadowFactory();
         }
-        
+
         if (factory != this.factory){
             if (this.factory != null) {
                 this.factory.removePropertyChangeListener(this);
@@ -165,7 +165,7 @@ public class DropShadowPanel extends JPanel implements PropertyChangeListener {
 
             this.factory = factory;
             this.factory.addPropertyChangeListener(this);
-            
+
             shadow = null;
             repaint();
         }
@@ -174,7 +174,7 @@ public class DropShadowPanel extends JPanel implements PropertyChangeListener {
     /**
      * <p>Gets the angle, in degrees, of the shadow relatively to the panel's
      * content.</p>
-     * 
+     *
      * @return this panel's shadow angle
      */
     public float getAngle() {
@@ -186,7 +186,7 @@ public class DropShadowPanel extends JPanel implements PropertyChangeListener {
      * relatively to this panel's content.</p>
      * <p>The angle should be comprised between 0 and 360 but negative values
      * and values greater than 360 are accepted.</p>
-     * 
+     *
      * @param angle the angle of the shadow relatively to the panel's content
      */
     public void setAngle(final float angle) {
@@ -198,7 +198,7 @@ public class DropShadowPanel extends JPanel implements PropertyChangeListener {
     /**
      * <p>Gets the distance, in pixels, of the shadow relatively to the panel's
      * content.</p>
-     * 
+     *
      * @return this panel's shadow distance
      */
     public int getDistance() {
@@ -209,7 +209,7 @@ public class DropShadowPanel extends JPanel implements PropertyChangeListener {
      * <p>Sets the distance, in pixels, at which the drop shadow is drawn
      * relatively to this panel's content.</p>
      * <p>The distance can be either positive or negative.</p>
-     * 
+     *
      * @param distance the distance of the shadow relatively to the panel's content
      */
     public void setDistance(final int distance) {
@@ -229,7 +229,7 @@ public class DropShadowPanel extends JPanel implements PropertyChangeListener {
     /**
      * <p>Due to the nature of this panel, it is assumed it is non opaque.
      * This allows to handle the drop shadow drawing properly.</p>
-     * 
+     *
      * @return always true
      */
     @Override
@@ -237,7 +237,7 @@ public class DropShadowPanel extends JPanel implements PropertyChangeListener {
         return false;
     }
 
-    /** 
+    /**
      * <p>When this panel is asked to lay out its children components,
      * the shadow is invalidated for redrawing.</p>
      */
@@ -246,13 +246,13 @@ public class DropShadowPanel extends JPanel implements PropertyChangeListener {
         super.doLayout();
         shadow = null;
     }
-    
+
     /**
      * <p>When the drop shadow is invalidated (see {@link #doLayout}), the
      * content of this panel is drawn in an offscreen picture and the shadow
      * factory is asked to generate the shadow. Otherwise, the shadow is drawn,
      * then the panel is painted as usual.</p>
-     * 
+     *
      * @param g the <code>Graphics</code> context in which to paint
      */
     @Override
@@ -276,7 +276,7 @@ public class DropShadowPanel extends JPanel implements PropertyChangeListener {
     /**
      * <p>Whenever a property of the shadow factory is changed, the shadow
      * is invalidated and the panel is updated for repainting.</p>
-     * 
+     *
      * @param evt the property change event generating the update
      */
     public void propertyChange(PropertyChangeEvent evt) {

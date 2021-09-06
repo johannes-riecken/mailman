@@ -1,21 +1,21 @@
 /**
  * Copyright (c) 2006, Sun Microsystems, Inc
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
  *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following 
- *     disclaimer in the documentation and/or other materials provided 
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
  *   * Neither the name of the TimingFramework project nor the names of its
- *     contributors may be used to endorse or promote products derived 
+ *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -87,24 +87,24 @@ public class JImagePanel extends JPanel {
     static {
         UIManager.getDefaults().addResourceBundle("passwordstore.swingx.resources.strings");
     }
-    
+
     public JImagePanel() {
         setBackground(Color.WHITE);
         setOpaque(true);
         showHintOnEmptyImage = true;
         updateHintIfNecessary();
     }
-    
+
     public void setShowHintOnEmptyImage(boolean value) {
         boolean oldValue = showHintOnEmptyImage;
         showHintOnEmptyImage = value;
         firePropertyChange("showHintOnEmptyImage", oldValue, value);
     }
-    
+
     public boolean getShowHintOnEmptyImage() {
         return showHintOnEmptyImage;
     }
-    
+
     public void setEditable(boolean editable) {
         if (editable != this.editable) {
             this.editable = editable;
@@ -122,16 +122,16 @@ public class JImagePanel extends JPanel {
             firePropertyChange("editable", !editable, editable);
         }
     }
-    
+
     public boolean isEditable() {
         return editable;
     }
-    
+
     public final void setImage(Image image) {
         setImage0(image);
         setImagePath0(null);
     }
-    
+
     private void setImage0(Image image) {
         Image oldImage = this.image;
         this.image = image;
@@ -141,11 +141,11 @@ public class JImagePanel extends JPanel {
         repaint();
         updateHintIfNecessary();
     }
-    
+
     public final Image getImage() {
         return image;
     }
-    
+
     protected void setDragImage(Image image) {
         Image oldImage = this.dragImage;
         this.dragImage = image;
@@ -153,11 +153,11 @@ public class JImagePanel extends JPanel {
         updateHintIfNecessary();
         firePropertyChange("dragImage", oldImage, image);
     }
-    
+
     protected Image getDragImage() {
         return dragImage;
     }
-    
+
     public final void setImagePath(URI path) {
         if (path == null) {
             setImage0(null);
@@ -166,17 +166,17 @@ public class JImagePanel extends JPanel {
         }
         setImagePath0(path);
     }
-    
+
     private void setImagePath0(URI path) {
         URI oldPath = this.imagePath;
         this.imagePath = path;
         firePropertyChange("imagePath", oldPath, imagePath);
     }
-    
+
     public final URI getImagePath() {
         return imagePath;
     }
-    
+
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Image image = getImageToDraw();
@@ -185,14 +185,14 @@ public class JImagePanel extends JPanel {
             g.drawImage(image, loc.x, loc.y, this);
         }
     }
-    
+
     private Image getImageToDraw() {
         if (cachedImage == null) {
             cachedImage = createCachedImage();
         }
         return cachedImage;
     }
-    
+
     private Image createCachedImage() {
         Image image = getDragImage();
         boolean isDrag = true;
@@ -248,7 +248,7 @@ public class JImagePanel extends JPanel {
                                 0, 0, iw, ih, this);
                         imageG.dispose();
                     } else {
-                        cachedImage = ImageCache.getInstance().getImage(this, 
+                        cachedImage = ImageCache.getInstance().getImage(this,
                                 image, targetWidth, targetHeight);
                     }
                     return cachedImage;
@@ -258,7 +258,7 @@ public class JImagePanel extends JPanel {
         }
         return null;
     }
-    
+
     private Point getImageLocation() {
         Image image = getImageToDraw();
         Insets insets = getInsets();
@@ -269,29 +269,29 @@ public class JImagePanel extends JPanel {
         return new Point(insets.left + (w - iw) / 2,
                 insets.top + (h - ih) / 2);
     }
-    
+
     private void clearCachedImage() {
         cachedImage = null;
         repaint();
     }
-    
+
     public void reshape(int x, int y, int w, int h) {
         super.reshape(x, y, w, h);
         clearCachedImage();
     }
-    
+
     public boolean imageUpdate(Image img, int infoflags, int x, int y, int w, int h) {
         if (img == getImage()) {
             return super.imageUpdate(img, infoflags, x, y, w, h);
         }
         return false;
     }
-    
+
     public void setBorder(Border border) {
         super.setBorder(border);
         clearCachedImage();
     }
-    
+
     protected void showChooser() {
         JFileChooser chooser = new JFileChooser();
         chooser.addChoosableFileFilter(new FileNameExtensionFilter(
@@ -307,7 +307,7 @@ public class JImagePanel extends JPanel {
             setImagePath(uri);
         }
     }
-    
+
     protected void processMouseEvent(MouseEvent e) {
         super.processMouseEvent(e);
         if (!e.isConsumed() && e.getClickCount() == 1) {
@@ -332,7 +332,7 @@ public class JImagePanel extends JPanel {
             repaint();
         }
     }
-    
+
     private Component getHintComponent() {
         if (getComponentCount() > 0) {
             return getComponent(0);
@@ -349,7 +349,7 @@ public class JImagePanel extends JPanel {
         label.setBorder(new EmptyBorder(4, 4, 4, 4));
         return label;
     }
-    
+
     private String getLabelText() {
         String text = UIManager.getString("ImagePanel.clickText");
         if (text == null) {
@@ -357,14 +357,14 @@ public class JImagePanel extends JPanel {
         }
         return text;
     }
-    
-    
+
+
     private class DropTargetHandler implements ActionListener,
             DropTargetListener {
         private URI dragURI;
         private Timer dragTimer;
         private boolean validDragImage;
-        
+
         public void dragEnter(DropTargetDragEvent e) {
             dragURI = null;
             stopTimer();
@@ -383,18 +383,18 @@ public class JImagePanel extends JPanel {
                 }
             }
         }
-        
+
         public void dragOver(DropTargetDragEvent e) {
         }
-        
+
         public void dropActionChanged(DropTargetDragEvent e) {
         }
-        
+
         public void dragExit(DropTargetEvent e) {
             setDragImage(null);
             stopTimer();
         }
-        
+
         public void drop(DropTargetDropEvent e) {
             if (dragURI != null && !validDragImage) {
                 updateDragImage();
@@ -412,11 +412,11 @@ public class JImagePanel extends JPanel {
                 e.rejectDrop();
             }
         }
-        
+
         public void actionPerformed(ActionEvent e) {
             updateDragImage();
         }
-        
+
         private void updateDragImage() {
             File file = new File(dragURI);
             if (file.length() > 0) {
@@ -438,13 +438,13 @@ public class JImagePanel extends JPanel {
                 startTimer();
             }
         }
-        
+
         private void startTimer() {
             dragTimer = new Timer(50, this);
             dragTimer.setRepeats(true);
             dragTimer.start();
         }
-        
+
         private void stopTimer() {
             if (dragTimer != null) {
                 dragTimer.stop();

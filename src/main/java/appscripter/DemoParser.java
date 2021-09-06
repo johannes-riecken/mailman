@@ -1,21 +1,21 @@
 /**
  * Copyright (c) 2006, Sun Microsystems, Inc
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
  *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following 
- *     disclaimer in the documentation and/or other materials provided 
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
  *   * Neither the name of the TimingFramework project nor the names of its
- *     contributors may be used to endorse or promote products derived 
+ *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -56,14 +56,14 @@ public final class DemoParser {
         List<DemoStage> stages = handler.getStages();
         return stages;
     }
-    
+
     private DemoParser() {
     }
-    
-    
+
+
     private static final class Handler extends DefaultHandler {
         private static final Map<String,DemoCommand.Type> TYPE_MAP;
-        
+
         private static final String E_STAGES = "stages";
         private static final String E_STAGE = "stage";
         private static final String E_MESSAGE = "message";
@@ -79,7 +79,7 @@ public final class DemoParser {
         private boolean inScript;
         private String message;
         private int stagePauseTime = 0;
-        
+
         static {
             TYPE_MAP = new HashMap<String,DemoCommand.Type>();
             for (DemoCommand.Type type : DemoCommand.Type.values()) {
@@ -90,7 +90,7 @@ public final class DemoParser {
                 TYPE_MAP.put(builder.toString().toUpperCase(Locale.ENGLISH), type);
             }
         }
-        
+
         Handler() {
             stages = new ArrayList<DemoStage>();
             messages = new ArrayList<DemoMessage>();
@@ -98,7 +98,7 @@ public final class DemoParser {
             fonts.add(new Font("Arial", Font.PLAIN, 36));
             commands = new ArrayList<DemoCommand>(11);
         }
-        
+
         private List<DemoStage> getStages() {
             return stages;
         }
@@ -155,7 +155,7 @@ public final class DemoParser {
                 message = new String(ch, start, length);
             }
         }
-        
+
         private Font parseFont(String fontString) {
             Font currentFont = getFont();
             String[] chunks = fontString.split(" ");

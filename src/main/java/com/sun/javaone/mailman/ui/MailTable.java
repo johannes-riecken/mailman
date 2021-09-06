@@ -1,21 +1,21 @@
 /**
  * Copyright (c) 2006, Sun Microsystems, Inc
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
  *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following 
- *     disclaimer in the documentation and/or other materials provided 
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
  *   * Neither the name of the TimingFramework project nor the names of its
- *     contributors may be used to endorse or promote products derived 
+ *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -77,10 +77,10 @@ public class MailTable extends JTable {
     };
     private final UIController controller;
     private boolean showTableStriping;
-    
+
     private final Map<String,Integer> colorMap;
-    
-    
+
+
     public MailTable(UIController controller) {
         this.controller = controller;
         colorMap = new HashMap<String,Integer>();
@@ -90,7 +90,7 @@ public class MailTable extends JTable {
         setDragEnabled(true);
         setName("mailTable");
     }
-    
+
     public boolean isCellEditable(int row, int column) {
         return false;
     }
@@ -135,11 +135,11 @@ public class MailTable extends JTable {
                 g.fillRect(0, rh * row, w, rh);
             }
         }
-        
+
         if (startRow < getRowCount()) {
             highlightRows(g, startRow, Math.min(getRowCount(), endRow));
         }
-        
+
         Graphics uig = g.create();
         getUI().paint(uig, this);
         uig.dispose();
@@ -179,12 +179,12 @@ public class MailTable extends JTable {
             showPopup(e);
         }
     }
-    
+
     private void showPopup(MouseEvent e) {
         getPopupMenu().show(this, e.getX(), e.getY());
     }
-    
-    
+
+
     private JPopupMenu getPopupMenu() {
         JPopupMenu popupMenu = new JPopupMenu();
         JCheckBoxMenuItem stripeCB = new JCheckBoxMenuItem("Table Striping");
@@ -216,16 +216,16 @@ public class MailTable extends JTable {
         }
         return popupMenu;
     }
-    
+
     public void setShowTableStriping(boolean showStriping) {
         this.showTableStriping = showStriping;
         repaint();
     }
-    
+
     public boolean getShowTableStriping() {
         return showTableStriping;
     }
-    
+
     private void colorize(int index) {
         int[] selection = getSelectedRows();
         List<Message> messages = controller.getSelectedMailBox().getMessages();
@@ -242,10 +242,10 @@ public class MailTable extends JTable {
         }
         repaint();
     }
-    
+
     private String getAddress(Message message) {
         Contact from = message.getFrom();
-        
+
         if (from != null) {
             String address = from.getAddress();
             if (address != null) {
@@ -255,16 +255,16 @@ public class MailTable extends JTable {
         return null;
     }
 
-    
+
     private static class ColorIcon implements Icon {
         private final int colorIndex;
-        
+
         ColorIcon(int index) {
             this.colorIndex = index;
         }
-        
+
         public void paintIcon(Component c, Graphics g, int x, int y) {
-            ((Graphics2D)g).setPaint(new GradientPaint(x, y, COLORS[colorIndex * 3], 
+            ((Graphics2D)g).setPaint(new GradientPaint(x, y, COLORS[colorIndex * 3],
                     x, y + getIconHeight(), COLORS[colorIndex* 3 + 1]));
             g.fillRect(x, y, getIconWidth(), getIconHeight());
             g.setColor(Color.WHITE);
@@ -278,12 +278,12 @@ public class MailTable extends JTable {
             return 16;
         }
     }
-    
-    
+
+
     private static class DateRenderer extends DefaultTableCellRenderer {
         public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
-            return super.getTableCellRendererComponent(table, 
+            return super.getTableCellRendererComponent(table,
                     DateHelper.convert((Long)value), isSelected, hasFocus, row,
                     column);
         }

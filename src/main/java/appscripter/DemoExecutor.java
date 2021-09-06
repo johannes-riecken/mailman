@@ -1,21 +1,21 @@
 /**
  * Copyright (c) 2006, Sun Microsystems, Inc
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
  *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following 
- *     disclaimer in the documentation and/or other materials provided 
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
  *   * Neither the name of the TimingFramework project nor the names of its
- *     contributors may be used to endorse or promote products derived 
+ *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -75,21 +75,21 @@ import javax.swing.SwingUtilities;
  */
 public class DemoExecutor {
     private static final String ARG_KEY_CODE = "keyCode";
-        
+
     private static final String ARG_PAUSE = "pause";
-    
+
     private static final String ARG_DELTA_X = "deltaX";
 
     private static final String ARG_DELTA_Y = "deltaY";
 
     private static final String ARG_COMPONENT_NAME = "componentName";
-    
+
     private static final String ARG_FIND_EMPTY_REGION = "findEmptyRegion";
-    
+
     private static final String ARG_INDEX = "index";
-    
+
     private static final String ARG_TIME = "time";
-    
+
     private static final String ARG_CLASS_NAME = "class";
 
     private static final int GLIDE_PAUSE_TIME = 10;
@@ -97,7 +97,7 @@ public class DemoExecutor {
     private static final int PAUSE_TIME = 500;
 
     private static final long TIME_OUT_THRESHOLD = 3000;
-    
+
     private static final String ON_EDT_METHOD_NAME = "onEDT";
 
     private static final String IN_BACKGROUND_METHOD_NAME = "offEDT";
@@ -110,22 +110,22 @@ public class DemoExecutor {
     private boolean[] hitRegion;
 
     private DemoExecutor.EventConditional conditional;
-    
+
     private AWTEventHandler eventHandler;
-    
+
     private volatile boolean running;
 
     private boolean isMouseDown;
-    
+
     private int mouseX;
-    
+
     private int mouseY;
-    
+
     private boolean errored;
-    
+
     private boolean initedDND;
 
-    
+
     public DemoExecutor() {
     }
 
@@ -144,7 +144,7 @@ public class DemoExecutor {
         errored = false;
         new Thread(new Runner()).start();
     }
-    
+
     public boolean errored() {
         return errored;
     }
@@ -153,12 +153,12 @@ public class DemoExecutor {
         // PENDING:
         return !running;
     }
-    
+
     private void updateMouseLocation() {
         Point mouseLoc = MouseInfo.getPointerInfo().getLocation();
         updateMouseLocation(mouseLoc.x, mouseLoc.y);
     }
-    
+
     private void updateMouseLocation(int x, int y) {
         mouseX = x;
         mouseY = y;
@@ -183,7 +183,7 @@ public class DemoExecutor {
         }
         running = false;
     }
-    
+
     protected void executeInBackground(DemoCommand command) throws Exception {
         final Object executor = getExecutor(command);
         HashSet<Method> allMethods = new HashSet<Method>();
@@ -243,7 +243,7 @@ public class DemoExecutor {
             }
         }
     }
-    
+
     private Object getExecutor(DemoCommand command) throws Exception {
         switch(command.getCommand()) {
             case SELECT_POPUP_ITEM:
@@ -265,16 +265,16 @@ public class DemoExecutor {
             case EXTERNAL:
                 return createExternalExecutor(command);
         }
-        throw new IllegalArgumentException("Unable to find executor for: " + 
+        throw new IllegalArgumentException("Unable to find executor for: " +
                 command);
     }
-    
+
     private Object createExternalExecutor(DemoCommand command) throws Exception {
         String className = (String) command.getArguments().get(ARG_CLASS_NAME);
         Class type = Class.forName(className);
         return type.getConstructor(ExecuteContext.class).newInstance(new ExecuteContext(command));
     }
-    
+
     private EventConditional createConditional(int id, Object...args) {
         if (args.length % 2 != 0) {
             throw new IllegalArgumentException(
@@ -288,12 +288,12 @@ public class DemoExecutor {
         }
         return new DefaultEventConditional(id, args);
     }
-    
+
     private void moveRobotTo(int x, int y) {
         getRobot().mouseMove(x, y);
         updateMouseLocation(x, y);
     }
-    
+
     private void moveMouseSmoothlyTo(int x, int y) {
         if (SwingUtilities.isEventDispatchThread()) {
             throw new IllegalStateException("Must be invoked in background");
@@ -329,7 +329,7 @@ public class DemoExecutor {
             waitForConditional();
         }
     }
-    
+
     private void moveMouse(int x, int y) {
         if (SwingUtilities.isEventDispatchThread()) {
             throw new IllegalStateException("Must be invoked in background");
@@ -345,7 +345,7 @@ public class DemoExecutor {
             waitForConditional();
         }
     }
-    
+
     private void mousePress(int robotMask, int mouseMask) {
         if (SwingUtilities.isEventDispatchThread()) {
             throw new IllegalStateException("Must be invoked in background");
@@ -354,12 +354,12 @@ public class DemoExecutor {
             throw new IllegalStateException("Mouse already down");
         }
         isMouseDown = true;
-        scheduleConditional(createConditional(MouseEvent.MOUSE_PRESSED, 
+        scheduleConditional(createConditional(MouseEvent.MOUSE_PRESSED,
                 "getButton", mouseMask));
         getRobot().mousePress(robotMask);
         waitForConditional();
     }
-    
+
     private void mouseRelease(int robotMask, int mouseMask) {
         if (SwingUtilities.isEventDispatchThread()) {
             throw new IllegalStateException("Must be invoked in background");
@@ -368,19 +368,19 @@ public class DemoExecutor {
             throw new IllegalStateException("Mouse button is not down");
         }
         isMouseDown = false;
-        scheduleConditional(createConditional(MouseEvent.MOUSE_RELEASED, 
+        scheduleConditional(createConditional(MouseEvent.MOUSE_RELEASED,
                 "getButton", mouseMask));
         getRobot().mouseRelease(robotMask);
         waitForConditional();
     }
-    
+
     private void flushEventQueue() {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
             }
         });
     }
-    
+
     private void pressKey(int keyCode) {
         if (SwingUtilities.isEventDispatchThread()) {
             throw new IllegalStateException("Must be invoked in background");
@@ -390,17 +390,17 @@ public class DemoExecutor {
         getRobot().keyPress(keyCode);
         waitForConditional();
     }
-    
+
     private void releaseKey(int keyCode) {
         if (SwingUtilities.isEventDispatchThread()) {
             throw new IllegalStateException("Must be invoked in background");
         }
-        scheduleConditional(createConditional(KeyEvent.KEY_RELEASED, 
+        scheduleConditional(createConditional(KeyEvent.KEY_RELEASED,
                 "getKeyCode", keyCode));
         getRobot().keyRelease(keyCode);
         waitForConditional();
     }
-    
+
     private void scheduleConditional(EventConditional e) {
         synchronized(this) {
             if (conditional != null) {
@@ -409,7 +409,7 @@ public class DemoExecutor {
             conditional = e;
         }
     }
-    
+
     private void waitForConditional() {
         long start = System.currentTimeMillis();
         synchronized(this) {
@@ -455,7 +455,7 @@ public class DemoExecutor {
             }
         }
     }
-    
+
     protected Robot getRobot() {
         if (robot == null) {
             try {
@@ -467,7 +467,7 @@ public class DemoExecutor {
         }
         return robot;
     }
-    
+
     private Point getLocation(final DemoCommand command) {
         if (!SwingUtilities.isEventDispatchThread()) {
             final Point[] loc = new Point[1];
@@ -487,7 +487,7 @@ public class DemoExecutor {
             return getLocation0(command);
         }
     }
-    
+
     private Point getLocation0(DemoCommand command) {
         Object dx = command.getArguments().get(ARG_DELTA_X);
         Object dy = command.getArguments().get(ARG_DELTA_Y);
@@ -549,7 +549,7 @@ public class DemoExecutor {
             throw new IllegalStateException("Unable to locate component named " + cName);
         }
     }
-    
+
     private Point findEmptyRegion(Component c, Rectangle bounds) {
         if (c instanceof Container) {
             int x = bounds.x;
@@ -596,7 +596,7 @@ public class DemoExecutor {
                     return new Point(testX, testY);
                 }
             }
-            
+
             for (int i = 0; i < h; i++) {
                 for (int j = 0; j < w; j++) {
                     if (!hitRegion[i * w + j]) {
@@ -610,7 +610,7 @@ public class DemoExecutor {
             return new Point(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
         }
     }
-    
+
     private Component findComponentByName(String name) {
         Component result = findComponentByName(gp.getParent(), name);
         if (result == null) {
@@ -641,28 +641,28 @@ public class DemoExecutor {
         return null;
     }
 
-    
+
     private final class Runner implements Runnable {
         public void run() {
             executeInBackground();
         }
     }
 
-    
+
     private final class SelectPopupItemExecutor {
         private final DemoCommand command;
-        
+
         SelectPopupItemExecutor(DemoCommand command) {
             this.command = command;
         }
-        
+
         private void offEDT10() {
             Point loc = getLocation(command);
             moveMouseSmoothlyTo(loc.x, loc.y);
             mousePress(InputEvent.BUTTON3_MASK, MouseEvent.BUTTON3);
             mouseRelease(InputEvent.BUTTON3_MASK, MouseEvent.BUTTON3);
         }
-        
+
         private void offEDT20() throws InterruptedException, InvocationTargetException {
             String[] indices = ((String)command.getArguments().get(ARG_INDEX)).split("\\.");
             final Point[] points = new Point[1];
@@ -706,29 +706,29 @@ public class DemoExecutor {
             }
         }
     }
-    
-    
+
+
     private final class MouseMoveExecutor {
         private final DemoCommand command;
-        
+
         MouseMoveExecutor(DemoCommand command) {
             this.command = command;
         }
-        
+
         private void offEDT10() {
             Point loc = getLocation(command);
             moveMouseSmoothlyTo(loc.x, loc.y);
         }
     }
-    
-    
+
+
     private final class MouseClickExecutor {
         private final DemoCommand command;
-        
+
         MouseClickExecutor(DemoCommand command) {
             this.command = command;
         }
-        
+
         private void offEDT10() {
             Point loc = getLocation(command);
             moveMouseSmoothlyTo(loc.x, loc.y);
@@ -736,15 +736,15 @@ public class DemoExecutor {
             mouseRelease(InputEvent.BUTTON1_MASK, MouseEvent.BUTTON1);
         }
     }
-    
-    
+
+
     private final class MouseDragExecutor {
         private final DemoCommand command;
-        
+
         MouseDragExecutor(DemoCommand command) {
             this.command = command;
         }
-        
+
         private void offEDT10() {
             mousePress(InputEvent.BUTTON1_MASK, MouseEvent.BUTTON1);
             Object pause = command.getArguments().get(ARG_PAUSE);
@@ -760,11 +760,11 @@ public class DemoExecutor {
             mouseRelease(InputEvent.BUTTON1_MASK, MouseEvent.BUTTON1);
         }
     }
-    
-    
+
+
     private final class MousePressExecutor {
         private final DemoCommand command;
-        
+
         MousePressExecutor(DemoCommand command) {
             this.command = command;
         }
@@ -773,11 +773,11 @@ public class DemoExecutor {
             mousePress(InputEvent.BUTTON1_MASK, MouseEvent.BUTTON1);
         }
     }
-    
-    
+
+
     private final class MouseReleaseExecutor {
         private final DemoCommand command;
-        
+
         MouseReleaseExecutor(DemoCommand command) {
             this.command = command;
         }
@@ -786,8 +786,8 @@ public class DemoExecutor {
             mouseRelease(InputEvent.BUTTON1_MASK, MouseEvent.BUTTON1);
         }
     }
-    
-    
+
+
     private final class KeyTypeExecutor {
         private final DemoCommand command;
 
@@ -802,14 +802,14 @@ public class DemoExecutor {
         }
     }
 
-    
+
     private final static class PauseExecutor {
         private final DemoCommand command;
 
         PauseExecutor(DemoCommand command) {
             this.command = command;
         }
-        
+
         private void offEDT10() {
             int value = Integer.parseInt((String) command.getArguments().get(ARG_TIME));
             try {
@@ -818,22 +818,22 @@ public class DemoExecutor {
             }
         }
     }
-    
-    
+
+
     private static abstract class EventConditional {
         public abstract boolean matchesEvent(Object o);
     }
 
-    
+
     private static class DefaultEventConditional extends EventConditional {
         private final int id;
         private final Object[] args;
-        
+
         public DefaultEventConditional(int id, Object[] args) {
             this.id = id;
             this.args = args;
         }
-        
+
         public boolean matchesEvent(Object e) {
             if (id == MouseEvent.MOUSE_RELEASED && e instanceof DragSourceDropEvent) {
                 return true;
@@ -867,7 +867,7 @@ public class DemoExecutor {
             }
             return false;
         }
-        
+
         public String toString() {
             String result = "EventConditional [";
             for (int i = 0; i < args.length; i += 2) {
@@ -880,9 +880,9 @@ public class DemoExecutor {
             return result;
         }
     }
-    
-    
-    private final class AWTEventHandler implements AWTEventListener, DragSourceListener, 
+
+
+    private final class AWTEventHandler implements AWTEventListener, DragSourceListener,
             DragSourceMotionListener {
         public void eventDispatched(AWTEvent event) {
             awtEventDispatched(event);
@@ -908,17 +908,17 @@ public class DemoExecutor {
             awtEventDispatched(dsde);
         }
     }
-    
-    
+
+
     private static final class MethodRunnable implements Runnable {
         private final Object target;
         private final Method method;
-        
+
         MethodRunnable(Object target, Method method) {
             this.target = target;
             this.method = method;
         }
-        
+
         public void run() {
             try {
                 method.invoke(target);
@@ -935,23 +935,23 @@ public class DemoExecutor {
 
     public class ExecuteContext {
         private final DemoCommand command;
-        
+
         ExecuteContext(DemoCommand command) {
             this.command = command;
         }
-        
+
         public DemoCommand getCommand() {
             return command;
         }
-        
+
         public DemoGlassPane getGlassPane() {
             return gp;
         }
-        
+
         public Component getComponentByName(String name) {
             return findComponentByName(name);
         }
-        
+
         public void moveMouse(int x, int y) {
             moveMouseSmoothlyTo(x, y);
         }

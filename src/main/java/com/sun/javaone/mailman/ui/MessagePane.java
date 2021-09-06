@@ -1,21 +1,21 @@
 /**
  * Copyright (c) 2006, Sun Microsystems, Inc
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
  *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following 
- *     disclaimer in the documentation and/or other materials provided 
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
  *   * Neither the name of the TimingFramework project nor the names of its
- *     contributors may be used to endorse or promote products derived 
+ *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -94,7 +94,7 @@ import org.jdesktop.animation.timing.interpolation.PropertyRange;
 public class MessagePane extends JTextPane {
     private static final AttributeSet[] DEPTH_ATTRS;
     private static final char[] NEWLINE_TEXT = new char[] { '\n' };
-    
+
     private static final String TEST_TEXT =
             "asdfa sfas wrote\r\n" +
             ">asdfasdf\r\n" +
@@ -123,32 +123,32 @@ public class MessagePane extends JTextPane {
             "> \r\n" +
             ">>\r\n" +
             ">> When we're ready, I hope we'll provide a NetBeans version\r\n";
-    
+
     private static final Object RESPONSE_TYPE = new String("Response");
     private static final int RESPONSE_INDENT = 11;
     private static MessagePane SHARED_MESSAGE_PANE;
     private String text;
     QuotedPathPanel pathPanel;
-    
+
     static {
         DEPTH_ATTRS = new AttributeSet[ColorScheme.getColorSchemeCount()];
         for (int i = 0; i < ColorScheme.getColorSchemeCount(); i++) {
             SimpleAttributeSet attrs = new SimpleAttributeSet();
-            StyleConstants.setForeground(attrs, 
+            StyleConstants.setForeground(attrs,
                     ColorScheme.getScheme(i).getOuterColor());
             StyleConstants.setBold(attrs, true);
             DEPTH_ATTRS[i] = attrs;
         }
     }
-    
+
     static MessagePane getMessagePane() {
         return SHARED_MESSAGE_PANE;
     }
-    
+
     private static Color getColorForDepth(int depth) {
         return ColorScheme.getScheme(depth - 1).getOuterColor();
     }
-    
+
     public static final void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -167,7 +167,7 @@ public class MessagePane extends JTextPane {
                 sp.setPreferredSize(new Dimension(200, 200));
                 frame.getContentPane().add(sp);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                
+
                 BindingContext bc = new BindingContext();
                 bc.addDescription(new BindingDescription(
                         mp, "quotedPath", pathC, "quotedPath"));
@@ -177,7 +177,7 @@ public class MessagePane extends JTextPane {
             }
         });
     }
-    
+
     // Look for:
     //   X Y wrote:
     //   On ... X Y wrote:
@@ -194,11 +194,11 @@ public class MessagePane extends JTextPane {
         setCaret(caret);
         setName("messagePane");
     }
-    
+
     public Point getExpandLoc(int[] path) {
         return getExpandLoc(getUI().getRootView(this).getView(0), getTextRect(), path, 0);
     }
-    
+
     public Point getExpandLoc(View view, Rectangle bounds, int[] path, int depth) {
         System.err.println("getExpandLoc, view=" + view + " bounds=" + bounds + " depth=" + depth);
         int responseCount = 0;
@@ -213,7 +213,7 @@ public class MessagePane extends JTextPane {
                         return ((ResponseView)view.getView(i)).getClickCenter(
                                 childBounds.x, childBounds.y);
                     } else {
-                        return getExpandLoc(view.getView(i), 
+                        return getExpandLoc(view.getView(i),
                                 childBounds, path, depth);
                     }
                 }
@@ -221,7 +221,7 @@ public class MessagePane extends JTextPane {
         }
         return null;
     }
-    
+
     public void setFoldsQuotes(boolean foldsQuotes) {
         if (foldsQuotes) {
             setEditorKit(new MessageEditorKit());
@@ -230,11 +230,11 @@ public class MessagePane extends JTextPane {
         }
         setText(text);
     }
-    
+
     public boolean getFoldsQuotes() {
         return (getEditorKit() instanceof MessageEditorKit);
     }
-    
+
     public List<String> getQuotedPath() {
         List<String> path = new ArrayList<String>(1);
         Rectangle rect = getTextRect();
@@ -250,7 +250,7 @@ public class MessagePane extends JTextPane {
         Collections.reverse(path);
         return path;
     }
-    
+
     public void setText(String text) {
         this.text = text;
         if (getEditorKit() instanceof MessageEditorKit) {
@@ -272,7 +272,7 @@ public class MessagePane extends JTextPane {
         select(0, 0);
         scrollRectToVisible(new Rectangle());
     }
-    
+
     protected void processMouseEvent(MouseEvent e) {
         super.processMouseEvent(e);
         if (!e.isConsumed()) {
@@ -286,7 +286,7 @@ public class MessagePane extends JTextPane {
             }
         }
     }
-    
+
     private JPopupMenu getPopupMenu() {
         JPopupMenu popupMenu = new JPopupMenu();
         JCheckBoxMenuItem foldsMI = new JCheckBoxMenuItem("Fold Quotes");
@@ -307,7 +307,7 @@ public class MessagePane extends JTextPane {
         popupMenu.add(pathPanelMI);
         return popupMenu;
     }
-    
+
     private View getDeepestView(View v, float x, float y, Shape alloc) {
         if (v == null) {
             return null;
@@ -323,7 +323,7 @@ public class MessagePane extends JTextPane {
         }
         return child;
     }
-    
+
     private Rectangle getTextRect() {
         Rectangle bounds = getBounds();
         bounds.x = 0;
@@ -335,14 +335,14 @@ public class MessagePane extends JTextPane {
         bounds.height -= (insets.top + insets.bottom);
         return bounds;
     }
-    
+
     private void handleClick(MouseEvent e) {
         float x = (float)e.getX();
         float y = (float)e.getY();
         View view = getUI().getRootView(this);
         toggleView(view, x, y, getTextRect());
     }
-    
+
     private View toggleView(View v, float x, float y, Shape alloc) {
         if (v == null) {
             return null;
@@ -359,14 +359,14 @@ public class MessagePane extends JTextPane {
         alloc = v.getChildAllocation(index, alloc);
         return toggleView(v.getView(index), x, y, alloc);
     }
-    
+
     @Deprecated
     public void reshape(int x, int y, int w, int h) {
         super.reshape(x, y, w, h);
         firePropertyChange("quotedPath", null, null);
     }
-    
-    
+
+
     public static final class ResponseView extends BoxView {
         private static final int MIN_HEIGHT = 20;
         private int depth;
@@ -374,11 +374,11 @@ public class MessagePane extends JTextPane {
         private boolean expanded = true;
         private boolean animating;
         private float height;
-        
+
         ResponseView(Element e) {
             super(e, BoxView.Y_AXIS);
         }
-        
+
         private String getSender() {
             Element e = getElement();
             Element parent = e.getParentElement();
@@ -401,7 +401,7 @@ public class MessagePane extends JTextPane {
             }
             return "";
         }
-        
+
         public void setParent(View parent) {
             super.setParent(parent);
             depth = 1;
@@ -412,11 +412,11 @@ public class MessagePane extends JTextPane {
                 parent = parent.getParent();
             }
         }
-        
+
         private int getDepth() {
             return depth;
         }
-        
+
         public void paint(Graphics g, Shape a) {
             if (fontCenter == 0) {
                 calcFontHeight();
@@ -455,21 +455,21 @@ public class MessagePane extends JTextPane {
                 super.paint(g, a);
             }
         }
-        
+
         protected short getLeftInset() {
             return RESPONSE_INDENT;
         }
-        
+
         private boolean isExpanded() {
             return expanded;
         }
-        
+
         private void calcFontHeight() {
             Container host = getContainer();
             FontMetrics metrics = host.getFontMetrics(host.getFont());
             fontCenter = metrics.getAscent() / 2 + 3;
         }
-        
+
         private void toggleIfNecessary(float x, float y, Shape alloc) {
             Rectangle bounds = alloc.getBounds();
             if ((!isExpanded() || bounds.height > MIN_HEIGHT) &&
@@ -480,17 +480,17 @@ public class MessagePane extends JTextPane {
                 getContainer().repaint();
             }
         }
-        
+
         private Point getClickCenter(int x, int y) {
             return new Point(x + 7, y + fontCenter);
         }
-        
+
         private boolean inClickArea(int x, int y, Rectangle bounds) {
             return (x >= bounds.x + 2 && x <= bounds.x + 13 &&
                     y >= bounds.y + fontCenter - 4 &&
                     y <= bounds.y + fontCenter + 5);
         }
-        
+
         public float getPreferredSpan(int axis) {
             if (axis == View.Y_AXIS && (animating || !isExpanded()) &&
                     height != 0) {
@@ -498,7 +498,7 @@ public class MessagePane extends JTextPane {
             }
             return super.getPreferredSpan(axis);
         }
-        
+
         public float getMinimumSpan(int axis) {
             if (axis == View.Y_AXIS && (animating || !isExpanded()) &&
                     height != 0) {
@@ -506,7 +506,7 @@ public class MessagePane extends JTextPane {
             }
             return super.getMinimumSpan(axis);
         }
-        
+
         public float getMaximumSpan(int axis) {
             if (axis == View.Y_AXIS && (animating || !isExpanded()) &&
                     height != 0) {
@@ -514,15 +514,15 @@ public class MessagePane extends JTextPane {
             }
             return super.getMaximumSpan(axis);
         }
-        
+
         private float getCollapsedHeight() {
             return 16f;
         }
-        
+
         public void setSize(float width, float height) {
             super.setSize(width, height);
         }
-        
+
         private void startAnimation() {
             float start;
             float end;
@@ -545,7 +545,7 @@ public class MessagePane extends JTextPane {
             controller.addTarget(new AnimateListener());
             controller.start();
         }
-        
+
         public void setHeight(float height) {
             Container host = getContainer();
             this.height = height;
@@ -555,22 +555,22 @@ public class MessagePane extends JTextPane {
                 ((JComponent)host).revalidate();
             }
         }
-        
-        
+
+
         private class AnimateListener implements TimingTarget {
             public void timingEvent(long l, long l0, float f) {
             }
-            
+
             public void begin() {
             }
-            
+
             public void end() {
                 animating = false;
             }
         }
     }
-    
-    
+
+
     private static final class MessageViewFactory implements ViewFactory {
         public View create(Element elem) {
             String kind = elem.getName();
@@ -593,36 +593,36 @@ public class MessagePane extends JTextPane {
             return new LabelView(elem);
         }
     }
-    
+
     private static final class MessageEditorKit extends StyledEditorKit {
         public ViewFactory getViewFactory() {
             return new MessageViewFactory();
         }
-        
+
         public Document createDefaultDocument() {
             return new MessageDocument();
         }
-        
+
     }
-    
-    
+
+
     private static final class MessageDocument extends DefaultStyledDocument {
         private final int length;
         private int currentDepth;
         private int offset;
         private int depth;
         private int nonResponseOffset;
-        
+
         public MessageDocument() {
             length = 0;
         }
-        
+
         public MessageDocument(char[] text) {
             super();
             length = (text == null) ? 0 : text.length;
             insert(text);
         }
-        
+
         private void insert(char[] text) {
             int lastDepth;
             offset = 0;
@@ -668,7 +668,7 @@ public class MessagePane extends JTextPane {
                 assert false;
             }
         }
-        
+
         private void parseLine(char[] text) {
             depth = 0;
             nonResponseOffset = offset;
@@ -695,11 +695,11 @@ public class MessagePane extends JTextPane {
                 offset++;
             }
         }
-        
+
         private boolean isResponseChar(char c) {
             return (c == '>');
         }
-        
+
         private void highlightFromIfNecessary(List<ElementSpec> specs, char[] text, int depth) {
             int sSize = specs.size();
             if (sSize > 2 && specs.get(sSize - 1).getType() == ElementSpec.EndTagType &&
@@ -747,7 +747,7 @@ public class MessagePane extends JTextPane {
                 }
             }
         }
-        
+
         private int findLastNonSpace(char[] text, int i, int min) {
             while (i >= min && text[i] == ' ') {
                 i--;
@@ -757,7 +757,7 @@ public class MessagePane extends JTextPane {
             }
             return i;
         }
-        
+
         private int findLastSpace(char[] text, int i, int min) {
             while (i >= min && text[i] != ' ') {
                 i--;
@@ -767,7 +767,7 @@ public class MessagePane extends JTextPane {
             }
             return i;
         }
-        
+
         private AttributeSet getNameAttributeSet(int depth) {
             return DEPTH_ATTRS[Math.min(DEPTH_ATTRS.length - 1, depth - 1)];
         }

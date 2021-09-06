@@ -1,21 +1,21 @@
 /**
  * Copyright (c) 2006, Sun Microsystems, Inc
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
  *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following 
- *     disclaimer in the documentation and/or other materials provided 
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
  *   * Neither the name of the TimingFramework project nor the names of its
- *     contributors may be used to endorse or promote products derived 
+ *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -56,12 +56,12 @@ public class QuotedPathPanel extends JPanel {
     private boolean pathsChangedDuringTransition;
     private int transitionIndex;
     private boolean fadingIn;
-    
+
     public QuotedPathPanel() {
         paths = new ArrayList<String>(1);
         setLayout(new Layout());
     }
-    
+
     public void setQuotedPath(List<String> paths) {
         List<String> oldPaths = this.paths;
         if (paths == null) {
@@ -74,17 +74,17 @@ public class QuotedPathPanel extends JPanel {
             startTransition();
         }
     }
-    
+
     public List<String> getQuotedPath() {
         return new ArrayList<String>(paths);
     }
-    
+
     private void startTransition() {
         transitioning = true;
         calcPathDiff();
         calcNextTransition();
     }
-    
+
     private void calcPathDiff() {
         int oldSize = paths.size();
         int newSize = targetPaths.size();
@@ -102,13 +102,13 @@ public class QuotedPathPanel extends JPanel {
         assert (differsAt != -1);
         differsIndex = differsAt;
     }
-    
+
     // find index that differs
     // remember index
     // if index < paths.size() -> fade element out
     // if index >= paths.size() -> add element, fading in
-    // If paths change, reevaluate index at 
-    
+    // If paths change, reevaluate index at
+
     private void calcNextTransition() {
         if (pathsChangedDuringTransition) {
             pathsChangedDuringTransition = false;
@@ -140,7 +140,7 @@ public class QuotedPathPanel extends JPanel {
             fadingIn = true;
         }
         TimingController tc = new TimingController(
-                new Cycle(250, 30), 
+                new Cycle(250, 30),
                 new Envelope(1, 0, Envelope.RepeatBehavior.FORWARD,
                 Envelope.EndBehavior.HOLD));
         tc.addTarget(new TimingHandler());
@@ -148,7 +148,7 @@ public class QuotedPathPanel extends JPanel {
         revalidate();
         repaint();
     }
-    
+
     private QuoteLabel createLabel(int index, String path) {
         QuoteLabel label = new QuoteLabel();
         if (path == null || "".equals(path)) {
@@ -165,7 +165,7 @@ public class QuotedPathPanel extends JPanel {
         return transitioning;
     }
 
-    
+
     private class TimingHandler implements TimingTarget {
         public void timingEvent(long l, long l0, float delta) {
             if (!fadingIn) {
@@ -187,10 +187,10 @@ public class QuotedPathPanel extends JPanel {
         }
     }
 
-    
+
     private static final int X_PAD = 4;
 
-    
+
     private final class Layout implements LayoutManager2 {
         public void addLayoutComponent(Component comp, Object constraints) {
         }
@@ -242,7 +242,7 @@ public class QuotedPathPanel extends JPanel {
             width += X_PAD * (getComponentCount() - 1);
             return new Dimension(width, height);
         }
-        
+
         public void layoutContainer(Container parent) {
             int x = 0;
             for (Component c : getComponents()) {

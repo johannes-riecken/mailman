@@ -1,21 +1,21 @@
 /**
  * Copyright (c) 2006, Sun Microsystems, Inc
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
  *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following 
- *     disclaimer in the documentation and/or other materials provided 
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
  *   * Neither the name of the TimingFramework project nor the names of its
- *     contributors may be used to endorse or promote products derived 
+ *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -89,12 +89,12 @@ import org.xml.sax.SAXException;
 
 public class MainFrame extends javax.swing.JFrame {
     private static final boolean STANDARD_LAYOUT = false;
-    
+
     ComposeMailFrame sharedFrame;
-    
+
     private final UIController controller;
     private GlobalKeyStrokeHandler globalKeyListener;
-    
+
     private JMenuItem ds = new JCheckBoxMenuItem("Drop Shadows");
     private JMenuItem coolbar = new JCheckBoxMenuItem("Raised Toolbar");
     private JMenuItem coolbuttons = new JCheckBoxMenuItem("Cool Buttons");
@@ -103,31 +103,31 @@ public class MainFrame extends javax.swing.JFrame {
     private JRadioButtonMenuItem asListMI= new JRadioButtonMenuItem("View As List");
     private JRadioButtonMenuItem asFullListMI= new JRadioButtonMenuItem("View As Full List");
     private JComponent mainToolBar;
-    
+
     private JScrollPane mailTableScrollPane = new JScrollPane();
     private JScrollPane messageViewScrollPane = new JScrollPane();
     private JScrollPane foldersScrollPane = new JScrollPane();
     private JLabel statusBar;
-    
-    
+
+
     private enum SearchDialogType {
         CLASSIC, APPLE, VISTA
     }
-    
+
     public MainFrame() {
         globalKeyListener = new GlobalKeyStrokeHandler();
-        
+
         controller = new UIController();
         controller.setAccount(Application.getAccounts()[0]);
-        
+
         initComponents();
         initBindings();
         registerGlobalKeys();
-        
+
         FocusTraversalPolicy policy = getFocusTraversalPolicy();
         setFocusTraversalPolicy(new DefaultFocusTraversalPolicy(foldersTree,
                 policy));
-        
+
         foldersTree.setSelectionRow(1);
         foldersTree.addFocusListener(new TreeDocker());
         if (mailTable.getRowCount() != 0) {
@@ -135,15 +135,15 @@ public class MainFrame extends javax.swing.JFrame {
         }
 
         mailTable.setTransferHandler(foldersTree.getTransferHandler());
-        
+
         floatablePanel.addPropertyChangeListener(SetFloatableAction.FLOATABLE_STATUS,
                 new FloatingTreeFocusHandler());
         ActionListener action = new DockedTreeButton();
         foldersCollapsiblePane.setLayout(new GridLayout(1, 1));
         enableFloatableCapability(floatablePanel, action);
-        
+
         setLocationRelativeTo(null);
-        
+
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("alt 1"), "updateBoxCounts");
         getRootPane().getActionMap().put("updateBoxCounts", new AbstractAction() {
             public void actionPerformed(ActionEvent ae) {
@@ -151,7 +151,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void runDemo() {
         try {
             List<DemoStage> stages = DemoParser.parse(MainFrame.class.getResourceAsStream("script.xml"));
@@ -172,7 +172,7 @@ public class MainFrame extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
-    
+
     private void initBindings() {
         BindingContext context = new BindingContext();
         JTreeRootBindingDescription treeBD = new JTreeRootBindingDescription(
@@ -183,29 +183,29 @@ public class MainFrame extends javax.swing.JFrame {
         treeBD.addDescription(new JTreeChildrenBindingDescription(
                 MailBox.class, "folders"));
         context.addDescription(treeBD);
-        
+
         context.addDescription(new BindingDescription(
                 controller, "selectedElement", foldersTree, "selectedElement"));
-        
+
         mailTable.addBindings(controller, context);
-        
+
         context.addDescription(new BindingDescription(
                 controller, "selectedMessage", mailTable, "selectedElement"));
-        
+
         context.addDescription(new BindingDescription(
                 controller, "selectedMessage.body", messageView, "text"));
-        
+
         context.addDescription(new BindingDescription(
                 controller, "selectedMessage", messageHeaderPanel, "message"));
-        
+
         context.addDescription(new BindingDescription(
                 messageView, "quotedPath", messageHeaderPanel.getPathPanel(), "quotedPath"));
-        
+
         context.bind();
-        
+
         mailTable.bound();
     }
-    
+
     public void showFullMessageList() {
         createMessageListIfNecessary();
         if (!listPanel.isShowing()) {
@@ -216,7 +216,7 @@ public class MainFrame extends javax.swing.JFrame {
             floatableTarget.repaint();
         }
     }
-    
+
     public void showMessageList() {
         createMessageListIfNecessary();
         if (listPanel.isShowing()) {
@@ -245,7 +245,7 @@ public class MainFrame extends javax.swing.JFrame {
             mailTableScrollPane.repaint();
         }
     }
-    
+
     public void showMessagePanel() {
         if (listPanel.isShowing()) {
             // slide MessageListPanel over, when it's docked, then reduce size
@@ -257,7 +257,7 @@ public class MainFrame extends javax.swing.JFrame {
             tc.start();
         }
     }
-    
+
     private void createMessageListIfNecessary() {
         if (listPanel == null) {
             listPanel = new MessageListPanel();
@@ -278,8 +278,8 @@ public class MainFrame extends javax.swing.JFrame {
             context.bind();
         }
     }
-    
-    
+
+
     private final class ShowMessagePanelHandler implements TimingTarget {
         private final VolatileImage windowImage;
         private final VolatileImage messagePanelImage;
@@ -288,16 +288,16 @@ public class MainFrame extends javax.swing.JFrame {
         private final int initialListPanelWidth;
         private final int initialListPanelHeight;
         private final JPanel panel;
-        
+
         private int messagePanelX;
         private int listPanelWidth;
         private int listPanelX;
-        
+
         ShowMessagePanelHandler() {
             int availableWidth = floatableTarget.getWidth();
             targetListPanelWidth = availableWidth * 4 / 10;
             targetMessagePanelWidth = availableWidth - targetListPanelWidth;
-            windowImage = createVolatileImage(floatableTarget.getWidth(), 
+            windowImage = createVolatileImage(floatableTarget.getWidth(),
                     floatableTarget.getHeight());
             Graphics g = windowImage.getGraphics();
             floatableTarget.paint(g);
@@ -306,27 +306,27 @@ public class MainFrame extends javax.swing.JFrame {
             initialListPanelHeight = listPanel.getHeight();
             messagePanel.setSize(targetMessagePanelWidth, floatableTarget.getHeight());
             messagePanel.validate();
-            messagePanelImage = createVolatileImage(messagePanel.getWidth(), 
+            messagePanelImage = createVolatileImage(messagePanel.getWidth(),
                     messagePanel.getHeight());
             g = messagePanelImage.getGraphics();
             messagePanel.paint(g);
             g.dispose();
-            
+
             listPanelX = listPanel.getX();
             listPanelWidth = listPanel.getWidth();
             messagePanelX = availableWidth;
-            
+
             panel = new AnimatePanel();
             panel.setLayout(null);
             panel.setOpaque(true);
-            messagePanel.setBounds(floatableTarget.getWidth(), 0, 
+            messagePanel.setBounds(floatableTarget.getWidth(), 0,
                     targetMessagePanelWidth, floatableTarget.getHeight());
             floatableTarget.removeAll();
             floatableTarget.add(panel, BorderLayout.CENTER);
             floatableTarget.revalidate();
             floatableTarget.repaint();
         }
-        
+
         public void begin() {
         }
 
@@ -354,14 +354,14 @@ public class MainFrame extends javax.swing.JFrame {
             floatableTarget.add(messagePanel, BorderLayout.CENTER);
             floatableTarget.revalidate();
             floatableTarget.repaint();
-            
+
             windowImage.flush();
             messagePanelImage.flush();
-            
+
             listPanel.showHeader();
             listPanel.setMailBox(controller.getSelectedMailBox());
         }
-        
+
         private final class AnimatePanel extends JPanel {
             protected void paintComponent(Graphics g) {
                 g.setColor(getBackground());
@@ -369,7 +369,7 @@ public class MainFrame extends javax.swing.JFrame {
                 g.drawImage(windowImage, 0, 0, null);
 
                 g.drawImage(messagePanelImage, messagePanelX, 0, null);
-                
+
                 if (listPanel.getParent() == null) {
                     g.drawImage(windowImage, listPanelX, 0, listPanelX + listPanelWidth, windowImage.getHeight(null),
                             windowImage.getWidth(null) - initialListPanelWidth, 0, windowImage.getWidth(null), initialListPanelHeight, null);
@@ -377,8 +377,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
     }
-    
-    
+
+
     private void enableFloatableCapability(JComponent component,
             ActionListener action) {
         globalKeyListener.putKeyBinding(KeyStroke.getKeyStroke("ctrl 1"),
@@ -388,10 +388,10 @@ public class MainFrame extends javax.swing.JFrame {
                 BorderLayout.WEST));
         enableResizableCapability(component, SwingConstants.EAST, 10);
     }
-    
+
     private class SetFloatableActionWrapper extends AbstractAction {
         private Action action;
-        
+
         public SetFloatableActionWrapper(JComponent component,
                 ActionListener action,
                 JPanel floatableTarget,
@@ -401,7 +401,7 @@ public class MainFrame extends javax.swing.JFrame {
                     floatableTarget,
                     constraints);
         }
-        
+
         public void actionPerformed(ActionEvent e) {
             if (foldersScrollPane.getBorder() instanceof CompoundBorder) {
                 CompoundBorder border = (CompoundBorder) foldersScrollPane.getBorder();
@@ -418,7 +418,7 @@ public class MainFrame extends javax.swing.JFrame {
             action.actionPerformed(e);
         }
     }
-    
+
     // we assume side == SwingConstants.EAST
     private static void enableResizableCapability(JComponent component, int side,
             int threshold) {
@@ -426,7 +426,7 @@ public class MainFrame extends javax.swing.JFrame {
         component.addMouseListener(resizer);
         component.addMouseMotionListener(resizer);
     }
-    
+
     private void registerGlobalKeys() {
         getToolkit().addAWTEventListener(globalKeyListener,
                 KeyEvent.KEY_EVENT_MASK);
@@ -449,11 +449,11 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
-    
+
     ////////////////////////////////////////////////////////////////////////////
     // COMPONENTS CREATION
     ////////////////////////////////////////////////////////////////////////////
-    
+
     private void initComponents() {
         JPanel contentPanel;
         JMenu editMenu;
@@ -464,7 +464,7 @@ public class MainFrame extends javax.swing.JFrame {
         StealthSplitPane stealthSplitPane;
         JMenu toolsMenu;
         JMenu viewMenu;
-        
+
         contentPanel = new JPanel();
         floatableTarget = new JPanel();
         stealthSplitPane = new StealthSplitPane();
@@ -505,17 +505,17 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         helpMenu.add(bindings);
-        
+
         messageHeaderPanel = new MessageHeaderPanel();
         messageView.pathPanel = messageHeaderPanel.getPathPanel();
-        
+
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Java Mail");
         setName("mainFrame");
-        
-        
+
+
         floatableTarget.setLayout(new BorderLayout());
-        
+
         stealthSplitPane.setBorder(BorderFactory.createEmptyBorder(0, 1, 0, 1));
         stealthSplitPane.setDividerLocation(160);
         stealthSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
@@ -525,27 +525,27 @@ public class MainFrame extends javax.swing.JFrame {
         mailTable.setFillsViewportHeight(true);
         mailTable.setIntercellSpacing(new Dimension(0, 0));
         mailTableScrollPane.setViewportView(mailTable);
-        
+
         stealthSplitPane.setLeftComponent(mailTableScrollPane);
-        
+
         messagePanel.setLayout(new BorderLayout());
-        
+
         messagePanel.add(messageHeaderPanel, BorderLayout.NORTH);
-        
+
         messagePanel.setBorder(null);
         messageView.setEditable(false);
         messageView.setFont(new Font("Monospaced", 0, 12));
         messageView.setBorder(BorderFactory.createEmptyBorder(2, 8, 2, 8));
         messageViewScrollPane.getVerticalScrollBar().setName("messagePaneVerticalScrollBar");
         messageViewScrollPane.setViewportView(messageView);
-        
+
         messagePanel.add(messageViewScrollPane, BorderLayout.CENTER);
-        
+
         findCollapsiblePane.getContentPane().setLayout(new BorderLayout());
-        
+
         findCollapsiblePane.setCollapsed(true);
         jPanel1.setLayout(new GridBagLayout());
-        
+
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -553,7 +553,7 @@ public class MainFrame extends javax.swing.JFrame {
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         //jPanel1.add(jSeparator4, gridBagConstraints);
-        
+
         searchPanel.setFieldName("Find: ");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -561,7 +561,7 @@ public class MainFrame extends javax.swing.JFrame {
         gridBagConstraints.anchor = GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         jPanel1.add(searchPanel, gridBagConstraints);
-        
+
         closeSearchPanel.setIcon(new ImageIcon(getClass().getResource("/resources/icons/close_01.png")));
         closeSearchPanel.setBorder(null);
         closeSearchPanel.setBorderPainted(false);
@@ -574,32 +574,32 @@ public class MainFrame extends javax.swing.JFrame {
                 closeSearchPanelActionPerformed(evt);
             }
         });
-        
+
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = GridBagConstraints.WEST;
         gridBagConstraints.insets = new Insets(0, 3, 0, 0);
         jPanel1.add(closeSearchPanel, gridBagConstraints);
-        
+
         findCollapsiblePane.getContentPane().add(jPanel1, BorderLayout.NORTH);
-        
+
         messagePanel.add(findCollapsiblePane, BorderLayout.SOUTH);
-        
+
         stealthSplitPane.setRightComponent(messagePanel);
-        
+
         floatableTarget.add(stealthSplitPane, BorderLayout.CENTER);
         floatableTarget.setOpaque(false);
-        
+
         floatablePanel.setLayout(new BorderLayout());
-        
+
         floatablePanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 4));
         floatablePanel.setOpaque(false);
         floatablePanel.setName("Mailboxes");
         foldersCollapsiblePane.getContentPane().setLayout(new BorderLayout());
-        
+
         foldersCollapsiblePane.setOrientation(JXCollapsiblePane.Orientation.HORIZONTAL);
-        
+
         DropShadowPanel dsp2 = new ScrollableShadowPanel(foldersTree);
         ShadowFactory factory2 = new ShadowFactory(5, 0.2f, Color.BLACK);
         //factory.setRenderingHint(ShadowFactory.KEY_BLUR_QUALITY, ShadowFactory.VALUE_BLUR_QUALITY_HIGH);
@@ -610,20 +610,20 @@ public class MainFrame extends javax.swing.JFrame {
         dsp2.add(foldersTree);
         foldersScrollPane.getViewport().setBackground(Color.WHITE);
         foldersScrollPane.setViewportView(dsp2);
-        
+
         foldersCollapsiblePane.getContentPane().add(foldersScrollPane, BorderLayout.CENTER);
-        
+
         floatablePanel.add(foldersCollapsiblePane, BorderLayout.CENTER);
-        
+
         floatableTarget.add(floatablePanel, BorderLayout.WEST);
-        
+
         contentPanel.setLayout(new BorderLayout());
         //contentPanel.add(topSeparator, BorderLayout.NORTH);
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(floatableTarget);
         panel.setBorder(BorderFactory.createEmptyBorder(5, 3, 0, 3));
         contentPanel.add(panel, BorderLayout.CENTER);
-        
+
         mailMenu.setText("Mail");
         quitMenuItem.setText("Quit");
         quitMenuItem.addActionListener(new ActionListener() {
@@ -631,34 +631,34 @@ public class MainFrame extends javax.swing.JFrame {
                 quitMenuItemActionPerformed(evt);
             }
         });
-        
+
         mailMenu.add(quitMenuItem);
-        
+
         mainMenuBar.add(mailMenu);
-        
+
         editMenu.setText("Edit");
         mainMenuBar.add(editMenu);
-        
+
         viewMenu.setText("View");
         mainMenuBar.add(viewMenu);
-        
+
         messageMenu.setText("Message");
         mainMenuBar.add(messageMenu);
-        
+
         toolsMenu.setText("Tools");
         mainMenuBar.add(toolsMenu);
-        
+
         helpMenu.setText("Help");
         mainMenuBar.add(helpMenu);
-        
+
         setJMenuBar(mainMenuBar);
-        
+
         mainToolBar = createMainToolBar();
         add(mainToolBar, BorderLayout.NORTH);
         add(contentPanel, BorderLayout.CENTER);
         statusBar = createStatusBar();
         add(statusBar, BorderLayout.SOUTH);
-        
+
         ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 Object src = ae.getSource();
@@ -679,7 +679,7 @@ public class MainFrame extends javax.swing.JFrame {
                 }
             }
         };
-        
+
         updateTree.addActionListener(al);
         ds.addActionListener(al);
         coolbar.addActionListener(al);
@@ -692,7 +692,7 @@ public class MainFrame extends javax.swing.JFrame {
         asFullListMI.addActionListener(al);
         asListMI.addActionListener(al);
         asTableMI.addActionListener(al);
-        
+
         //pack();
         int height = 650;
         // Romain, tweak this test if it's still too big for your display size.
@@ -701,13 +701,13 @@ public class MainFrame extends javax.swing.JFrame {
         }
         setSize(900, height);
     }
-    
+
     private void updateBorders() {
         updateBorder(mailTableScrollPane);
         updateBorder(messageViewScrollPane);
         updateBorder(foldersScrollPane);
     }
-    
+
     private void updateBorder(JComponent comp) {
         if (ds.isSelected()) {
             comp.setBorder(BorderFactory.createCompoundBorder(new DropShadowBorder(Color.BLACK, 0, 5, .5f,
@@ -717,12 +717,12 @@ public class MainFrame extends javax.swing.JFrame {
             comp.setBorder(border.getInsideBorder());
         }
     }
-    
+
     private JLabel createStatusBar() {
         if (coolbar.isSelected()) {
             return new StatusBar();
         }
-        
+
         JLabel label = new JLabel("   You have 6 new messages...") {
             public Dimension getPreferredSize() {
                 return new Dimension(super.getPreferredSize().width, super.getPreferredSize().height + 2);
@@ -730,7 +730,7 @@ public class MainFrame extends javax.swing.JFrame {
         };
         return label;
     }
-    
+
     private void updateToolBar() {
         getContentPane().remove(mainToolBar);
         mainToolBar = createMainToolBar();
@@ -744,7 +744,7 @@ public class MainFrame extends javax.swing.JFrame {
         statusBar.revalidate();
         statusBar.repaint();
     }
-    
+
     private JComponent createMainToolBar() {
         boolean cool = coolbar.isSelected();
         boolean coolButtons = coolbuttons.isSelected();
@@ -752,7 +752,7 @@ public class MainFrame extends javax.swing.JFrame {
         mainToolBar.setName("toolbar");
         mainToolBar.setFloatable(false);
         JComponent retComp;
-        
+
         if (cool) {
             retComp = mainToolBar;
         } else {
@@ -760,10 +760,10 @@ public class MainFrame extends javax.swing.JFrame {
             p.add(new JSeparator(), BorderLayout.NORTH);
             p.add(mainToolBar);
             p.add(new JSeparator(), BorderLayout.SOUTH);
-            
+
             retComp = p;
         }
-        
+
         JButton getMailButton = createToolbarButton("Get Mail", "get-mail", 1);
         getMailButton.setName("getMail");
         JButton composeButton = createToolbarButton("Compose", "compose-mail", 2);
@@ -785,7 +785,7 @@ public class MainFrame extends javax.swing.JFrame {
         JButton printButton = createToolbarButton("Print", "print", 1);
         JButton stopButton = createToolbarButton("Stop", "stop", 3);
         stopButton.setName("stop");
-        
+
         if (coolButtons) {
             DropShadowPanel dsp = createDropShadowPanel();
             dsp.setBorder(new javax.swing.border.EmptyBorder(2, 4, 6, 4));
@@ -793,20 +793,20 @@ public class MainFrame extends javax.swing.JFrame {
             dsp.add(composeButton);
             dsp.add(addressBookButton);
             mainToolBar.add(dsp);
-            
+
             dsp = createDropShadowPanel();
             dsp.setBorder(new javax.swing.border.EmptyBorder(2, 4, 6, 4));
             dsp.add(replyButton);
             dsp.add(replyAllButton);
             dsp.add(forwardButton);
             mainToolBar.add(dsp);
-            
+
             dsp = createDropShadowPanel();
             dsp.setBorder(new javax.swing.border.EmptyBorder(2, 4, 6, 4));
             dsp.add(deleteButton);
             dsp.add(junkButton);
             mainToolBar.add(dsp);
-            
+
             dsp = createDropShadowPanel();
             dsp.setBorder(new javax.swing.border.EmptyBorder(2, 4, 6, 20));
             dsp.add(printButton);
@@ -827,7 +827,7 @@ public class MainFrame extends javax.swing.JFrame {
             mainToolBar.add(printButton);
             mainToolBar.add(stopButton);
         }
-        
+
         JPopupMenu popup = new JPopupMenu();
         popup.add(ds);
         popup.add(coolbar);
@@ -838,11 +838,11 @@ public class MainFrame extends javax.swing.JFrame {
         popup.add(asTableMI);
         popup.add(asListMI);
         popup.add(asFullListMI);
-        
+
         mainToolBar.setComponentPopupMenu(popup);
         return retComp;
     }
-    
+
     private static DropShadowPanel createDropShadowPanel() {
         DropShadowPanel dsp = new DropShadowPanel();
         ShadowFactory factory = new ShadowFactory(5, 0.2f, Color.BLACK);
@@ -852,7 +852,7 @@ public class MainFrame extends javax.swing.JFrame {
         dsp.setLayout(new BoxLayout(dsp, BoxLayout.X_AXIS));
         return dsp;
     }
-    
+
     private JButton createToolbarButton(String text, String icon, int type) {
         boolean cool = coolbuttons.isSelected();
         JButton button = cool ? new CoolButton(type) : new JButton();
@@ -874,12 +874,12 @@ public class MainFrame extends javax.swing.JFrame {
         button.setRequestFocusEnabled(false);
         return button;
     }
-    
+
     /** @noinspection UNUSED_SYMBOL*/
     private void quitMenuItemActionPerformed(ActionEvent evt) {
         dispose();
     }
-    
+
     /** @noinspection UNUSED_SYMBOL*/
     private void closeSearchPanelActionPerformed(ActionEvent evt) {
         findCollapsiblePane.setCollapsed(true);
@@ -889,7 +889,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private void installInLayeredPane(JComponent component) {
         JLayeredPane layeredPane = getRootPane().getLayeredPane();
         layeredPane.add(component, JLayeredPane.PALETTE_LAYER, 20);
@@ -900,15 +900,15 @@ public class MainFrame extends javax.swing.JFrame {
         component.revalidate();
         component.setVisible(true);
     }
-    
+
 ////////////////////////////////////////////////////////////////////////////
 // INNER CLASSES
 ////////////////////////////////////////////////////////////////////////////
-    
+
     private class TreeDocker implements FocusListener {
         public void focusGained(FocusEvent e) {
         }
-        
+
         public void focusLost(FocusEvent e) {
             Object status = floatablePanel.getClientProperty(
                     SetFloatableAction.FLOATABLE_STATUS);
@@ -917,13 +917,13 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private class FloatingTreeFocusHandler implements PropertyChangeListener {
         public void propertyChange(PropertyChangeEvent evt) {
             foldersTree.requestFocusInWindow();
         }
     }
-    
+
     private class DockedTreeButton implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if (!floatablePanel.isVisible()) {
@@ -932,10 +932,10 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private class GlobalKeyStrokeHandler implements AWTEventListener {
         private final Map<KeyStroke, Action> bindings = new HashMap<KeyStroke, Action>();
-        
+
         public void eventDispatched(AWTEvent event) {
             Window window = SwingUtilities.getWindowAncestor((Component) event.getSource());
             if (window == MainFrame.this) {
@@ -943,7 +943,7 @@ public class MainFrame extends javax.swing.JFrame {
                 if (keyEvent.getID() == KeyEvent.KEY_RELEASED) {
                     KeyStroke typed = KeyStroke.getKeyStroke(keyEvent.getKeyCode(),
                             keyEvent.getModifiers());
-                    
+
                     for (Map.Entry<KeyStroke, Action> entry : bindings.entrySet()) {
                         if (typed.equals(entry.getKey())) {
                             ActionEvent e = new ActionEvent(MainFrame.this,
@@ -955,11 +955,11 @@ public class MainFrame extends javax.swing.JFrame {
                 }
             }
         }
-        
+
         public void putKeyBinding(KeyStroke keyStroke, Action action) {
             bindings.put(keyStroke, action);
         }
-        
+
         public Action getActionByName(String name) {
             for (Action action : bindings.values()) {
                 if (name.equals(action.getValue(Action.NAME))) {
@@ -969,11 +969,11 @@ public class MainFrame extends javax.swing.JFrame {
             return null;
         }
     }
-    
+
     Action getGlobalActionByName(String name) {
         return globalKeyListener.getActionByName(name);
     }
-    
+
     private class ShowHideFoldersAction extends AbstractAction {
         public void actionPerformed(ActionEvent e) {
             Object status = floatablePanel.getClientProperty(
@@ -984,7 +984,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private class ShowHideSearchBarAction extends AbstractAction {
         ShowHideSearchBarAction() {
             super("firefox");
@@ -1032,28 +1032,28 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private class MessagePaneScrollAction extends AbstractAction {
         private final boolean down;
-        
+
         MessagePaneScrollAction(boolean down) {
             this.down = down;
         }
-        
+
         public void actionPerformed(ActionEvent e) {
             JScrollPane sp = (JScrollPane)messageView.getParent().getParent();
             String key = (down) ? "scrollDown" : "scrollUp";
             sp.getActionMap().get(key).actionPerformed(new ActionEvent(sp, 0, null));
         }
     }
-    
+
     private class ShowSearchDialogAction extends AbstractAction {
         private final SearchDialogType type;
-        
+
         public ShowSearchDialogAction(SearchDialogType type) {
             this.type = type;
         }
-        
+
         public void actionPerformed(ActionEvent e) {
             if (type == SearchDialogType.CLASSIC) {
                 Component c = (Component) e.getSource();
@@ -1067,7 +1067,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
     }
-    
+
 ////////////////////////////////////////////////////////////////////////////
 // MEMBERS/UI COMPONENTS
 ////////////////////////////////////////////////////////////////////////////

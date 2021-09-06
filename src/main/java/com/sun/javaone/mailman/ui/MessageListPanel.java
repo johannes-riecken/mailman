@@ -1,21 +1,21 @@
 /**
  * Copyright (c) 2006, Sun Microsystems, Inc
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
  *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following 
- *     disclaimer in the documentation and/or other materials provided 
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
  *   * Neither the name of the TimingFramework project nor the names of its
- *     contributors may be used to endorse or promote products derived 
+ *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -66,7 +66,7 @@ public class MessageListPanel extends JPanel {
     private final MailBoxLabel mailBoxLabel;
     private final JXPanel header;
     private final JScrollPane scrollPane;
-    
+
     public MessageListPanel() {
         FlowLayout layout = new FlowLayout(FlowLayout.LEADING);
         layout.setHgap(0);
@@ -80,13 +80,13 @@ public class MessageListPanel extends JPanel {
         dsp.add(new JLabel(new BackIcon()));
         header.add(dsp);
         header.setAlpha(0f);
-        
+
         mailBoxLabel = new MailBoxLabel();
         dsp = new DropShadowPanel(new BorderLayout());
         dsp.setBorder(new EmptyBorder(0, 2, 5, 5));
         dsp.add(mailBoxLabel);
         header.add(dsp);
-                
+
         setLayout(new BorderLayout());
         list = new MessageList();
         list.setName("mailList");
@@ -100,19 +100,19 @@ public class MessageListPanel extends JPanel {
         scrollPanePanel.add(scrollPane);
         add(scrollPanePanel, BorderLayout.CENTER);
     }
-    
+
     public void ensureListInScrollPane() {
         scrollPane.setViewportView(list);
     }
-    
+
     public void setMailBox(MailBox mbox) {
         mailBoxLabel.setMailBox(mbox);
     }
-    
+
     public JList getList() {
         return list;
     }
-    
+
     public void showHeader() {
         if (!header.isShowing()) {
             add(header, BorderLayout.NORTH);
@@ -138,8 +138,8 @@ public class MessageListPanel extends JPanel {
             tc.start();
         }
     }
-    
-    
+
+
     private void fadeInHeaderIcons() {
         TimingController tc = new TimingController(
                 new Cycle(250, 30),
@@ -157,8 +157,8 @@ public class MessageListPanel extends JPanel {
         });
         tc.start();
     }
-    
-    
+
+
     private static final class MessageList extends JList {
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -205,19 +205,19 @@ public class MessageListPanel extends JPanel {
                 setIcon(MailBoxTree.CLOSED_ICON);
             }
         }
-        
+
         public void paint(Graphics g) {
             Graphics2D g2d = (Graphics2D)g.create();
             int corn = 20;
             int h = getHeight() - 2 * MailBoxTree.OUTSET;
             boolean sel = true;
-            
+
             if (sel) {
                 g2d.setPaint(new GradientPaint(0, MailBoxTree.OUTSET, Color.WHITE, 0, getHeight() - 2 * MailBoxTree.OUTSET, MailBoxTree.COLOR1, true));
             } else {
                 g2d.setPaint(MailBoxTree.GP);
             }
-            
+
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             RoundRectangle2D.Float r2d = new RoundRectangle2D.Float(0, MailBoxTree.OUTSET, getWidth(), h, corn, corn);
             Shape clip = g2d.getClip();
@@ -234,7 +234,7 @@ public class MessageListPanel extends JPanel {
             g2d.dispose();
             super.paint(g);
         }
-        
+
         public Dimension getPreferredSize() {
             int extremeLevel = 1;
             return extremeLevel >= 1

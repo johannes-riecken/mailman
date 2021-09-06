@@ -1,21 +1,21 @@
 /**
  * Copyright (c) 2006, Sun Microsystems, Inc
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
  *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following 
- *     disclaimer in the documentation and/or other materials provided 
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
  *   * Neither the name of the TimingFramework project nor the names of its
- *     contributors may be used to endorse or promote products derived 
+ *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -46,7 +46,7 @@ import org.jdesktop.layout.GroupLayout;
  * @author  sky
  */
 public class BlurryTest extends javax.swing.JFrame {
-    
+
     /** Creates new form BlurryTest */
     public BlurryTest() {
         initComponents();
@@ -71,7 +71,7 @@ public class BlurryTest extends javax.swing.JFrame {
                 bl, "shiftH", shiftH, "text")).setConverter(new IntConverter());
         context.bind();
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -198,7 +198,7 @@ public class BlurryTest extends javax.swing.JFrame {
         );
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     /**
      * @param args the command line arguments
      */
@@ -210,7 +210,7 @@ public class BlurryTest extends javax.swing.JFrame {
             }
         });
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField blurTF;
     private javax.swing.JLabel jLabel1;
@@ -228,8 +228,8 @@ public class BlurryTest extends javax.swing.JFrame {
     private javax.swing.JTextField shiftW;
     private javax.swing.JTextField textTF;
     // End of variables declaration//GEN-END:variables
- 
-    
+
+
     private static final class FloatConverter extends BindingConverter {
         public Object convertToSource(BindingDescription description,
                 Object value) {

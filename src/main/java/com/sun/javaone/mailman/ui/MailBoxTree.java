@@ -1,21 +1,21 @@
 /**
  * Copyright (c) 2006, Sun Microsystems, Inc
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
  *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following 
- *     disclaimer in the documentation and/or other materials provided 
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
  *   * Neither the name of the TimingFramework project nor the names of its
- *     contributors may be used to endorse or promote products derived 
+ *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -51,7 +51,7 @@ import org.jdesktop.animation.timing.*;
 public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeListener {
     private TreePath dropPath;
     private int extremeLevel = -1;
-    
+
     private static final int[][] DUMMY_COUNTS = {{0, 0},
     {3, 0},
     {5, 0},
@@ -62,12 +62,12 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
     private int[] oldCounts = {0, 0};
     private boolean trans = true;
     private float pct;
-    
+
     static final String SENT = "Sent";
     static final String TRASH = "Trash";
     static final String INBOX = "Inbox";
     static final String DRAFT = "Drafts";
-    
+
     static final ImageIcon SERVER_ICON =
             new ImageIcon(MailBoxTree.class.getResource("/resources/icons/server-mail.png"));
     static final ImageIcon CLOSED_ICON =
@@ -82,37 +82,37 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
             new ImageIcon(MailBoxTree.class.getResource("/resources/icons/folder-sent.png"));
     static final ImageIcon TRASH_ICON =
             new ImageIcon(MailBoxTree.class.getResource("/resources/icons/folder-trash.png"));
-    
+
     private static final int INSET = 5;
     static final int OUTSET = 2;
     static final Dimension NODE_SIZE = new Dimension(100, 30);
-    
+
     private BufferedImage shadow = null;
-    
+
     static final Color COLOR1 = new Color(125, 161, 237);
     private static final Color COLOR2 = new Color(91, 118, 173);
     static final GradientPaint GP = new GradientPaint(0, OUTSET, COLOR1, 0, NODE_SIZE.height - 2 * OUTSET, COLOR2, true);
     private static final GradientPaint GPR = new GradientPaint(0, OUTSET, COLOR2, 0, NODE_SIZE.height - 2 * OUTSET, COLOR1, true);
     private static final GradientPaint GPB = new GradientPaint(0, OUTSET, COLOR1, 0, NODE_SIZE.height + 16 - 2 * OUTSET, COLOR2, true);
     private static final GradientPaint GPBR = new GradientPaint(0, OUTSET, COLOR2, 0, NODE_SIZE.height + 16 - 2 * OUTSET, COLOR1, true);
-    
+
     static final Border LRBORDER = new EmptyBorder(0, INSET, 0, INSET);
-    
+
     private int overRow = -1;
-    
+
     private final MouseAdapter MLISTENER = new MouseAdapter() {
         public void mouseMoved(MouseEvent me) {
             repaintRows(me);
         }
-        
+
         public void mouseEntered(MouseEvent me) {
             repaintRows(me);
         }
-        
+
         public void mouseExited(MouseEvent me) {
             repaintRows(me);
         }
-        
+
         private void repaintRows(MouseEvent me) {
             int row = getRowForLocation(me.getX(), me.getY());
             if (overRow != row) {
@@ -121,7 +121,7 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
                 repaintRow(overRow);
             }
         }
-        
+
         private void repaintRow(int row) {
             if (row != -1) {
                 Rectangle rect = getRowBounds(row);
@@ -131,7 +131,7 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
             }
         }
     };
-    
+
     public int getExtremeLevel() {
         return extremeLevel;
     }
@@ -150,13 +150,13 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
             repaint();
         }
     }
-    
+
     public void begin() {
     }
-    
+
     public void end() {
     }
-    
+
     public void timingEvent(long cycleElapsedTime, long totalElapsedTime, float fraction) {
         pct = fraction;
         Container p = getParent();
@@ -170,13 +170,13 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
     public void propertyChange(PropertyChangeEvent pce) {
         DropLocation dl = getDropLocation();
         TreePath newPath = (dl == null) ? null : dl.getPath();
-        
+
         if (newPath != dropPath) {
             repaint();
             dropPath = newPath;
         }
     }
-    
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (extremeLevel >= 1) {
@@ -184,23 +184,23 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
             paintCount(g, 5, oldCounts[1], counts[1]);
         }
     }
-    
+
     private void paintCount(Graphics g, int row, int oldCount, int newCount) {
         if (row >= getRowCount() || (oldCount == 0 && newCount == 0)) {
             return;
         }
-        
+
         Graphics2D g2d = (Graphics2D)g.create();
-        
+
         Image image = MessageIconGenerator.createIcon(oldCount, newCount, pct);
         Rectangle bounds = getRowBounds(row);
         int iw = image.getWidth(null);
         int ih = image.getHeight(null);
         g2d.drawImage(image, bounds.x + bounds.width - 12, bounds.y - 1, null);
-        
+
         g2d.dispose();
     }
-    
+
     private static void paintAttachment(Graphics g, int x, int top, int bottom) {
         g.setColor(new Color(100, 100, 100));
         g.drawLine(x, top, x, bottom);
@@ -215,7 +215,7 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
     // 2 -> everything
     public void switchExtremeLevel() {
         extremeLevel = (extremeLevel + 1) % 3;
-        
+
         switch (extremeLevel) {
             case 0:
                 setRowHeight(18);
@@ -236,7 +236,7 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
         if (extremeLevel >= 2) {
             setOpaque(false);
         }
-        
+
         revalidate();
         repaint();
     }
@@ -254,7 +254,7 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
         dropPath = null;
         getCellRenderer().getTreeCellRendererComponent(this, "Foo", false, false, false, 0, false);
     }
-    
+
     public MailBoxTree() {
         setShowsRootHandles(true);
         addMouseMotionListener(MLISTENER);
@@ -281,15 +281,15 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
         if (value instanceof MailBox) {
             return ((MailBox)value).getName();
         }
-        
+
         return value.toString();
     }
-    
+
     private class MailBoxUI extends BasicTreeUI {
         protected int getRowX(int row, int depth) {
             return super.getRowX(row, depth - 1);
         }
-        
+
         public void installUI(JComponent c) {
             super.installUI(c);
         }
@@ -297,14 +297,14 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
                 int bottom) {
             paintAttachment(g, x + 24, top, bottom);
         }
-        
+
         protected void paintHorizontalPartOfLeg(Graphics g, Rectangle clipBounds,
                 Insets insets, Rectangle bounds,
                 TreePath path, int row,
                 boolean isExpanded,
                 boolean hasBeenExpanded, boolean
                 isLeaf) {}
-        
+
         protected void paintRow(Graphics g, Rectangle clipBounds,
                 Insets insets, Rectangle bounds, TreePath path,
                 int row, boolean isExpanded,
@@ -334,7 +334,7 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
             }
             paintRow(g, (Rectangle)g.getClip(), getInsets(), bounds, dropPath, row, true, true, true);
         }
-        
+
         protected boolean isLocationInExpandControl(TreePath path,
                 int mouseX, int mouseY) {
             return super.isLocationInExpandControl(path, mouseX - 44, mouseY - 10);
@@ -343,7 +343,7 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
             if (isLocationInExpandControl(path, event.getX(), event.getY())) {
                 return;
             }
-            
+
             super.selectPathForEvent(path, event);
         }
         protected void paintExpandControl(Graphics g,
@@ -388,7 +388,7 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
             }
 
             String countString = getCountString(row);
-            
+
             if (countString != "") {
                 setFont(getFont().deriveFont(Font.BOLD));
             } else {
@@ -396,7 +396,7 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
             }
 
             setText(val + countString);
-            
+
             return this;
         }
     }
@@ -407,38 +407,38 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
         private boolean sel;
         private boolean isLast;
         private JTree tree;
-        
+
         public void validate() {}
         public void invalidate() {}
-        public void revalidate() {} 
+        public void revalidate() {}
         public void repaint(long tm, int x, int y, int width, int height) {}
         public void repaint(Rectangle r) {}
         public void repaint() {}
-        
+
         public Component getTreeCellRendererComponent(
                 JTree tree, Object value, boolean sel,
                 boolean expanded, boolean leaf, int row,
                 boolean hasFocus) {
-            
+
             this.row = row;
             this.showAttach = !leaf && expanded;
             this.sel = sel;
             isLast = true;
             this.tree = tree;
-            
+
             TreePath path = tree.getPathForRow(row);
             if (path != null) {
                 TreePath parent = path.getParentPath();
                 if (parent != null) {
                     Object parentObj = parent.getLastPathComponent();
                     Object childObj = value;
-                    
+
                     int childIndex = tree.getModel().getIndexOfChild(parentObj, childObj);
                     int totalIndex = tree.getModel().getChildCount(parentObj);
                     isLast = (childIndex == totalIndex - 1);
                 }
             }
-            
+
             String val = tree.convertValueToText(value, sel, expanded,
                     leaf, row, hasFocus);
             setText(val);
@@ -457,7 +457,7 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
             } else {
                 setIcon(CLOSED_ICON);
             }
-            
+
             setVerticalAlignment(JButton.CENTER);
             setBorder(LRBORDER);
             if (sel) {
@@ -470,15 +470,15 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
             } else {
                 setFont(tree.getFont().deriveFont(Font.BOLD));
             }
-            
+
             return this;
         }
-        
+
         public void paint(Graphics g) {
             Graphics2D g2d = (Graphics2D)g.create();
             int corn = (tree.getPathForRow(row) == dropPath) ? 35 : 20;
             int h = getHeight() - 2 * OUTSET;
-            
+
             if (sel) {
                 if (row == overRow) {
                     g2d.setPaint(new GradientPaint(0, OUTSET, COLOR1, 0, getHeight() - 2 * OUTSET, Color.WHITE, true));
@@ -490,7 +490,7 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
             } else {
                 g2d.setPaint(row == overRow ? GPR : GP);
             }
-            
+
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             RoundRectangle2D.Float r2d = new RoundRectangle2D.Float(0, OUTSET, getWidth(), h, corn, corn);
             Shape clip = g2d.getClip();
@@ -508,16 +508,16 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
                 if (showAttach) {
                     paintAttachment(g, 31, 28, 100);
                 }
-            
+
                 if (row != 0) {
                     paintAttachment(g, 11, 0, 2);
                 }
-            
+
                 if (!isLast) {
                     paintAttachment(g, 11, 28, 100);
                 }
             }
-            
+
             g2d.dispose();
             if (tree.getPathForRow(row) == dropPath) {
                 g.translate(3, 0);
@@ -527,14 +527,14 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
                 g.translate(-3, 0);
             }
         }
-        
+
         public Dimension getPreferredSize() {
             return extremeLevel >= 1
                     ? new Dimension(Math.max(NODE_SIZE.width, super.getPreferredSize().width + 6), NODE_SIZE.height)
                     : super.getPreferredSize();
         }
     }
-    
+
     public Dimension getPreferredSize() {
         return extremeLevel >= 1
                 ? new Dimension(super.getPreferredSize().width + 10, super.getPreferredSize().height)

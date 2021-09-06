@@ -1,21 +1,21 @@
 /**
  * Copyright (c) 2006, Sun Microsystems, Inc
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
  *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following 
- *     disclaimer in the documentation and/or other materials provided 
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
  *   * Neither the name of the TimingFramework project nor the names of its
- *     contributors may be used to endorse or promote products derived 
+ *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -56,7 +56,7 @@ public final class MessageIconGenerator {
     private MessageIconGenerator() {
     }
 
-    
+
     public static BufferedImage createIcon(Message[] messages) {
         return createIcon(messages.length);
     }
@@ -160,7 +160,7 @@ public final class MessageIconGenerator {
     public static BufferedImage createIcon(int oldNum, int newNum, float pct) {
         int width = 22;
         int height = 22;
-        
+
         BufferedImage image = GraphicsUtil.createTranslucentCompatibleImage(width, height);
         Graphics2D g2 = image.createGraphics();
         if (oldNum == 0) {
@@ -168,10 +168,10 @@ public final class MessageIconGenerator {
         } else if (newNum == 0) {
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1 - pct));
         }
-        
+
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
-        
+
         g2.setColor(new Color(0.0f, 0.0f, 0.0f, 0.25f));
         StarShape star = new StarShape(0.0, 0.0, 8.0, 11.0, 22);
         g2.translate(0, -1);
@@ -184,7 +184,7 @@ public final class MessageIconGenerator {
         g2.translate(2, 0);
         g2.fill(star);
         g2.translate(-1, 0);
-        
+
         Paint paint = g2.getPaint();
         g2.setPaint(new GradientPaint(
                 new Point2D.Double(0, 0),
@@ -193,7 +193,7 @@ public final class MessageIconGenerator {
                 new Color(200, 45, 45)));
         g2.fill(star);
         g2.setPaint(paint);
-        
+
         if (oldNum != 0 && newNum != 0 && oldNum != newNum) {
             paintNum(g2, oldNum, 1.0f - pct);
             paintNum(g2, newNum, pct);
@@ -202,36 +202,36 @@ public final class MessageIconGenerator {
         } else {
             paintNum(g2, newNum, -1f);
         }
-        
+
         g2.translate(-image.getWidth() + 25, 0);
-        
+
         g2.dispose();
         return image;
     }
-    
+
     private static void paintNum(Graphics2D g2, int count, float pct) {
         String text = String.valueOf(count);
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
                 RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);
         g2.setColor(Color.WHITE);
         g2.setFont(new Font("Arial", Font.BOLD, 14));
-        
+
         Rectangle2D bounds = g2.getFontMetrics().getStringBounds(text, g2);
         double textWidth = bounds.getWidth();
         double textHeight = bounds.getHeight();
-        
+
         double tx = (22.0 - textWidth) / 2.0;
         double ty = (22.0 - textHeight) / 2.0 + g2.getFontMetrics().getAscent();
-        
+
         g2.translate(tx, ty);
-        
+
         if (pct >= 0f) {
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, pct));
         }
         g2.drawString(text, 0, 0);
         g2.translate(-tx, -ty);
     }
-    
+
     public static void main(String[] args) {
         JFrame f = new JFrame("Icon Generator");
 

@@ -1,21 +1,21 @@
 /**
  * Copyright (c) 2006, Sun Microsystems, Inc
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
  *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following 
- *     disclaimer in the documentation and/or other materials provided 
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
  *   * Neither the name of the TimingFramework project nor the names of its
- *     contributors may be used to endorse or promote products derived 
+ *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -96,7 +96,7 @@ import java.util.HashMap;
  * <pre>
  * ShadowFactory factory = new ShadowFactory();
  * // factory setup
- * BufferedImage shadow = factory.createShadow(bufferedImage); 
+ * BufferedImage shadow = factory.createShadow(bufferedImage);
  * </pre>
  * The resulting image is of type <code>BufferedImage.TYPE_INT_ARGB</code>.
  * Both dimensions of this image are larger than original image's:
@@ -113,7 +113,7 @@ import java.util.HashMap;
  * you can easily repaint the component when needed.</p>
  * <h2>Threading Issues</h2>
  * <p><code>ShadowFactory</code> is not guaranteed to be thread-safe.</p>
- * 
+ *
  * @author Romain Guy <romain.guy@mac.com>
  * @author Sébastien Petrucci <sebastien_petrucci@yahoo.fr>
  */
@@ -129,7 +129,7 @@ public class ShadowFactory {
      * hint for <code>KEY_BLUR_QUALITY</code>.</p>
      */
     public static final String VALUE_BLUR_QUALITY_FAST = "fast";
-    
+
     /**
      * <p>Selects the high quality rendering algorithm. With current implementation,
      * This algorithm does not guarantee a better rendering quality and should
@@ -143,14 +143,14 @@ public class ShadowFactory {
      * value are provided as <code>Integer</code> instances.</p>
      */
     public static final String SIZE_CHANGED_PROPERTY = "shadow_size";
-    
+
     /**
      * <p>Identifies a change to the opacity used to render the shadow.</p>
      * <p>When the property change event is fired, the old value and the new
      * value are provided as <code>Float</code> instances.</p>
      */
     public static final String OPACITY_CHANGED_PROPERTY = "shadow_opacity";
-    
+
     /**
      * <p>Identifies a change to the color used to render the shadow.</p>
      */
@@ -158,16 +158,16 @@ public class ShadowFactory {
 
     // size of the shadow in pixels (defines the fuzziness)
     private int size = 5;
-    
+
     // opacity of the shadow
     private float opacity = 0.5f;
-    
+
     // color of the shadow
     private Color color = Color.BLACK;
 
     // rendering hints map
     private HashMap<Object, Object> hints;
-    
+
     // notifies listeners of properties changes
     private PropertyChangeSupport changeSupport;
 
@@ -185,10 +185,10 @@ public class ShadowFactory {
     public ShadowFactory() {
         this(5, 0.5f, Color.BLACK);
     }
-    
+
     /**
      * <p>A shadow factory needs three properties to generate shadows.
-     * These properties are:</p> 
+     * These properties are:</p>
      * <ul>
      *   <li><i>size</i>: The size, in pixels, of the shadow. This property also
      *   defines the fuzzyness.</li>
@@ -207,7 +207,7 @@ public class ShadowFactory {
     public ShadowFactory(final int size, final float opacity, final Color color) {
         hints = new HashMap<Object, Object>();
         hints.put(KEY_BLUR_QUALITY, VALUE_BLUR_QUALITY_FAST);
-        
+
         changeSupport = new PropertyChangeSupport(this);
 
         setSize(size);
@@ -220,7 +220,7 @@ public class ShadowFactory {
      * registered for all properties. The same listener object may be added
      * more than once, and will be called as many times as it is added. If
      * <code>listener</code> is null, no exception is thrown and no action
-     * is taken.</p> 
+     * is taken.</p>
      * @param listener the PropertyChangeListener to be added
      */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -296,7 +296,7 @@ public class ShadowFactory {
      */
     public void setOpacity(final float shadowOpacity) {
         float oldOpacity = this.opacity;
-        
+
         if (shadowOpacity < 0.0) {
             this.opacity = 0.0f;
         } else if (shadowOpacity > 1.0f) {
@@ -304,7 +304,7 @@ public class ShadowFactory {
         } else {
             this.opacity = shadowOpacity;
         }
-        
+
         changeSupport.firePropertyChange(OPACITY_CHANGED_PROPERTY,
                                          oldOpacity,
                                          this.opacity);
@@ -323,8 +323,8 @@ public class ShadowFactory {
      * <p>The size defines the blur radius applied to the shadow to create the
      * fuzziness.</p>
      * <p>There is virtually no limit to the size but it has an impact on shadow
-     * generation performances. The greater this value, the longer it will take 
-     * to generate the shadow. Remember the generated shadow image dimensions 
+     * generation performances. The greater this value, the longer it will take
+     * to generate the shadow. Remember the generated shadow image dimensions
      * are computed as follow:
      * <ul>
      *   <li>new width = original width + 2 * shadow size</li>
@@ -336,13 +336,13 @@ public class ShadowFactory {
      */
     public void setSize(final int shadowSize) {
         int oldSize = this.size;
-        
+
         if (shadowSize < 0) {
             this.size = 0;
         } else {
             this.size = shadowSize;
         }
-        
+
         changeSupport.firePropertyChange(SIZE_CHANGED_PROPERTY,
                                          Integer.valueOf(oldSize),
                                          Integer.valueOf(this.size));
@@ -360,7 +360,7 @@ public class ShadowFactory {
      * shadow, the larger the longer it takes, and on the selected rendering
      * algorithm.</p>
      * @param image the picture from which the shadow must be cast
-     * @return the picture containing the shadow of <code>image</code> 
+     * @return the picture containing the shadow of <code>image</code>
      */
     public BufferedImage createShadow(final BufferedImage image) {
         if (hints.get(KEY_BLUR_QUALITY) == VALUE_BLUR_QUALITY_HIGH) {
@@ -380,7 +380,7 @@ public class ShadowFactory {
         // call the fast rendering algorithm
         return createShadowFast(image);
     }
-    
+
     // prepares the picture for the high quality rendering algorithm
     private BufferedImage prepareImage(final BufferedImage image) {
         BufferedImage subject = new BufferedImage(image.getWidth() + size * 2,

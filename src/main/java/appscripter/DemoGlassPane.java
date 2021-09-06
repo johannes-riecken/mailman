@@ -1,21 +1,21 @@
 /**
  * Copyright (c) 2006, Sun Microsystems, Inc
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
  *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following 
- *     disclaimer in the documentation and/or other materials provided 
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
  *   * Neither the name of the TimingFramework project nor the names of its
- *     contributors may be used to endorse or promote products derived 
+ *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -57,34 +57,34 @@ public class DemoGlassPane extends WrappingGlassPane {
     private enum NavigationType {
         STOP, SHOW_CODE, NEXT
     };
-    
+
     private final List<TranslucentLabel> messages;
-    
+
     private boolean isNextVisible;
-    
+
     private Component nextComponent;
-    
+
     private ActionListener nextActionListener;
 
     private boolean isShowCodeVisible;
-    
+
     private Component showCodeComponent;
-    
+
     private ActionListener showCodeActionListener;
-    
+
     private boolean isStopVisible;
-    
+
     private Component stopComponent;
-    
+
     private ActionListener stopActionListener;
-    
+
     private float labelTranslucency;
 
     private float bgAlpha;
 
     private Image bgImage;
-    
-    
+
+
     public DemoGlassPane() {
         messages = new ArrayList<TranslucentLabel>();
         labelTranslucency = 1.0f;
@@ -92,7 +92,7 @@ public class DemoGlassPane extends WrappingGlassPane {
         setNextVisible(false);
         setShowCodeVisible(false);
     }
-    
+
     public void setLabelTranslucency(float labelTranslucency) {
         if (labelTranslucency < 0f || labelTranslucency > 1f) {
             throw new IllegalArgumentException("Translucency must be between 0 and 1");
@@ -102,11 +102,11 @@ public class DemoGlassPane extends WrappingGlassPane {
             label.setAlpha(labelTranslucency);
         }
     }
-    
+
     public float getLabelTranslucency() {
         return labelTranslucency;
     }
-    
+
     public void setStopVisible(boolean stopVisible) {
         if (isStopVisible != stopVisible) {
             isStopVisible = stopVisible;
@@ -120,18 +120,18 @@ public class DemoGlassPane extends WrappingGlassPane {
             }
         }
     }
-    
+
     public boolean isStopVisible() {
         return isStopVisible;
     }
-    
+
     public void addStopActionListener(ActionListener stopActionListener) {
         if (this.stopActionListener!= null) {
             throw new IllegalStateException("Only one listener is supported");
         }
         this.stopActionListener = stopActionListener;
     }
-    
+
     public void setNextVisible(boolean nextVisible) {
         if (isNextVisible != nextVisible) {
             isNextVisible = nextVisible;
@@ -145,18 +145,18 @@ public class DemoGlassPane extends WrappingGlassPane {
             }
         }
     }
-    
+
     public boolean isNextVisible() {
         return isNextVisible;
     }
-    
+
     public void addNextActionListener(ActionListener nextActionListener) {
         if (this.nextActionListener != null) {
             throw new IllegalStateException("Only one listener is supported");
         }
         this.nextActionListener = nextActionListener;
     }
-    
+
     public void setShowCodeVisible(boolean showCodeVisible) {
         if (isShowCodeVisible != showCodeVisible) {
             isShowCodeVisible = showCodeVisible;
@@ -170,7 +170,7 @@ public class DemoGlassPane extends WrappingGlassPane {
             }
         }
     }
-    
+
     public boolean isShowCodeVisible() {
         return isShowCodeVisible;
     }
@@ -181,7 +181,7 @@ public class DemoGlassPane extends WrappingGlassPane {
         }
         this.showCodeActionListener = showCodeActionListener;
     }
-    
+
     public void appendMessage(Font font, String message) {
         TranslucentLabel label = new TranslucentLabel(message);
         label.setForeground(Color.BLACK);
@@ -192,7 +192,7 @@ public class DemoGlassPane extends WrappingGlassPane {
         revalidate();
         repaint();
     }
-    
+
     public void removeMessages() {
         for (JLabel label : messages) {
             remove(label);
@@ -201,18 +201,18 @@ public class DemoGlassPane extends WrappingGlassPane {
         repaint();
         revalidate();
     }
-    
+
     public List<TranslucentLabel> getMessages() {
         List<TranslucentLabel> labels = new ArrayList<TranslucentLabel>(messages);
         return labels;
     }
-    
+
     public void layout() {
         super.layout();
         layoutLabels();
         layoutNavigationButtons();
     }
-    
+
     private void layoutNavigationButtons() {
         if (isNextVisible()) {
             Component next = nextComponent;
@@ -237,7 +237,7 @@ public class DemoGlassPane extends WrappingGlassPane {
                     pref.width, pref.height);
         }
     }
-    
+
     private void layoutLabels() {
         int width = getWidth();
         int y = getInitialY();
@@ -274,22 +274,22 @@ public class DemoGlassPane extends WrappingGlassPane {
     private Component createDefaultShowCodeComponent() {
         return createNavigationComponent(NavigationType.SHOW_CODE, "Code...");
     }
-    
+
     private Component createDefaultStopComponent() {
         return createNavigationComponent(NavigationType.STOP, "Stop");
     }
-    
+
     private Component createNavigationComponent(NavigationType type, String text) {
         JLabel label = new TranslucentLabel(text);
         label.setFont(getDefaultNavigationFont());
         label.addMouseListener(new MouseHandler(type));
         return label;
     }
-    
+
     protected Font getDefaultNavigationFont() {
         return new Font("Arial", Font.ITALIC, 18);
     }
-    
+
     private void notifyListeners(NavigationType type) {
         ActionListener listener = null;
         switch(type) {
@@ -311,7 +311,7 @@ public class DemoGlassPane extends WrappingGlassPane {
     private int getNavigationXPadding() {
         return 20;
     }
-    
+
     private int getNavigationYPadding() {
         return 20;
     }
@@ -319,12 +319,12 @@ public class DemoGlassPane extends WrappingGlassPane {
     public boolean isOptimizedDrawingEnabled() {
         return (getAltGlassPane() == null);
     }
-    
+
     public void setBackgroundImage(Image image) {
         bgImage = image;
         repaint();
     }
-    
+
     public Image getBackgroundImage() {
         return bgImage;
     }
@@ -333,7 +333,7 @@ public class DemoGlassPane extends WrappingGlassPane {
         bgAlpha = alpha;
         repaint();
     }
-    
+
     public float getBackgroundImageAlpha() {
         return bgAlpha;
     }
@@ -363,15 +363,15 @@ public class DemoGlassPane extends WrappingGlassPane {
             // PENDING: look for click on next/show
         }
     }
-    
-    
+
+
     private final class MouseHandler extends MouseAdapter {
         private final NavigationType type;
-        
+
         MouseHandler(NavigationType type) {
             this.type = type;
         }
-        
+
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
             notifyListeners(type);

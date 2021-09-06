@@ -1,21 +1,21 @@
 /**
  * Copyright (c) 2006, Sun Microsystems, Inc
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
  *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following 
- *     disclaimer in the documentation and/or other materials provided 
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
  *   * Neither the name of the TimingFramework project nor the names of its
- *     contributors may be used to endorse or promote products derived 
+ *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -42,14 +42,14 @@ import com.sun.javaone.mailman.ui.image.*;
  */
 public class CoolButton extends JButton implements TimingTarget {
     private static boolean REPAINT_SHADOW = true;
-    
+
     private static final Color COLOR1 = new Color(125, 161, 237);
     private static final Color COLOR2 = new Color(91, 118, 173);
-    
+
     private int style;
     private float pct;
     private boolean forward;
-    
+
     private TimingController cont = new TimingController(200, this);
 
     private final MouseAdapter MLISTENER = new MouseAdapter() {
@@ -58,7 +58,7 @@ public class CoolButton extends JButton implements TimingTarget {
             forward = true;
             cont.start();
         }
-        
+
         public void mouseExited(MouseEvent me) {
             cont.stop();
             forward = false;
@@ -68,7 +68,7 @@ public class CoolButton extends JButton implements TimingTarget {
 
     public void begin() {
     }
-    
+
     public void end() {
         if (forward) {
             setForeground(Color.WHITE);
@@ -84,7 +84,7 @@ public class CoolButton extends JButton implements TimingTarget {
             repaint();
         }
     }
-    
+
     public void timingEvent(long cycleElapsedTime, long totalElapsedTime, float fraction) {
         if (forward) {
             pct = fraction;
@@ -106,7 +106,7 @@ public class CoolButton extends JButton implements TimingTarget {
              //repaint();
         }
     }
-    
+
     public CoolButton(int style) {
         super();
         this.style = style;
@@ -116,23 +116,23 @@ public class CoolButton extends JButton implements TimingTarget {
         addMouseListener(MLISTENER);
         //setFont(getFont().deriveFont(Font.BOLD));
     }
-    
+
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D)g.create();
-        
+
         int h = getHeight();
         int w = getWidth();
-        
+
         float tran = 0.1f + pct * 0.9f;
-        
+
         GradientPaint GP = new GradientPaint(0, 0, COLOR1, 0, h, COLOR2, true);
         g2d.setPaint(GP);
-        
+
 
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         GradientPaint p1;
         GradientPaint p2;
-        
+
         if (getModel().isPressed()) {
             p1 = new GradientPaint(0, 0, new Color(0, 0, 0), 0, h - 1, new Color(100, 100, 100));
             p2 = new GradientPaint(0, 1, new Color(0, 0, 0, 50), 0, h - 3, new Color(255, 255, 255, 100));
@@ -140,7 +140,7 @@ public class CoolButton extends JButton implements TimingTarget {
             p1 = new GradientPaint(0, 0, new Color(100, 100, 100), 0, h - 1, new Color(0, 0, 0));
             p2 = new GradientPaint(0, 1, new Color(255, 255, 255, 100), 0, h - 3, new Color(0, 0, 0, 50));
         }
-        
+
         if (style == 0) {
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, tran));
             RoundRectangle2D.Float r2d = new RoundRectangle2D.Float(0, 0, w - 1, h - 1, 20, 20);
@@ -200,7 +200,7 @@ public class CoolButton extends JButton implements TimingTarget {
             g2d.drawLine(1, 2, 1, h - 1);
             g2d.dispose();
         }
-        
+
         super.paintComponent(g);
     }
 }

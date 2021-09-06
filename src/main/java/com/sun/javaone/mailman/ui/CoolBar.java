@@ -1,21 +1,21 @@
 /**
  * Copyright (c) 2006, Sun Microsystems, Inc
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
  *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following 
- *     disclaimer in the documentation and/or other materials provided 
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
  *   * Neither the name of the TimingFramework project nor the names of its
- *     contributors may be used to endorse or promote products derived 
+ *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -39,7 +39,7 @@ import org.jdesktop.swingx.border.DropShadowBorder;
  * @author Shannon Hickey
  */
 public class CoolBar extends JToolBar {
-    
+
     /** Creates a new instance of CoolBar */
     public CoolBar() {
         Border outerBorder = new DropShadowBorder(Color.BLACK, 0, 5, .5f,
@@ -50,7 +50,7 @@ public class CoolBar extends JToolBar {
         };
         setBorder(outerBorder);
     }
-    
+
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D)g.create();
         int bottom = getHeight() - getInsets().bottom;

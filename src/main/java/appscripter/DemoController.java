@@ -1,21 +1,21 @@
 /**
  * Copyright (c) 2006, Sun Microsystems, Inc
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
  *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following 
- *     disclaimer in the documentation and/or other materials provided 
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
  *   * Neither the name of the TimingFramework project nor the names of its
- *     contributors may be used to endorse or promote products derived 
+ *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -72,9 +72,9 @@ public class DemoController {
     // Tim to fade out messages
     private static final int FADE_OUT_TIME = 500;
     private static final int DIM_BACKGROUND_TIME = 500;
-    
+
     private static final float MAX_DIM = .6f;
-    
+
     private static char[] tmpChars = new char[256];
 
     private final JFrame frame;
@@ -86,22 +86,22 @@ public class DemoController {
     private Incrementor incrementor;
 
     private int state;
-    
+
     private boolean pausing;
 
     private int stageIndex;
-    
+
     private Image bgImage;
-    
+
     private final DemoExecutor executor;
-    
+
     private int mouseX;
     private int mouseY;
 
     private boolean inScript;
 
     private boolean aborting;
-    
+
     public static List<DemoStage> flowStages(List<DemoStage> stages, int width) {
         List<DemoStage> resultingStages = new ArrayList<DemoStage>(stages.size());
         for (DemoStage stage : stages) {
@@ -109,17 +109,17 @@ public class DemoController {
         }
         return resultingStages;
     }
-    
+
     private static DemoStage flowStage(DemoStage stage, int width) {
         List<DemoMessage> messages = stage.getMessages();
         List<DemoMessage> newMessages = new ArrayList<DemoMessage>(messages.size());
         for (DemoMessage message : messages) {
             flowMessage(message, width, newMessages);
         }
-        return new DemoStage(newMessages, stage.getCodeLocations(), 
+        return new DemoStage(newMessages, stage.getCodeLocations(),
                 stage.getScript(), stage.getPauseTime());
     }
-    
+
     private static void flowMessage(DemoMessage message, int width, List<DemoMessage> messages) {
         String text = message.getMessage();
         FontMetrics fm = Toolkit.getDefaultToolkit().getFontMetrics(message.getFont());
@@ -159,7 +159,7 @@ public class DemoController {
             messages.add(message);
         }
     }
-    
+
     private static DemoMessage dupMessage(DemoMessage message, String text) {
         return new DemoMessage(text, message.getFont(), message.getDelay());
     }
@@ -170,7 +170,7 @@ public class DemoController {
         }
         return index;
     }
-    
+
     private static int nextNonWhitespace(int index, int length) {
         while (index < length && Character.isWhitespace(tmpChars[index])) {
             tmpChars[index] = ' ';
@@ -178,8 +178,8 @@ public class DemoController {
         }
         return index;
     }
-    
-    
+
+
     public DemoController(JFrame frame, List<DemoStage> stages) {
         this.stages = new ArrayList<DemoStage>(stages);
         this.frame = frame;
@@ -189,7 +189,7 @@ public class DemoController {
     public void start() {
         start(0);
     }
-    
+
     public void start(int index) {
         if (running) {
             throw new IllegalStateException("Already running");
@@ -204,7 +204,7 @@ public class DemoController {
         stageIndex = index - 1;
         startTimer();
     }
-    
+
     public void stop() {
         if (!running) {
             throw new IllegalStateException("Not running");
@@ -214,7 +214,7 @@ public class DemoController {
         timer = null;
         uninstallGlassPane();
     }
-    
+
     private void updateMouseLocation() {
         Point mouseLoc = MouseInfo.getPointerInfo().getLocation();
         mouseX = mouseLoc.x;
@@ -225,7 +225,7 @@ public class DemoController {
         Point mouseLoc = MouseInfo.getPointerInfo().getLocation();
         return (mouseX != mouseLoc.x || mouseY != mouseLoc.y);
     }
-    
+
     private void tick() {
         if (incrementor == null) {
             // The first time through. Start things going.
@@ -265,7 +265,7 @@ public class DemoController {
             stop();
         }
     }
-    
+
     private void abort() {
         aborting = true;
         Incrementor newIncrementor = null;
@@ -288,10 +288,10 @@ public class DemoController {
         incrementor = newIncrementor;
         aborting = true;
     }
-    
+
     private void advanceState() {
         state = (state + 1) % LAST_STATE;
-        if (state == STATE_DIMMING_BACKGROUND && 
+        if (state == STATE_DIMMING_BACKGROUND &&
                 glassPane.getBackgroundImage() != null) {
             state = (state + 1) % LAST_STATE;
         }
@@ -328,12 +328,12 @@ public class DemoController {
             pause();
         }
     }
-    
+
     private void pause() {
         pausing = true;
         incrementor = new PauseIncrementor();
     }
-    
+
     private void advanceStage() {
         incrementor = null;
         currentStage = nextStage();
@@ -352,11 +352,11 @@ public class DemoController {
 //            }
         }
     }
-    
+
     private void appendMessage(DemoMessage message) {
         glassPane.appendMessage(message.getFont(), message.getMessage());
     }
-    
+
     private DemoStage nextStage() {
         if (++stageIndex == stages.size()) {
             return null;
@@ -373,7 +373,7 @@ public class DemoController {
         timer.setRepeats(true);
         timer.start();
     }
-    
+
     private void uninstallGlassPane() {
         Exception exception = null;
         glassPane.setVisible(false);
@@ -406,7 +406,7 @@ public class DemoController {
         }
         glassPane = null;
     }
-    
+
     private void installGlassPane() {
         Exception exception = null;
         DemoRootPane rootPane = new DemoRootPane();
@@ -470,19 +470,19 @@ public class DemoController {
         glassPane.setBackgroundImage(bgImage);
         glassPane.setBackgroundImageAlpha(1f);
     }
-    
-    
+
+
     private static abstract class Incrementor {
         protected long start;
-        
+
         Incrementor() {
             resetTime();
         }
-        
+
         public abstract void tick();
-        
+
         public abstract boolean isDone();
-        
+
         protected float getPercent(int time) {
             return Math.min(1f, (float)(System.currentTimeMillis() - start) / (float)time);
         }
@@ -490,17 +490,17 @@ public class DemoController {
         protected void resetTime() {
             start = System.currentTimeMillis();
         }
-        
+
         public void stop() {
         }
     }
-    
+
     private final class MessageIncrementor extends Incrementor {
         private final List<DemoMessage> messages;
         private int index;
         private int componentIndex;
         private boolean pausing;
-        
+
         MessageIncrementor(List<DemoMessage> messages) {
             this.messages = messages;
             index = 0;
@@ -514,7 +514,7 @@ public class DemoController {
             assert (index != -1);
             addNextMessage();
         }
-        
+
         public void tick() {
             if (pausing) {
                 if (getPercent(PAUSE_TIME) >= 1f) {
@@ -543,8 +543,8 @@ public class DemoController {
         }
 
     }
-    
-    
+
+
     private static final class PauseIncrementor extends Incrementor {
         public void tick() {
         }
@@ -553,23 +553,23 @@ public class DemoController {
             return getPercent(PAUSE_TIME) >= 1f;
         }
     }
-    
-    
+
+
     private final class FadeOutIncrementor extends Incrementor {
         private final boolean fadeBackgroundImage;
         private final int pauseTime;
         private boolean pausing;
-        
+
         FadeOutIncrementor(boolean fadeBackgroundImage) {
             this(fadeBackgroundImage, 0);
         }
-        
+
         FadeOutIncrementor(boolean fadeBackgroundImage, int pauseTime) {
             this.fadeBackgroundImage = fadeBackgroundImage;
             this.pauseTime = 1000;//pauseTime;
             pausing = (this.pauseTime > 0);
         }
-        
+
         public void tick() {
             if (pausing && getPercent(pauseTime) >= 1f) {
                 pausing = false;
@@ -587,8 +587,8 @@ public class DemoController {
             return !pausing && getPercent(FADE_OUT_TIME) >= 1f;
         }
     }
-    
-    
+
+
     private final class FadeBackgroundIncrementor extends Incrementor {
         public void tick() {
             glassPane.setBackgroundImageAlpha(1f - getPercent(DIM_BACKGROUND_TIME) * MAX_DIM);
@@ -599,7 +599,7 @@ public class DemoController {
         }
     }
 
-    
+
     private final class FadeBackgroundInIncrementor extends Incrementor {
         private final int time;
         private final float startAlpha;
@@ -617,7 +617,7 @@ public class DemoController {
         }
     }
 
-    
+
     private final class ScriptIncrementor extends Incrementor {
         public void tick() {
         }
@@ -625,7 +625,7 @@ public class DemoController {
         public boolean isDone() {
             return executor.isDone();
         }
-        
+
         // PENDING: override stop
     }
 }

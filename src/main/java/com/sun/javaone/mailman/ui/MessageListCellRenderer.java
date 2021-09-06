@@ -1,21 +1,21 @@
 /**
  * Copyright (c) 2006, Sun Microsystems, Inc
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
  *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following 
- *     disclaimer in the documentation and/or other materials provided 
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
  *   * Neither the name of the TimingFramework project nor the names of its
- *     contributors may be used to endorse or promote products derived 
+ *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -57,9 +57,9 @@ import javax.swing.border.LineBorder;
 public class MessageListCellRenderer implements ListCellRenderer {
     private static final int IS = 48;
     private static final Color FROM_COLOR = new Color(0,  81, 212);
-    
+
     private final RendererPanel panel;
-    
+
     public MessageListCellRenderer() {
         panel = new RendererPanel();
     }
@@ -87,7 +87,7 @@ public class MessageListCellRenderer implements ListCellRenderer {
         }
         return panel;
     }
-        
+
     private void adjustColors(Color bg, Color fg) {
         for (Component c : panel.toAdjust) {
             c.setForeground(fg);
@@ -98,7 +98,7 @@ public class MessageListCellRenderer implements ListCellRenderer {
     private int getRowCount() {
         return 2;
     }
-    
+
     private class RendererPanel extends JPanel {
         private final JLabel dateLabel;
         private final JLabel labels[];
@@ -129,10 +129,10 @@ public class MessageListCellRenderer implements ListCellRenderer {
             imagePanel = new JImagePanel();
             imagePanel.setBorder(new LineBorder(Color.BLACK, 1));
             imagePanel.setEditable(false);
-            
+
             GroupLayout layout = new GroupLayout(this);
             setLayout(layout);
-            
+
             GroupLayout.ParallelGroup labelHG = layout.createParallelGroup();
             GroupLayout.SequentialGroup labelVG = layout.createSequentialGroup();
             for (int i = 0; i < labels.length; i++) {
@@ -170,14 +170,14 @@ public class MessageListCellRenderer implements ListCellRenderer {
             layout.setVerticalGroup(vg);
 //            layout.setAutoCreateContainerGaps(true);
             layout.setAutoCreateGaps(true);
-            
+
             toAdjust = new LinkedList<Component>();
             toAdjust.add(dateLabel);
             toAdjust.addAll(Arrays.asList(labels));
             toAdjust.add(this);
             toAdjust.add(fromLabel);
         }
-        
+
         public void setMessage(Message m) {
             if (m == null) {
                 text = null;
@@ -202,7 +202,7 @@ public class MessageListCellRenderer implements ListCellRenderer {
                 }
              }
         }
-        
+
         public void doLayout() {
             super.doLayout();
             if (layoutWidth != getWidth()) {
@@ -210,7 +210,7 @@ public class MessageListCellRenderer implements ListCellRenderer {
                 reflowText();
             }
         }
-        
+
         private int nextNonWhitespace(int index, int length) {
             while (index < length && Character.isWhitespace(tmpChars[index])) {
                 tmpChars[index] = ' ';
@@ -218,7 +218,7 @@ public class MessageListCellRenderer implements ListCellRenderer {
             }
             return index;
         }
-        
+
         private int nextWhitespace(int index, int length) {
             while (index < length && !Character.isWhitespace(tmpChars[index])) {
                 index++;
@@ -231,7 +231,7 @@ public class MessageListCellRenderer implements ListCellRenderer {
                 label.setText(" ");
             }
         }
-        
+
         private void reflowText() {
             resetMessageLabels();
             int availableWidth = labels[0].getWidth();
