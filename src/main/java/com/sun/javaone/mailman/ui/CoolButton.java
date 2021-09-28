@@ -41,16 +41,16 @@ import com.sun.javaone.mailman.ui.image.*;
  * @author Shannon Hickey
  */
 public class CoolButton extends JButton implements TimingTarget {
-    private static boolean REPAINT_SHADOW = true;
+    private static final boolean REPAINT_SHADOW = true;
 
     private static final Color COLOR1 = new Color(125, 161, 237);
     private static final Color COLOR2 = new Color(91, 118, 173);
 
-    private int style;
+    private final int style;
     private float pct;
     private boolean forward;
 
-    private TimingController cont = new TimingController(200, this);
+    private final TimingController cont = new TimingController(200, this);
 
     private final MouseAdapter MLISTENER = new MouseAdapter() {
         public void mouseEntered(MouseEvent me) {

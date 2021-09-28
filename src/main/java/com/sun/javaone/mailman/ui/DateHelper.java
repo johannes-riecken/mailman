@@ -46,8 +46,8 @@ public final class DateHelper {
     private final static DateFormat todayFormat;
     private final static DateFormat thisYearFormat;
     private final static DateFormat longFormat;
-    private static long thisYear;
-    private static long today;
+    private static final long thisYear;
+    private static final long today;
 
     static {
         date = new Date();

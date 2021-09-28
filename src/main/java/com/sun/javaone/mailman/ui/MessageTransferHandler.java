@@ -42,13 +42,13 @@ import org.jdesktop.animation.timing.*;
  * @author shannonh
  */
 public class MessageTransferHandler extends TransferHandler implements DragSourceMotionListener, TimingTarget {
-    private MailBoxTree tree;
+    private final MailBoxTree tree;
 
     public MessageTransferHandler(MailBoxTree tree) {
         this.tree = tree;
     }
 
-    private DragOverGlassPane gp = new DragOverGlassPane();
+    private final DragOverGlassPane gp = new DragOverGlassPane();
 
     public int getSourceActions(JComponent c) {
         return c instanceof JTable ? COPY_OR_MOVE : NONE;

@@ -49,7 +49,7 @@ import org.jdesktop.animation.timing.TimingTarget;
  * @author sky
  */
 public class QuotedPathPanel extends JPanel {
-    private List<String> paths;
+    private final List<String> paths;
     private List<String> targetPaths;
     private boolean transitioning;
     private int differsIndex;

@@ -201,7 +201,7 @@ public class VistaSearchDialog extends JComponent  {
     }
 
     private class TitleBar extends JComponent {
-        private String title;
+        private final String title;
 
         private TitleBar(String title) {
             this.title = title;
@@ -252,7 +252,7 @@ public class VistaSearchDialog extends JComponent  {
 
             Paint oldPaint = g2.getPaint();
 
-            float rgb[] = new Color(0xe9efff).getRGBColorComponents(null);
+            float[] rgb = new Color(0xe9efff).getRGBColorComponents(null);
 
             g2.setPaint(new GradientPaint(0.0f, 0.0f,
                                           new Color(rgb[0], rgb[1], rgb[2], 0.2f * getAlpha()),

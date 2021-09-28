@@ -50,7 +50,8 @@ public class DemoCommand {
         RELEASE_MOUSE,
         TYPE_KEY,
         EXTERNAL
-    };
+    }
+
     private final Type command;
     private final Map<Object,Object> arguments;
 

@@ -41,7 +41,7 @@ import javax.swing.*;
  */
 public class ScrollableShadowPanel extends DropShadowPanel implements Scrollable {
 
-    private Scrollable scroll;
+    private final Scrollable scroll;
 
     public ScrollableShadowPanel(Scrollable scroll) {
         this.scroll = scroll;
@@ -61,14 +61,14 @@ public class ScrollableShadowPanel extends DropShadowPanel implements Scrollable
 
     public boolean getScrollableTracksViewportWidth() {
 	if (getParent() instanceof JViewport) {
-	    return (((JViewport)getParent()).getWidth() > getPreferredSize().width);
+	    return (getParent().getWidth() > getPreferredSize().width);
 	}
 	return false;
     }
 
     public boolean getScrollableTracksViewportHeight() {
 	if (getParent() instanceof JViewport) {
-	    return (((JViewport)getParent()).getHeight() > getPreferredSize().height);
+	    return (getParent().getHeight() > getPreferredSize().height);
 	}
 	return false;
     }

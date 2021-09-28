@@ -101,7 +101,7 @@ public class MessageListCellRenderer implements ListCellRenderer {
 
     private class RendererPanel extends JPanel {
         private final JLabel dateLabel;
-        private final JLabel labels[];
+        private final JLabel[] labels;
         private final JLabel fromLabel;
         private final JImagePanel imagePanel;
         private final JLabel subjectLabel;

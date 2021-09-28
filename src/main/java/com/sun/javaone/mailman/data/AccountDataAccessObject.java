@@ -33,5 +33,5 @@ package com.sun.javaone.mailman.data;
 import com.sun.javaone.mailman.model.Account;
 
 public interface AccountDataAccessObject {
-    public Account getAccount(String name);
+    Account getAccount(String name);
 }

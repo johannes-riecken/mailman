@@ -32,5 +32,5 @@
 package com.sun.javaone.mailman.data;
 
 public interface AccountListDataAccessObject {
-    public String[] getAccountNames();
+    String[] getAccountNames();
 }

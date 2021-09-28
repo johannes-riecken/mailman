@@ -42,7 +42,7 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 
 public class GraphicsUtil {
-    private static GraphicsConfiguration configuration = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
+    private static final GraphicsConfiguration configuration = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
 
     private GraphicsUtil() {
     }

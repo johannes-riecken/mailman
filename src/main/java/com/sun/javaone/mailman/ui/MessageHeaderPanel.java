@@ -331,7 +331,7 @@ public class MessageHeaderPanel extends JPanel {
         }
         public Object convertToTarget(BindingDescription description,
                 Object value) {
-            return (value != null) ? true : false;
+            return value != null;
         }
     }
 

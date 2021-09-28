@@ -51,10 +51,10 @@ class SetFloatableAction extends AbstractAction {
     public static final String FLOATABLE_STATUS = "floatable_status";
 
     private final JComponent component;
-    private ActionListener action;
+    private final ActionListener action;
     private final JComponent target;
     private final Object constraints;
-    private Box box;
+    private final Box box;
 
     SetFloatableAction(JComponent component, ActionListener action,
                        JComponent target, Object constraints) {

@@ -65,7 +65,7 @@ public class DataAccessTest {
         System.out.println("=================================================");
         System.out.println("Account: " + name);
         System.out.println("=================================================");
-        System.out.println("");
+        System.out.println();
 
         Account account = accountDao.getAccount(name);
         System.out.println("Account: ");
@@ -73,46 +73,46 @@ public class DataAccessTest {
         System.out.println("\tIdentity: " + account.getIdentity());
         System.out.println("\tSend: " + account.getSendMailServer());
         System.out.println("\tGet: " + account.getGetMailServer());
-        System.out.println("");
+        System.out.println();
         AddressBook book = bookDao.getAddressBook(account);
         System.out.println("Address book: ");
         for (Contact contact : book.findAll()) {
             System.out.println("\t" + contact);
         }
-        System.out.println("");
+        System.out.println();
         System.out.println("Find contacts @*.gov: ");
         for (Contact contact : book.find(".gov")) {
             System.out.println("\t" + contact);
         }
-        System.out.println("");
+        System.out.println();
         System.out.println("Find contacts called Scott: ");
         for (Contact contact : book.findByFirstName("Scott")) {
             System.out.println("\t" + contact);
         }
-        System.out.println("");
+        System.out.println();
         printMailBox(account.getInbox());
-        System.out.println("");
+        System.out.println();
         printMailBox(account.getTrash());
-        System.out.println("");
+        System.out.println();
         printMailBox(account.getSent());
-        System.out.println("");
+        System.out.println();
         printMailBox(account.getDrafts());
-        System.out.println("");
+        System.out.println();
         System.out.println("Find inbox mail sent to Chet: ");
         for (Message message : account.getInbox().findByRecipient("Chet")) {
             System.out.println("\t" + message);
         }
-        System.out.println("");
+        System.out.println();
         System.out.println("Find inbox mail sent by Jeff Dinkins: ");
         for (Message message : account.getInbox().findBySender("Dinkins")) {
             System.out.println("\t" + message);
         }
-        System.out.println("");
+        System.out.println();
         System.out.println("Find inbox mail with the reply prefix: ");
         for (Message message : account.getInbox().findBySubject("Re: ")) {
             System.out.println("\t" + message);
         }
-        System.out.println("");
+        System.out.println();
     }
 
     private static void printMailBox(MailBox mbox) {

@@ -56,7 +56,7 @@ import javax.swing.JLabel;
 public class DemoGlassPane extends WrappingGlassPane {
     private enum NavigationType {
         STOP, SHOW_CODE, NEXT
-    };
+    }
 
     private final List<TranslucentLabel> messages;
 

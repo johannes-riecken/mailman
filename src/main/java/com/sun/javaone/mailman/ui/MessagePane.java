@@ -124,7 +124,7 @@ public class MessagePane extends JTextPane {
             ">>\r\n" +
             ">> When we're ready, I hope we'll provide a NetBeans version\r\n";
 
-    private static final Object RESPONSE_TYPE = new String("Response");
+    private static final Object RESPONSE_TYPE = "Response";
     private static final int RESPONSE_INDENT = 11;
     private static MessagePane SHARED_MESSAGE_PANE;
     private String text;
@@ -552,7 +552,7 @@ public class MessagePane extends JTextPane {
             preferenceChanged(this, true, true);
             host.repaint();
             if (host instanceof JComponent) {
-                ((JComponent)host).revalidate();
+                host.revalidate();
             }
         }
 

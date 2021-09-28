@@ -79,7 +79,7 @@ class ResizingMouseListener extends MouseAdapter {
 
         component.setPreferredSize(newSize);
         component.setSize(newSize);
-        ((JComponent) component.getParent()).revalidate();
+        component.getParent().revalidate();
 
         startPoint = point;
     }

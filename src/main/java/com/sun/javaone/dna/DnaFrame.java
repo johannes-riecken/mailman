@@ -70,7 +70,7 @@ import org.jdesktop.swingx.JXHyperlink;
 public class DnaFrame extends JWindow {
     private TimingController waitController;
     private DnaPanel dnaPanel;
-    private Timer launchTimer;
+    private final Timer launchTimer;
 
     public DnaFrame() {
         getContentPane().setBackground(Color.WHITE);

@@ -38,7 +38,7 @@ import java.awt.Color;
  * @author sky
  */
 public final class ColorScheme {
-    private static final int COLORS[] = new int[] {
+    private static final int[] COLORS = new int[] {
          0,  81, 212,     141, 180, 242,
         44, 161,  11,     150, 236, 134,
        230,  23,  23,     247, 170, 170,

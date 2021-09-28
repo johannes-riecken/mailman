@@ -55,7 +55,7 @@ public class Main {
     public Main() {
     }
 
-    public static void main(String[] args) throws FileNotFoundException, SAXException, IOException, ParserConfigurationException {
+    public static void main(String[] args) throws SAXException, IOException, ParserConfigurationException {
         List<DemoStage> stages = DemoParser.parse(Main.class.getResourceAsStream("resources/script.xml"));
 
         System.err.println("pre");

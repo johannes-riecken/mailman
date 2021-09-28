@@ -36,7 +36,7 @@ public class MailServer {
         POP3, IMAP, SMTP
     }
 
-    private Protocol protocol;
+    private final Protocol protocol;
     private String name;
     private String host;
     private int port;

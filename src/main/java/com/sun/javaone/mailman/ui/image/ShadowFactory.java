@@ -166,10 +166,10 @@ public class ShadowFactory {
     private Color color = Color.BLACK;
 
     // rendering hints map
-    private HashMap<Object, Object> hints;
+    private final HashMap<Object, Object> hints;
 
     // notifies listeners of properties changes
-    private PropertyChangeSupport changeSupport;
+    private final PropertyChangeSupport changeSupport;
 
     /**
      * <p>Creates a default good looking shadow generator.

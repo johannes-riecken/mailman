@@ -15,7 +15,7 @@ import com.jhlabs.image.AbstractBufferedImageOp;
  */
 
 public class WrappedBoxBlurFilter extends AbstractBufferedImageOp {
-    private int radius = 20;
+    private final int radius = 20;
 
     public WrappedBoxBlurFilter() {
     }

@@ -93,20 +93,20 @@ public class MainFrame extends javax.swing.JFrame {
     ComposeMailFrame sharedFrame;
 
     private final UIController controller;
-    private GlobalKeyStrokeHandler globalKeyListener;
+    private final GlobalKeyStrokeHandler globalKeyListener;
 
-    private JMenuItem ds = new JCheckBoxMenuItem("Drop Shadows");
-    private JMenuItem coolbar = new JCheckBoxMenuItem("Raised Toolbar");
-    private JMenuItem coolbuttons = new JCheckBoxMenuItem("Cool Buttons");
-    private JMenuItem updateTree = new JMenuItem("Update Tree");
-    private JRadioButtonMenuItem asTableMI = new JRadioButtonMenuItem("View As Table");
-    private JRadioButtonMenuItem asListMI= new JRadioButtonMenuItem("View As List");
-    private JRadioButtonMenuItem asFullListMI= new JRadioButtonMenuItem("View As Full List");
+    private final JMenuItem ds = new JCheckBoxMenuItem("Drop Shadows");
+    private final JMenuItem coolbar = new JCheckBoxMenuItem("Raised Toolbar");
+    private final JMenuItem coolbuttons = new JCheckBoxMenuItem("Cool Buttons");
+    private final JMenuItem updateTree = new JMenuItem("Update Tree");
+    private final JRadioButtonMenuItem asTableMI = new JRadioButtonMenuItem("View As Table");
+    private final JRadioButtonMenuItem asListMI= new JRadioButtonMenuItem("View As List");
+    private final JRadioButtonMenuItem asFullListMI= new JRadioButtonMenuItem("View As Full List");
     private JComponent mainToolBar;
 
-    private JScrollPane mailTableScrollPane = new JScrollPane();
-    private JScrollPane messageViewScrollPane = new JScrollPane();
-    private JScrollPane foldersScrollPane = new JScrollPane();
+    private final JScrollPane mailTableScrollPane = new JScrollPane();
+    private final JScrollPane messageViewScrollPane = new JScrollPane();
+    private final JScrollPane foldersScrollPane = new JScrollPane();
     private JLabel statusBar;
 
 
@@ -390,7 +390,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private class SetFloatableActionWrapper extends AbstractAction {
-        private Action action;
+        private final Action action;
 
         public SetFloatableActionWrapper(JComponent component,
                 ActionListener action,

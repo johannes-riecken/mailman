@@ -281,7 +281,7 @@ public class DemoExecutor {
                     "Must supply an even number of args");
         }
         for (int i = 0; i < args.length; i += 2) {
-            if (!String.class.isInstance(args[i])) {
+            if (!(args[i] instanceof String)) {
                 throw new IllegalArgumentException(
                         "Even number object must be a String, was " + args[i]);
             }

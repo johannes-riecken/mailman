@@ -35,7 +35,7 @@ import java.awt.Component;
 import java.awt.Container;
 
 class DefaultFocusTraversalPolicy extends FocusTraversalPolicy {
-    private Component component;
+    private final Component component;
     private final FocusTraversalPolicy policy;
 
     DefaultFocusTraversalPolicy(Component component,

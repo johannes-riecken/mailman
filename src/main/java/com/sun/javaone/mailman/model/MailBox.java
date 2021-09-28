@@ -75,14 +75,14 @@ public class MailBox {
     }
     private final File path;
     private String name;
-    private Type type;
+    private final Type type;
     private MailBox parent;
 
     private final List<Message> messages = BindingCollections.observableList(new ArrayList<Message>());
     private final List<MailBox> folders = BindingCollections.observableList(new ArrayList<MailBox>());
 
     public MailBox(Type type, String name, MailBox parent,
-            File path) throws FileNotFoundException, IOException {
+            File path) throws IOException {
         if (name == null || name.length() == 0) {
             throw new IllegalArgumentException("Name cannot be null or empty.");
         }
@@ -254,7 +254,7 @@ public class MailBox {
                 "]";
     }
 
-    private void loadMessages() throws FileNotFoundException, IOException {
+    private void loadMessages() throws IOException {
         // Search for starting with ^From
         // Header separated with a newline
         long startTime = System.currentTimeMillis();

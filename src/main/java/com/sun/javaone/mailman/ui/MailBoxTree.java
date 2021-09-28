@@ -60,7 +60,7 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
     private int count = 0;
     private int[] counts = DUMMY_COUNTS[0];
     private int[] oldCounts = {0, 0};
-    private boolean trans = true;
+    private final boolean trans = true;
     private float pct;
 
     static final String SENT = "Sent";

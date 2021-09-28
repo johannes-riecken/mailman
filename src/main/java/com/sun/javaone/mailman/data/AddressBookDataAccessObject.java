@@ -35,5 +35,5 @@ import com.sun.javaone.mailman.model.AddressBook;
 import com.sun.javaone.mailman.model.Account;
 
 public interface AddressBookDataAccessObject {
-    public AddressBook getAddressBook(Account account);
+    AddressBook getAddressBook(Account account);
 }

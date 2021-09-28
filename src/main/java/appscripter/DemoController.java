@@ -523,7 +523,7 @@ public class DemoController {
                 }
             } else {
                 float percent = getPercent(FADE_IN_TIME);//messages.get(index).getDelay()));
-                ((TranslucentLabel)glassPane.getMessages().get(componentIndex)).setAlpha(percent);
+                glassPane.getMessages().get(componentIndex).setAlpha(percent);
                 if (percent >= 1 && ++index < messages.size()) {
                     addNextMessage();
                     pausing = true;
@@ -538,7 +538,7 @@ public class DemoController {
         private void addNextMessage() {
             appendMessage(messages.get(index));
             componentIndex = glassPane.getMessages().size() - 1;
-            ((TranslucentLabel)glassPane.getMessages().get(componentIndex)).setAlpha(0);
+            glassPane.getMessages().get(componentIndex).setAlpha(0);
             resetTime();
         }
 

@@ -39,8 +39,8 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class Message {
-    private MailBox mailBox;
-    private int position;
+    private final MailBox mailBox;
+    private final int position;
     private String id;
     private Contact from;
     private Contact[] to;

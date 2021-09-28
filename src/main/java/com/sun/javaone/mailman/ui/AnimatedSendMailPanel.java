@@ -74,7 +74,7 @@ public class AnimatedSendMailPanel extends JXPanel {
     private boolean isEnvelopeFolding = false;
     private boolean isStamping = false;
 
-    private StarShape stampShape = new StarShape(0.0, 0.0, 16.0, 18.0, 22);
+    private final StarShape stampShape = new StarShape(0.0, 0.0, 16.0, 18.0, 22);
 
     private static final float ENVELOPE_RATIO = 1.3f;
     private static final float MESSAGE_WIDTH = 0.2f;
