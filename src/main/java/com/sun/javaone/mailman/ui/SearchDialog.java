@@ -160,6 +160,7 @@ public class SearchDialog extends javax.swing.JDialog {
      */
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new SearchDialog(new javax.swing.JFrame(), true).setVisible(true);
             }

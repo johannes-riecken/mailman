@@ -82,6 +82,7 @@ class PlainTextDataAccessObjectProvider extends DataAccessObjectProvider {
 
     private static final class PlainTextAccountListDataAccessObject implements
             AccountListDataAccessObject {
+        @Override
         public String[] getAccountNames() {
             File accountListFile = new File(MAIL_DIRECTORY, "accountlist");
             List<String> accounts = new ArrayList<String>();
@@ -114,6 +115,7 @@ class PlainTextDataAccessObjectProvider extends DataAccessObjectProvider {
             }
         }
 
+        @Override
         public Account getAccount(String name) {
             File accountFile = new File(MAIL_DIRECTORY + File.separator + name,
                     "account");
@@ -367,6 +369,7 @@ class PlainTextDataAccessObjectProvider extends DataAccessObjectProvider {
 
     private static final class PlainTextAddressBookDataAccessObject implements
             AddressBookDataAccessObject {
+        @Override
         public AddressBook getAddressBook(Account account) {
             File addressBookFile = new File(
                     MAIL_DIRECTORY + File.separator + account.getName(),

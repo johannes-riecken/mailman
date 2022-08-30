@@ -71,11 +71,13 @@ public class WrappingGlassPane extends JComponent {
         return altGlassPane;
     }
 
+    @Override
     public void remove(int index) {
         super.remove(index);
         checkAltGlassPane();
     }
 
+    @Override
     public void removeAll() {
         super.removeAll();
         checkAltGlassPane();
@@ -87,6 +89,7 @@ public class WrappingGlassPane extends JComponent {
         }
     }
 
+    @Override
     public void layout() {
         if (altGlassPane != null) {
             altGlassPane.setBounds(0, 0, getWidth(), getHeight());

@@ -279,6 +279,7 @@ public class DropShadowPanel extends JPanel implements PropertyChangeListener {
      *
      * @param evt the property change event generating the update
      */
+    @Override
     public void propertyChange(PropertyChangeEvent evt) {
         shadow = null;
         repaint();

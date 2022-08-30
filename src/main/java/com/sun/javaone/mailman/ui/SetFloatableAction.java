@@ -80,6 +80,7 @@ class SetFloatableAction extends AbstractAction {
         box.add(showFloatable);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         JComponent parent = (JComponent) component.getParent();
         JRootPane rootPane = SwingUtilities.getRootPane(parent);
@@ -102,6 +103,7 @@ class SetFloatableAction extends AbstractAction {
             layeredPane.add(component, JLayeredPane.PALETTE_LAYER, 10);
 
             SwingUtilities.invokeLater(new Runnable() {
+                @Override
                 public void run() {
                     component.putClientProperty(FLOATABLE_STATUS, Boolean.TRUE);
                 }

@@ -366,6 +366,7 @@ public class DemoController {
 
     private void startTimer() {
         timer = new Timer(30, new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 tick();
             }
@@ -515,6 +516,7 @@ public class DemoController {
             addNextMessage();
         }
 
+        @Override
         public void tick() {
             if (pausing) {
                 if (getPercent(PAUSE_TIME) >= 1f) {
@@ -531,6 +533,7 @@ public class DemoController {
             }
         }
 
+        @Override
         public boolean isDone() {
             return (index == messages.size());
         }
@@ -546,9 +549,11 @@ public class DemoController {
 
 
     private static final class PauseIncrementor extends Incrementor {
+        @Override
         public void tick() {
         }
 
+        @Override
         public boolean isDone() {
             return getPercent(PAUSE_TIME) >= 1f;
         }
@@ -570,6 +575,7 @@ public class DemoController {
             pausing = (this.pauseTime > 0);
         }
 
+        @Override
         public void tick() {
             if (pausing && getPercent(pauseTime) >= 1f) {
                 pausing = false;
@@ -583,6 +589,7 @@ public class DemoController {
             }
         }
 
+        @Override
         public boolean isDone() {
             return !pausing && getPercent(FADE_OUT_TIME) >= 1f;
         }
@@ -590,10 +597,12 @@ public class DemoController {
 
 
     private final class FadeBackgroundIncrementor extends Incrementor {
+        @Override
         public void tick() {
             glassPane.setBackgroundImageAlpha(1f - getPercent(DIM_BACKGROUND_TIME) * MAX_DIM);
         }
 
+        @Override
         public boolean isDone() {
             return getPercent(DIM_BACKGROUND_TIME) >= 1f;
         }
@@ -608,10 +617,12 @@ public class DemoController {
             float delta = 1f - startAlpha;
             time = (int)(delta / MAX_DIM * DIM_BACKGROUND_TIME);
         }
+        @Override
         public void tick() {
             glassPane.setBackgroundImageAlpha(startAlpha + getPercent(time) * (1f - startAlpha));
         }
 
+        @Override
         public boolean isDone() {
             return getPercent(time) >= 1f;
         }
@@ -619,9 +630,11 @@ public class DemoController {
 
 
     private final class ScriptIncrementor extends Incrementor {
+        @Override
         public void tick() {
         }
 
+        @Override
         public boolean isDone() {
             return executor.isDone();
         }

@@ -58,6 +58,7 @@ public class QuoteLabel extends JLabel {
         return alpha;
     }
 
+    @Override
     protected void paintComponent(Graphics g) {
         Composite oldC = null;
         if (alpha != 1f) {

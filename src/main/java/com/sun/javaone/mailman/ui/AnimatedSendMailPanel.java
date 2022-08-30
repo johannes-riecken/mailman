@@ -98,13 +98,16 @@ public class AnimatedSendMailPanel extends JXPanel {
         controller.setAcceleration(0.5f);
         controller.setDeceleration(0.2f);
         controller.addTimingListener(new TimingListener() {
+            @Override
             public void timerStarted(TimingEvent timingEvent) {
             }
+@Override
 
             public void timerStopped(TimingEvent timingEvent) {
                 foldMessage();
             }
 
+            @Override
             public void timerRepeated(TimingEvent timingEvent) {
             }
         });
@@ -121,14 +124,17 @@ public class AnimatedSendMailPanel extends JXPanel {
         controller = new TimingController(cycle, envelope, target);
         controller.setAcceleration(0.5f);
         controller.addTimingListener(new TimingListener() {
+            @Override
             public void timerStarted(TimingEvent timingEvent) {
                 isFolding = true;
             }
+@Override
 
             public void timerStopped(TimingEvent timingEvent) {
                 foldEnvelope();
             }
 
+            @Override
             public void timerRepeated(TimingEvent timingEvent) {
             }
         });
@@ -145,14 +151,17 @@ public class AnimatedSendMailPanel extends JXPanel {
         controller = new TimingController(cycle, envelope, target);
         controller.setAcceleration(0.5f);
         controller.addTimingListener(new TimingListener() {
+            @Override
             public void timerStarted(TimingEvent timingEvent) {
                 isEnvelopeFolding = true;
             }
+@Override
 
             public void timerStopped(TimingEvent timingEvent) {
                 applyStamp();
             }
 
+            @Override
             public void timerRepeated(TimingEvent timingEvent) {
             }
         });
@@ -170,14 +179,17 @@ public class AnimatedSendMailPanel extends JXPanel {
         controller.setAcceleration(0.5f);
         controller.setAcceleration(0.2f);
         controller.addTimingListener(new TimingListener() {
+            @Override
             public void timerStarted(TimingEvent timingEvent) {
                 isStamping = true;
             }
+@Override
 
             public void timerStopped(TimingEvent timingEvent) {
                 startSend();
             }
 
+            @Override
             public void timerRepeated(TimingEvent timingEvent) {
             }
         });
@@ -194,13 +206,16 @@ public class AnimatedSendMailPanel extends JXPanel {
         controller = new TimingController(cycle, envelope, target);
         controller.setAcceleration(1.0f);
         controller.addTimingListener(new TimingListener() {
+            @Override
             public void timerStarted(TimingEvent timingEvent) {
             }
+@Override
 
             public void timerStopped(TimingEvent timingEvent) {
                 firePropertyChange("message_sent", false, true);
             }
 
+            @Override
             public void timerRepeated(TimingEvent timingEvent) {
             }
         });

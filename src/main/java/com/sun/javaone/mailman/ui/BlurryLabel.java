@@ -98,6 +98,7 @@ public class BlurryLabel extends JLabel {
         return shiftH;
     }
 
+    @Override
     public Dimension getPreferredSize() {
         return super.getPreferredSize();
     }
@@ -132,11 +133,13 @@ public class BlurryLabel extends JLabel {
         return blurFactor;
     }
 
+    @Override
     public void setText(String text) {
         image = null;
         super.setText(text);
     }
 
+    @Override
     protected void paintComponent(Graphics g) {
         if (!drawBlur) {
             super.paintComponent(g);
@@ -183,6 +186,7 @@ public class BlurryLabel extends JLabel {
         image = targetImage;
     }
 
+    @Override
     public Color getForeground() {
         return fg;
     }

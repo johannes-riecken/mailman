@@ -205,6 +205,7 @@ public class BlurryTest extends javax.swing.JFrame {
     public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
         UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new BlurryTest().setVisible(true);
             }
@@ -231,20 +232,24 @@ public class BlurryTest extends javax.swing.JFrame {
 
 
     private static final class FloatConverter extends BindingConverter {
+        @Override
         public Object convertToSource(BindingDescription description,
                 Object value) {
             return Float.parseFloat((String)value);
         }
+        @Override
         public Object convertToTarget(BindingDescription description,
                 Object value) {
             return value.toString();
         }
     }
     private static final class IntConverter extends BindingConverter {
+        @Override
         public Object convertToSource(BindingDescription description,
                 Object value) {
             return Integer.parseInt((String)value);
         }
+        @Override
         public Object convertToTarget(BindingDescription description,
                 Object value) {
             return value.toString();

@@ -77,6 +77,7 @@ public class DemoCommand {
         return command;
     }
 
+    @Override
     public String toString() {
         return "DemoCommand [command=" + command + ", args=" + arguments + "]";
     }

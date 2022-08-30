@@ -91,6 +91,7 @@ public class MailTable extends JTable {
         setName("mailTable");
     }
 
+    @Override
     public boolean isCellEditable(int row, int column) {
         return false;
     }
@@ -119,6 +120,7 @@ public class MailTable extends JTable {
         cm.getColumn(3).setCellRenderer(new DateRenderer());
     }
 
+    @Override
     protected void paintComponent(Graphics g) {
         Rectangle clip = g.getClipBounds();
         int rh = getRowHeight();
@@ -173,6 +175,7 @@ public class MailTable extends JTable {
         }
     }
 
+    @Override
     protected void processMouseEvent(MouseEvent e) {
         super.processMouseEvent(e);
         if (!e.isConsumed() && e.isPopupTrigger()) {
@@ -190,6 +193,7 @@ public class MailTable extends JTable {
         JCheckBoxMenuItem stripeCB = new JCheckBoxMenuItem("Table Striping");
         stripeCB.setSelected(getShowTableStriping());
         stripeCB.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 setShowTableStriping(((JCheckBoxMenuItem)e.getSource()).isSelected());
             }
@@ -198,6 +202,7 @@ public class MailTable extends JTable {
         JMenu colorizeMenu = (JMenu) popupMenu.add(new JMenu("Colorize"));
         if (getSelectedRowCount() != 0) {
             ActionListener colorizeAL = new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     JMenuItem mi = (JMenuItem)e.getSource();
                     colorize(mi.getParent().getComponentZOrder(mi));
@@ -263,6 +268,7 @@ public class MailTable extends JTable {
             this.colorIndex = index;
         }
 
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             ((Graphics2D)g).setPaint(new GradientPaint(x, y, COLORS[colorIndex * 3],
                     x, y + getIconHeight(), COLORS[colorIndex* 3 + 1]));
@@ -270,9 +276,11 @@ public class MailTable extends JTable {
             g.setColor(Color.WHITE);
         }
 
+        @Override
         public int getIconWidth() {
             return 16;
         }
+@Override
 
         public int getIconHeight() {
             return 16;
@@ -281,6 +289,7 @@ public class MailTable extends JTable {
 
 
     private static class DateRenderer extends DefaultTableCellRenderer {
+        @Override
         public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
             return super.getTableCellRendererComponent(table,

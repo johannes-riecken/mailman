@@ -110,6 +110,7 @@ public class TranslucentLabel extends JLabel {
         return shiftH;
     }
 
+    @Override
     public Dimension getPreferredSize() {
         return super.getPreferredSize();
     }
@@ -144,11 +145,13 @@ public class TranslucentLabel extends JLabel {
         return blurFactor;
     }
 
+    @Override
     public void setText(String text) {
         image = null;
         super.setText(text);
     }
 
+    @Override
     protected void paintComponent(Graphics g) {
         float alpha = getAlpha();
         Composite oldC = null;
@@ -205,6 +208,7 @@ public class TranslucentLabel extends JLabel {
         image = targetImage;
     }
 
+    @Override
     public Color getForeground() {
         return fg;
     }
@@ -218,6 +222,7 @@ public class TranslucentLabel extends JLabel {
         return alpha;
     }
 
+    @Override
     public boolean isOpaque() {
         return (super.isOpaque() && (getAlpha() == 1f));
     }

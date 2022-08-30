@@ -207,6 +207,7 @@ public class DemoGlassPane extends WrappingGlassPane {
         return labels;
     }
 
+    @Override
     public void layout() {
         super.layout();
         layoutLabels();
@@ -257,11 +258,13 @@ public class DemoGlassPane extends WrappingGlassPane {
         return 10;
     }
 
+    @Override
     public void addNotify() {
         super.addNotify();
         //Toolkit.getDefaultToolkit().addAWTEventListener(new AWTEventHandler(), AWTEvent.MOUSE_EVENT_MASK);
     }
 
+    @Override
     public void removeNotify() {
         super.removeNotify();
         //Toolkit.getDefaultToolkit().addAWTEventListener(new AWTEventHandler(), AWTEvent.MOUSE_EVENT_MASK);
@@ -316,6 +319,7 @@ public class DemoGlassPane extends WrappingGlassPane {
         return 20;
     }
 
+    @Override
     public boolean isOptimizedDrawingEnabled() {
         return (getAltGlassPane() == null);
     }
@@ -338,6 +342,7 @@ public class DemoGlassPane extends WrappingGlassPane {
         return bgAlpha;
     }
 
+    @Override
     protected void paintComponent(Graphics g) {
         if (bgImage != null) {
             float alpha = getBackgroundImageAlpha();
@@ -359,6 +364,7 @@ public class DemoGlassPane extends WrappingGlassPane {
 
 
     private final static class AWTEventHandler implements AWTEventListener {
+        @Override
         public void eventDispatched(AWTEvent event) {
             // PENDING: look for click on next/show
         }
@@ -372,6 +378,7 @@ public class DemoGlassPane extends WrappingGlassPane {
             this.type = type;
         }
 
+        @Override
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
             notifyListeners(type);

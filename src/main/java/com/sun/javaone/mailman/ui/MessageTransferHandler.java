@@ -50,10 +50,12 @@ public class MessageTransferHandler extends TransferHandler implements DragSourc
 
     private final DragOverGlassPane gp = new DragOverGlassPane();
 
+    @Override
     public int getSourceActions(JComponent c) {
         return c instanceof JTable ? COPY_OR_MOVE : NONE;
     }
 
+    @Override
     public Transferable createTransferable(JComponent c) {
         if (!(c instanceof JTable)) {
             return null;
@@ -72,6 +74,7 @@ public class MessageTransferHandler extends TransferHandler implements DragSourc
         return new StringSelection("foo");
     }
 
+    @Override
     public boolean canImport(TransferSupport support) {
         Component comp = support.getComponent();
         if (comp instanceof JTable) {
@@ -87,6 +90,7 @@ public class MessageTransferHandler extends TransferHandler implements DragSourc
         return tree.getRowForPath(dl.getPath()) != 0;
     }
 
+    @Override
     public void exportDone(JComponent source, Transferable data, int action) {
         if (tree.getExtremeLevel() >= 1) {
             DragSource.getDefaultDragSource().removeDragSourceMotionListener(this);
@@ -100,10 +104,12 @@ public class MessageTransferHandler extends TransferHandler implements DragSourc
         }
     }
 
+    @Override
     public boolean importData(TransferSupport support) {
         return true;
     }
 
+    @Override
     public void dragMouseMoved(DragSourceDragEvent dsde) {
         if (to == null) {
             to = dsde.getDragSourceContext().getTrigger().getDragOrigin();
@@ -118,6 +124,7 @@ public class MessageTransferHandler extends TransferHandler implements DragSourc
         gp.moveIt(dsde.getLocation());
     }
 
+    @Override
     public void timingEvent(long l, long l0, float f) {
         if (gp.getAccepted()) {
             gp.repaintIt(f);
@@ -132,10 +139,12 @@ public class MessageTransferHandler extends TransferHandler implements DragSourc
     Point from;
     Point to;
 
+    @Override
     public void begin() {
         from = gp.getPoint();
     }
 
+    @Override
     public void end() {
         from = null;
         to = null;
@@ -226,6 +235,7 @@ class DragOverGlassPane extends JPanel {
         }
     }
 
+    @Override
     public void paintComponent(Graphics g) {
         if (p != null) {
             Graphics2D g2d = (Graphics2D)g.create();

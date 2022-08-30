@@ -68,6 +68,7 @@ public class Message {
         return position;
     }
 
+    @Override
     public String toString() {
         return "Message [" +
                 "id=" + id +

@@ -198,6 +198,7 @@ public class DemoExecutor {
             }
         }
         Comparator<Method> comparator = new Comparator<Method>() {
+            @Override
             public int compare(Method m1, Method m2) {
                 int index1 = getIndex(m1);
                 int index2 = getIndex(m2);
@@ -376,6 +377,7 @@ public class DemoExecutor {
 
     private void flushEventQueue() {
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
             }
         });
@@ -473,6 +475,7 @@ public class DemoExecutor {
             final Point[] loc = new Point[1];
             try {
                 SwingUtilities.invokeAndWait(new Runnable() {
+                    @Override
                     public void run() {
                         loc[0] = getLocation0(command);
                     }
@@ -643,6 +646,7 @@ public class DemoExecutor {
 
 
     private final class Runner implements Runnable {
+        @Override
         public void run() {
             executeInBackground();
         }
@@ -670,6 +674,7 @@ public class DemoExecutor {
             for (String sIndex : indices) {
                 final int index = Integer.parseInt(sIndex);
                 SwingUtilities.invokeAndWait(new Runnable() {
+                    @Override
                     public void run() {
                         MenuSelectionManager msm = MenuSelectionManager.defaultManager();
                         MenuElement[] menuSelection = msm.getSelectedPath();
@@ -834,6 +839,7 @@ public class DemoExecutor {
             this.args = args;
         }
 
+        @Override
         public boolean matchesEvent(Object e) {
             if (id == MouseEvent.MOUSE_RELEASED && e instanceof DragSourceDropEvent) {
                 return true;
@@ -868,6 +874,7 @@ public class DemoExecutor {
             return false;
         }
 
+        @Override
         public String toString() {
             String result = "EventConditional [";
             for (int i = 0; i < args.length; i += 2) {
@@ -884,26 +891,33 @@ public class DemoExecutor {
 
     private final class AWTEventHandler implements AWTEventListener, DragSourceListener,
             DragSourceMotionListener {
+        @Override
         public void eventDispatched(AWTEvent event) {
             awtEventDispatched(event);
         }
 
+        @Override
         public void dragMouseMoved(DragSourceDragEvent event) {
             awtEventDispatched(event);
         }
 
+        @Override
         public void dragEnter(DragSourceDragEvent dsde) {
         }
 
+        @Override
         public void dragOver(DragSourceDragEvent dsde) {
         }
 
+        @Override
         public void dropActionChanged(DragSourceDragEvent dsde) {
         }
 
+        @Override
         public void dragExit(DragSourceEvent dse) {
         }
 
+        @Override
         public void dragDropEnd(DragSourceDropEvent dsde) {
             awtEventDispatched(dsde);
         }
@@ -919,6 +933,7 @@ public class DemoExecutor {
             this.method = method;
         }
 
+        @Override
         public void run() {
             try {
                 method.invoke(target);

@@ -123,12 +123,15 @@ public class MessageListPanel extends JPanel {
                     new Envelope(1, 0, Envelope.RepeatBehavior.FORWARD,
                     Envelope.EndBehavior.HOLD));
             tc.addTarget(new TimingTarget() {
+                @Override
                 public void begin() {
                 }
+                @Override
                 public void end() {
                     header.setPreferredSize(headerPref);
                     fadeInHeaderIcons();
                 }
+                @Override
                 public void timingEvent(long l, long l0, float f) {
                     header.setPreferredSize(new Dimension(1, (int)(headerPref.height * f)));
                     revalidate();
@@ -146,11 +149,14 @@ public class MessageListPanel extends JPanel {
                 new Envelope(1, 0, Envelope.RepeatBehavior.FORWARD,
                 Envelope.EndBehavior.HOLD));
         tc.addTarget(new TimingTarget() {
+            @Override
             public void begin() {
             }
+            @Override
             public void end() {
                 header.setAlpha(1.0f);
             }
+            @Override
             public void timingEvent(long l, long l0, float f) {
                 header.setAlpha(f);
             }
@@ -160,6 +166,7 @@ public class MessageListPanel extends JPanel {
 
 
     private static final class MessageList extends JList {
+        @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             int height = getHeight();
@@ -206,6 +213,7 @@ public class MessageListPanel extends JPanel {
             }
         }
 
+        @Override
         public void paint(Graphics g) {
             Graphics2D g2d = (Graphics2D)g.create();
             int corn = 20;
@@ -235,6 +243,7 @@ public class MessageListPanel extends JPanel {
             super.paint(g);
         }
 
+        @Override
         public Dimension getPreferredSize() {
             int extremeLevel = 1;
             return extremeLevel >= 1

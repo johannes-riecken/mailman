@@ -80,6 +80,7 @@ public class Main {
         frame.setBounds(0, 0, 600, 600);
         frame.setVisible(true);
         Timer timer = new Timer(600, new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 controller.start();
             }

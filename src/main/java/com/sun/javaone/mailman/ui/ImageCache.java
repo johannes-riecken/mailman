@@ -154,6 +154,7 @@ public class ImageCache {
             this.height = height;
         }
 
+        @Override
         public int hashCode() {
             int hash = 17;
             hash = 17 + 37 * source.hashCode();
@@ -162,6 +163,7 @@ public class ImageCache {
             return hash;
         }
 
+        @Override
         public boolean equals(Object obj) {
             if (obj == this) {
                 return true;

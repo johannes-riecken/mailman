@@ -82,6 +82,7 @@ public class DnaFrame extends JWindow {
 
         setSize(350, 400);
         launchTimer = new Timer(3000, new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 launchApp(true);
             }
@@ -169,6 +170,7 @@ public class DnaFrame extends JWindow {
         JXHyperlink skipHyperlink = new JXHyperlink();
         skipHyperlink.setText("Skip Demo");
         skipHyperlink.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 skipDemo();
             }
@@ -359,6 +361,7 @@ public class DnaFrame extends JWindow {
 
     public static void main(String... args) {
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 SwingBindingSupport.register();
                 try {

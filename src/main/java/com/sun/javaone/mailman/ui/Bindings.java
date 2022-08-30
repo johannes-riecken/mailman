@@ -88,6 +88,7 @@ public class Bindings extends javax.swing.JDialog {
         setTitle("Demo Keyboard Bindings");
         jButton1.setText("OK");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
@@ -136,6 +137,7 @@ public class Bindings extends javax.swing.JDialog {
      */
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Bindings(new javax.swing.JFrame(), true).setVisible(true);
             }

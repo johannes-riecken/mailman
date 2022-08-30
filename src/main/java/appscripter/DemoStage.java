@@ -75,6 +75,7 @@ public class DemoStage {
         return script;
     }
 
+    @Override
     public String toString() {
         return "DemoStage [messages=" + messages +
                 ", codeLocs=" + codeLocs +

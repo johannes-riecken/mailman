@@ -72,13 +72,16 @@ class ResizableJXPanel extends JXPanel {
         TimingController controller = new TimingController(cycle, envelope,
                                                            new ObjectModifier(this, range));
         controller.addTimingListener(new TimingListener() {
+            @Override
             public void timerStarted(TimingEvent timingEvent) {
             }
+@Override
 
             public void timerStopped(TimingEvent timingEvent) {
                 ResizableJXPanel.super.setVisible(false);
             }
 
+            @Override
             public void timerRepeated(TimingEvent timingEvent) {
             }
         });

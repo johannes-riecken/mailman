@@ -167,6 +167,7 @@ public class QuotedPathPanel extends JPanel {
 
 
     private class TimingHandler implements TimingTarget {
+        @Override
         public void timingEvent(long l, long l0, float delta) {
             if (!fadingIn) {
                 delta = 1f - delta;
@@ -174,9 +175,11 @@ public class QuotedPathPanel extends JPanel {
             ((QuoteLabel)getComponent(transitionIndex)).setAlpha(delta);
         }
 
+        @Override
         public void begin() {
         }
 
+        @Override
         public void end() {
             if (!fadingIn) {
                 remove(getComponentCount() - 1);
@@ -192,34 +195,43 @@ public class QuotedPathPanel extends JPanel {
 
 
     private final class Layout implements LayoutManager2 {
+        @Override
         public void addLayoutComponent(Component comp, Object constraints) {
         }
 
+        @Override
         public float getLayoutAlignmentX(Container target) {
             return 0f;
         }
 
+        @Override
         public float getLayoutAlignmentY(Container target) {
             return 0f;
         }
 
+        @Override
         public void invalidateLayout(Container target) {
         }
 
+        @Override
         public void addLayoutComponent(String name, Component comp) {
         }
 
+        @Override
         public void removeLayoutComponent(Component comp) {
         }
 
+        @Override
         public Dimension preferredLayoutSize(Container parent) {
             return calcSize();
         }
 
+        @Override
         public Dimension minimumLayoutSize(Container parent) {
             return calcSize();
         }
 
+        @Override
         public Dimension maximumLayoutSize(Container target) {
             Dimension size = calcSize();
             size.width = Integer.MAX_VALUE;
@@ -243,6 +255,7 @@ public class QuotedPathPanel extends JPanel {
             return new Dimension(width, height);
         }
 
+        @Override
         public void layoutContainer(Container parent) {
             int x = 0;
             for (Component c : getComponents()) {

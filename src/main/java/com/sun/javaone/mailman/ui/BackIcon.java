@@ -43,6 +43,7 @@ import javax.swing.Icon;
  * @author sky
  */
 public final class BackIcon implements Icon {
+    @Override
     public void paintIcon(Component c, Graphics g, int x, int y) {
         // Apple
 //        g.setColor(new Color(148, 193, 238));
@@ -60,10 +61,12 @@ public final class BackIcon implements Icon {
         }
     }
 
+    @Override
     public int getIconWidth() {
         return 28;
     }
 
+    @Override
     public int getIconHeight() {
         return 28;
     }

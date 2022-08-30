@@ -64,6 +64,7 @@ public class MessageListCellRenderer implements ListCellRenderer {
         panel = new RendererPanel();
     }
 
+    @Override
     public Component getListCellRendererComponent(JList list, Object value,
             int index, boolean isSelected, boolean cellHasFocus) {
         if (value instanceof String) {
@@ -203,6 +204,7 @@ public class MessageListCellRenderer implements ListCellRenderer {
              }
         }
 
+        @Override
         public void doLayout() {
             super.doLayout();
             if (layoutWidth != getWidth()) {

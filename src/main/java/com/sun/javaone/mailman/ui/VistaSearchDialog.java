@@ -141,8 +141,10 @@ public class VistaSearchDialog extends JComponent  {
         controller.setAcceleration(0.5f);
         controller.setAcceleration(0.3f);
         controller.addTimingListener(new TimingListener() {
+            @Override
             public void timerStarted(TimingEvent timingEvent) {
             }
+@Override
 
             public void timerStopped(TimingEvent timingEvent) {
                 Container parent = VistaSearchDialog.this.getParent();
@@ -152,6 +154,7 @@ public class VistaSearchDialog extends JComponent  {
                 parent.repaint();
             }
 
+            @Override
             public void timerRepeated(TimingEvent timingEvent) {
             }
         });
@@ -230,6 +233,7 @@ public class VistaSearchDialog extends JComponent  {
                                                GridBagConstraints.VERTICAL,
                                                new Insets(0, 0, 0, 0), 0, 0));
             button.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     startFadeOut();
                 }

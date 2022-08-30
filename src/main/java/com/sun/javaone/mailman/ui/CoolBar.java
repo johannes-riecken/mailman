@@ -44,6 +44,7 @@ public class CoolBar extends JToolBar {
     public CoolBar() {
         Border outerBorder = new DropShadowBorder(Color.BLACK, 0, 5, .5f,
                               12, false, true, true, true) {
+             @Override
              public void paintBorder(Component c, Graphics graphics, int x, int y, int width, int height) {
                  super.paintBorder(c, graphics, x - 5, y, width + 10, height);
              }
@@ -51,6 +52,7 @@ public class CoolBar extends JToolBar {
         setBorder(outerBorder);
     }
 
+    @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D)g.create();
         int bottom = getHeight() - getInsets().bottom;

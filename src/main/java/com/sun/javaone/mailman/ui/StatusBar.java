@@ -41,6 +41,7 @@ public class StatusBar extends JLabel {
         this.setVerticalAlignment(SwingConstants.TOP);
     }
 
+    @Override
     public void paintComponent(Graphics g) {
         g.setColor(Color.WHITE);
         Insets insets = getInsets();
@@ -53,6 +54,7 @@ public class StatusBar extends JLabel {
         super.paintComponent(g);
     }
 
+    @Override
     public Dimension getPreferredSize() {
         return new Dimension(super.getPreferredSize().width, super.getPreferredSize().height + 2);
     }

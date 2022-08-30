@@ -54,9 +54,11 @@ public class DemoRootPane extends JRootPane {
         return paintChildren;
     }
 
+    @Override
     protected Component createGlassPane() {
         return new DemoGlassPane();
     }
+@Override
 
     public void setGlassPane(Component glass) {
         if (glass instanceof DemoGlassPane) {
@@ -66,6 +68,7 @@ public class DemoRootPane extends JRootPane {
         }
     }
 
+    @Override
     protected void paintChildren(Graphics g) {
         if (getPaintChildren()) {
             super.paintChildren(g);

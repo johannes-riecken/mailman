@@ -47,18 +47,22 @@ public class ScrollableShadowPanel extends DropShadowPanel implements Scrollable
         this.scroll = scroll;
     }
 
+    @Override
     public Dimension getPreferredScrollableViewportSize() {
         return scroll.getPreferredScrollableViewportSize();
     }
 
+    @Override
     public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction) {
         return scroll.getScrollableUnitIncrement(visibleRect, orientation, direction);
     }
 
+    @Override
     public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction) {
         return scroll.getScrollableBlockIncrement(visibleRect, orientation, direction);
     }
 
+    @Override
     public boolean getScrollableTracksViewportWidth() {
 	if (getParent() instanceof JViewport) {
 	    return (getParent().getWidth() > getPreferredSize().width);
@@ -66,6 +70,7 @@ public class ScrollableShadowPanel extends DropShadowPanel implements Scrollable
 	return false;
     }
 
+    @Override
     public boolean getScrollableTracksViewportHeight() {
 	if (getParent() instanceof JViewport) {
 	    return (getParent().getHeight() > getPreferredSize().height);

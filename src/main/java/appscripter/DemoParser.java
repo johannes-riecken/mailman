@@ -103,6 +103,7 @@ public final class DemoParser {
             return stages;
         }
 
+        @Override
         public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
             String eName = qName.intern();
             inMessage = false;
@@ -125,6 +126,7 @@ public final class DemoParser {
             }
         }
 
+        @Override
         public void endElement(String uri, String localName, String qName) throws SAXException {
             String eName = qName.intern();
             if (eName == E_STAGE) {
@@ -149,6 +151,7 @@ public final class DemoParser {
             }
         }
 
+        @Override
         public void characters(char[] ch, int start, int length) throws SAXException {
             super.characters(ch, start, length);
             if (inMessage) {

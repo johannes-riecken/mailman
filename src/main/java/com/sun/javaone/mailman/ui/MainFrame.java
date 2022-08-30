@@ -146,6 +146,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("alt 1"), "updateBoxCounts");
         getRootPane().getActionMap().put("updateBoxCounts", new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent ae) {
                 foldersTree.changeCounts();
             }
@@ -158,6 +159,7 @@ public class MainFrame extends javax.swing.JFrame {
             stages = DemoController.flowStages(stages, getWidth() - 60);
             final DemoController controller = new DemoController(this, stages);
             Timer timer = new Timer(1000, new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     controller.start(0);
                 }
@@ -262,6 +264,7 @@ public class MainFrame extends javax.swing.JFrame {
         if (listPanel == null) {
             listPanel = new MessageListPanel();
             listPanel.getList().addMouseListener(new MouseAdapter() {
+                @Override
                 public void mouseClicked(MouseEvent e) {
                     System.err.println("folders showing=" + foldersTree.isShowing());
                     if (asFullListMI.isSelected() && foldersTree.isShowing()) {
@@ -327,9 +330,11 @@ public class MainFrame extends javax.swing.JFrame {
             floatableTarget.repaint();
         }
 
+        @Override
         public void begin() {
         }
 
+        @Override
         public void timingEvent(long l, long l0, float delta) {
             messagePanelX = floatableTarget.getWidth() -
                     (int)((float)targetMessagePanelWidth * delta);
@@ -346,6 +351,7 @@ public class MainFrame extends javax.swing.JFrame {
             panel.repaint();
         }
 
+        @Override
         public void end() {
             floatableTarget.removeAll();
             floatableTarget.setLayout(new BorderLayout());
@@ -363,6 +369,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
 
         private final class AnimatePanel extends JPanel {
+            @Override
             protected void paintComponent(Graphics g) {
                 g.setColor(getBackground());
                 g.fillRect(0, 0, getWidth(), getHeight());
@@ -402,6 +409,7 @@ public class MainFrame extends javax.swing.JFrame {
                     constraints);
         }
 
+        @Override
         public void actionPerformed(ActionEvent e) {
             if (foldersScrollPane.getBorder() instanceof CompoundBorder) {
                 CompoundBorder border = (CompoundBorder) foldersScrollPane.getBorder();
@@ -444,6 +452,7 @@ public class MainFrame extends javax.swing.JFrame {
                 new ShowHideFoldersAction());
         globalKeyListener.putKeyBinding(KeyStroke.getKeyStroke("ctrl 6"),
                 new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 showMessagePanel();
             }
@@ -500,6 +509,7 @@ public class MainFrame extends javax.swing.JFrame {
         helpMenu = new JMenu();
         JMenuItem bindings = new JMenuItem("Demo Bindings");
         bindings.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ae) {
                 new Bindings(MainFrame.this, false).setVisible(true);
             }
@@ -570,6 +580,7 @@ public class MainFrame extends javax.swing.JFrame {
         closeSearchPanel.setPressedIcon(new ImageIcon(getClass().getResource("/resources/icons/close_03.png")));
         closeSearchPanel.setRolloverIcon(new ImageIcon(getClass().getResource("/resources/icons/close_02.png")));
         closeSearchPanel.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 closeSearchPanelActionPerformed(evt);
             }
@@ -627,6 +638,7 @@ public class MainFrame extends javax.swing.JFrame {
         mailMenu.setText("Mail");
         quitMenuItem.setText("Quit");
         quitMenuItem.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 quitMenuItemActionPerformed(evt);
             }
@@ -660,6 +672,7 @@ public class MainFrame extends javax.swing.JFrame {
         add(statusBar, BorderLayout.SOUTH);
 
         ActionListener al = new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ae) {
                 Object src = ae.getSource();
                 if (src == asFullListMI || src == asListMI || src == asTableMI) {
@@ -724,6 +737,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
 
         JLabel label = new JLabel("   You have 6 new messages...") {
+            @Override
             public Dimension getPreferredSize() {
                 return new Dimension(super.getPreferredSize().width, super.getPreferredSize().height + 2);
             }
@@ -769,6 +783,7 @@ public class MainFrame extends javax.swing.JFrame {
         JButton composeButton = createToolbarButton("Compose", "compose-mail", 2);
         composeButton.setName("composeButton");
         composeButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 ComposeMailFrame frame = new ComposeMailFrame();
                 frame.setLocationRelativeTo(null);
@@ -884,6 +899,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void closeSearchPanelActionPerformed(ActionEvent evt) {
         findCollapsiblePane.setCollapsed(true);
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 messageView.requestFocusInWindow();
             }
@@ -906,9 +922,11 @@ public class MainFrame extends javax.swing.JFrame {
 ////////////////////////////////////////////////////////////////////////////
 
     private class TreeDocker implements FocusListener {
+        @Override
         public void focusGained(FocusEvent e) {
         }
 
+        @Override
         public void focusLost(FocusEvent e) {
             Object status = floatablePanel.getClientProperty(
                     SetFloatableAction.FLOATABLE_STATUS);
@@ -919,12 +937,14 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private class FloatingTreeFocusHandler implements PropertyChangeListener {
+        @Override
         public void propertyChange(PropertyChangeEvent evt) {
             foldersTree.requestFocusInWindow();
         }
     }
 
     private class DockedTreeButton implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             if (!floatablePanel.isVisible()) {
                 floatablePanel.setVisible(true);
@@ -936,6 +956,7 @@ public class MainFrame extends javax.swing.JFrame {
     private class GlobalKeyStrokeHandler implements AWTEventListener {
         private final Map<KeyStroke, Action> bindings = new HashMap<KeyStroke, Action>();
 
+        @Override
         public void eventDispatched(AWTEvent event) {
             Window window = SwingUtilities.getWindowAncestor((Component) event.getSource());
             if (window == MainFrame.this) {
@@ -975,6 +996,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private class ShowHideFoldersAction extends AbstractAction {
+        @Override
         public void actionPerformed(ActionEvent e) {
             Object status = floatablePanel.getClientProperty(
                     SetFloatableAction.FLOATABLE_STATUS);
@@ -989,11 +1011,13 @@ public class MainFrame extends javax.swing.JFrame {
         ShowHideSearchBarAction() {
             super("firefox");
         }
+        @Override
         public void actionPerformed(ActionEvent e) {
             boolean collapsed = findCollapsiblePane.isCollapsed();
             findCollapsiblePane.setCollapsed(!collapsed);
             if (collapsed) {
                 new Thread(new Runnable() {
+                    @Override
                     public void run() {
                         try {
                             Thread.sleep(500);
@@ -1002,16 +1026,19 @@ public class MainFrame extends javax.swing.JFrame {
                         }
                         try {
                             SwingUtilities.invokeAndWait(new Runnable() {
+                                @Override
                                 public void run() {
                                     searchPanel.requestFocusInWindow();
                                 }
                             });
                             SwingUtilities.invokeAndWait(new Runnable() {
+                                @Override
                                 public void run() {
                                     searchPanel.transferFocus();
                                 }
                             });
                             SwingUtilities.invokeAndWait(new Runnable() {
+                                @Override
                                 public void run() {
                                     FocusManager.getCurrentManager().focusNextComponent();
                                 }
@@ -1025,6 +1052,7 @@ public class MainFrame extends javax.swing.JFrame {
                 }).start();
             } else {
                 SwingUtilities.invokeLater(new Runnable() {
+                    @Override
                     public void run() {
                         foldersTree.requestFocusInWindow();
                     }
@@ -1040,6 +1068,7 @@ public class MainFrame extends javax.swing.JFrame {
             this.down = down;
         }
 
+        @Override
         public void actionPerformed(ActionEvent e) {
             JScrollPane sp = (JScrollPane)messageView.getParent().getParent();
             String key = (down) ? "scrollDown" : "scrollUp";
@@ -1054,6 +1083,7 @@ public class MainFrame extends javax.swing.JFrame {
             this.type = type;
         }
 
+        @Override
         public void actionPerformed(ActionEvent e) {
             if (type == SearchDialogType.CLASSIC) {
                 Component c = (Component) e.getSource();

@@ -145,6 +145,7 @@ public class ComposeMailFrame extends javax.swing.JFrame {
         messageScrollPane.getViewport().setOpaque(false);
         //messageTextArea.setVisible(false);
         messageBackground.addPropertyChangeListener("message_sent", new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 for (Component c : mainToolBar.getComponents()) {
                     c.setEnabled(false);
@@ -248,6 +249,7 @@ public class ComposeMailFrame extends javax.swing.JFrame {
         sendButton.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/send-mail_02.png")));
         sendButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         sendButton.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sendButtonActionPerformed(evt);
             }
@@ -430,6 +432,7 @@ public class ComposeMailFrame extends javax.swing.JFrame {
         final boolean isShiftDown = (evt.getModifiers() & KeyEvent.SHIFT_MASK) != 0;
 
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 startSendAnimation(isShiftDown);
             }
@@ -441,6 +444,7 @@ public class ComposeMailFrame extends javax.swing.JFrame {
      */
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 try {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

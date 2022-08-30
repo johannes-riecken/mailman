@@ -53,11 +53,13 @@ public class CoolButton extends JButton implements TimingTarget {
     private final TimingController cont = new TimingController(200, this);
 
     private final MouseAdapter MLISTENER = new MouseAdapter() {
+        @Override
         public void mouseEntered(MouseEvent me) {
             cont.stop();
             forward = true;
             cont.start();
         }
+@Override
 
         public void mouseExited(MouseEvent me) {
             cont.stop();
@@ -66,9 +68,11 @@ public class CoolButton extends JButton implements TimingTarget {
         }
     };
 
+    @Override
     public void begin() {
     }
 
+    @Override
     public void end() {
         if (forward) {
             setForeground(Color.WHITE);
@@ -85,6 +89,7 @@ public class CoolButton extends JButton implements TimingTarget {
         }
     }
 
+    @Override
     public void timingEvent(long cycleElapsedTime, long totalElapsedTime, float fraction) {
         if (forward) {
             pct = fraction;
@@ -117,6 +122,7 @@ public class CoolButton extends JButton implements TimingTarget {
         //setFont(getFont().deriveFont(Font.BOLD));
     }
 
+    @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D)g.create();
 

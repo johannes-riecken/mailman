@@ -177,6 +177,7 @@ public class JImagePanel extends JPanel {
         return imagePath;
     }
 
+    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Image image = getImageToDraw();
@@ -275,11 +276,13 @@ public class JImagePanel extends JPanel {
         repaint();
     }
 
+    @Override
     public void reshape(int x, int y, int w, int h) {
         super.reshape(x, y, w, h);
         clearCachedImage();
     }
 
+    @Override
     public boolean imageUpdate(Image img, int infoflags, int x, int y, int w, int h) {
         if (img == getImage()) {
             return super.imageUpdate(img, infoflags, x, y, w, h);
@@ -287,6 +290,7 @@ public class JImagePanel extends JPanel {
         return false;
     }
 
+    @Override
     public void setBorder(Border border) {
         super.setBorder(border);
         clearCachedImage();
@@ -308,6 +312,7 @@ public class JImagePanel extends JPanel {
         }
     }
 
+    @Override
     protected void processMouseEvent(MouseEvent e) {
         super.processMouseEvent(e);
         if (!e.isConsumed() && e.getClickCount() == 1) {
@@ -365,6 +370,7 @@ public class JImagePanel extends JPanel {
         private Timer dragTimer;
         private boolean validDragImage;
 
+        @Override
         public void dragEnter(DropTargetDragEvent e) {
             dragURI = null;
             stopTimer();
@@ -384,17 +390,21 @@ public class JImagePanel extends JPanel {
             }
         }
 
+        @Override
         public void dragOver(DropTargetDragEvent e) {
         }
 
+        @Override
         public void dropActionChanged(DropTargetDragEvent e) {
         }
 
+        @Override
         public void dragExit(DropTargetEvent e) {
             setDragImage(null);
             stopTimer();
         }
 
+        @Override
         public void drop(DropTargetDropEvent e) {
             if (dragURI != null && !validDragImage) {
                 updateDragImage();
@@ -413,6 +423,7 @@ public class JImagePanel extends JPanel {
             }
         }
 
+        @Override
         public void actionPerformed(ActionEvent e) {
             updateDragImage();
         }

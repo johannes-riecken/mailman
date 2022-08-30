@@ -85,6 +85,7 @@ public class MessageHeaderPanel extends JPanel {
         setName("messageHeader");
     }
 
+    @Override
     protected void processMouseEvent(MouseEvent e) {
         super.processMouseEvent(e);
         if (!e.isConsumed() && e.isPopupTrigger()) {
@@ -102,6 +103,7 @@ public class MessageHeaderPanel extends JPanel {
         JCheckBoxMenuItem bigSubjectCI = new JCheckBoxMenuItem("Big Subject");
         bigSubjectCI.setSelected(subject.getDrawBlur());
         bigSubjectCI.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 setBigSubject(((JCheckBoxMenuItem)e.getSource()).isSelected());
             }
@@ -110,6 +112,7 @@ public class MessageHeaderPanel extends JPanel {
         JCheckBoxMenuItem imagePanelCB = new JCheckBoxMenuItem("Images");
         imagePanelCB.setSelected(getShowImagePanel());
         imagePanelCB.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 setShowImagePanel(((JCheckBoxMenuItem)e.getSource()).
                         isSelected());
@@ -155,9 +158,11 @@ public class MessageHeaderPanel extends JPanel {
                 this, "message.subject", subject, "text"));
         sBD.setNullSourceValue(" ");
         sBD.setConverter(new BindingConverter() {
+            @Override
             public Object getValueForIncompleteSource(BindingDescription description) {
                 return " ";
             }
+            @Override
             public Object convertToTarget(BindingDescription description,
                     Object value) {
                 if (value == null || "".equals(value)) {
@@ -326,9 +331,11 @@ public class MessageHeaderPanel extends JPanel {
 
 
     private static final class BooleanConverter extends BindingConverter {
+        @Override
         public Object getValueForIncompleteSource(BindingDescription description) {
             return false;
         }
+        @Override
         public Object convertToTarget(BindingDescription description,
                 Object value) {
             return value != null;
@@ -337,6 +344,7 @@ public class MessageHeaderPanel extends JPanel {
 
 
     private static final class ContactConverter extends BindingConverter {
+        @Override
         public Object convertToTarget(BindingDescription description,
                 Object value) {
             if (value == null) {

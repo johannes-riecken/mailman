@@ -151,6 +151,7 @@ public class MessagePane extends JTextPane {
 
     public static final void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 try {
                     UIManager.setLookAndFeel(new MetalLookAndFeel());
@@ -251,6 +252,7 @@ public class MessagePane extends JTextPane {
         return path;
     }
 
+    @Override
     public void setText(String text) {
         this.text = text;
         if (getEditorKit() instanceof MessageEditorKit) {
@@ -273,6 +275,7 @@ public class MessagePane extends JTextPane {
         scrollRectToVisible(new Rectangle());
     }
 
+    @Override
     protected void processMouseEvent(MouseEvent e) {
         super.processMouseEvent(e);
         if (!e.isConsumed()) {
@@ -292,6 +295,7 @@ public class MessagePane extends JTextPane {
         JCheckBoxMenuItem foldsMI = new JCheckBoxMenuItem("Fold Quotes");
         foldsMI.setSelected(getFoldsQuotes());
         foldsMI.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 setFoldsQuotes(((JCheckBoxMenuItem)e.getSource()).isSelected());
             }
@@ -300,6 +304,7 @@ public class MessagePane extends JTextPane {
         JCheckBoxMenuItem pathPanelMI = new JCheckBoxMenuItem("Show Quote Path");
         pathPanelMI.setSelected(pathPanel.isVisible());
         pathPanelMI.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 pathPanel.setVisible(((JCheckBoxMenuItem)e.getSource()).isSelected());
             }
@@ -361,6 +366,7 @@ public class MessagePane extends JTextPane {
     }
 
     @Deprecated
+    @Override
     public void reshape(int x, int y, int w, int h) {
         super.reshape(x, y, w, h);
         firePropertyChange("quotedPath", null, null);
@@ -402,6 +408,7 @@ public class MessagePane extends JTextPane {
             return "";
         }
 
+        @Override
         public void setParent(View parent) {
             super.setParent(parent);
             depth = 1;
@@ -417,6 +424,7 @@ public class MessagePane extends JTextPane {
             return depth;
         }
 
+        @Override
         public void paint(Graphics g, Shape a) {
             if (fontCenter == 0) {
                 calcFontHeight();
@@ -456,6 +464,7 @@ public class MessagePane extends JTextPane {
             }
         }
 
+        @Override
         protected short getLeftInset() {
             return RESPONSE_INDENT;
         }
@@ -491,6 +500,7 @@ public class MessagePane extends JTextPane {
                     y <= bounds.y + fontCenter + 5);
         }
 
+        @Override
         public float getPreferredSpan(int axis) {
             if (axis == View.Y_AXIS && (animating || !isExpanded()) &&
                     height != 0) {
@@ -499,6 +509,7 @@ public class MessagePane extends JTextPane {
             return super.getPreferredSpan(axis);
         }
 
+        @Override
         public float getMinimumSpan(int axis) {
             if (axis == View.Y_AXIS && (animating || !isExpanded()) &&
                     height != 0) {
@@ -507,6 +518,7 @@ public class MessagePane extends JTextPane {
             return super.getMinimumSpan(axis);
         }
 
+        @Override
         public float getMaximumSpan(int axis) {
             if (axis == View.Y_AXIS && (animating || !isExpanded()) &&
                     height != 0) {
@@ -519,6 +531,7 @@ public class MessagePane extends JTextPane {
             return 16f;
         }
 
+        @Override
         public void setSize(float width, float height) {
             super.setSize(width, height);
         }
@@ -558,12 +571,15 @@ public class MessagePane extends JTextPane {
 
 
         private class AnimateListener implements TimingTarget {
+            @Override
             public void timingEvent(long l, long l0, float f) {
             }
 
+            @Override
             public void begin() {
             }
 
+            @Override
             public void end() {
                 animating = false;
             }
@@ -572,6 +588,7 @@ public class MessagePane extends JTextPane {
 
 
     private static final class MessageViewFactory implements ViewFactory {
+        @Override
         public View create(Element elem) {
             String kind = elem.getName();
             if (kind != null) {
@@ -595,10 +612,12 @@ public class MessagePane extends JTextPane {
     }
 
     private static final class MessageEditorKit extends StyledEditorKit {
+        @Override
         public ViewFactory getViewFactory() {
             return new MessageViewFactory();
         }
 
+        @Override
         public Document createDefaultDocument() {
             return new MessageDocument();
         }
