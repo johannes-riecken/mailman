@@ -358,7 +358,7 @@ public class DemoGlassPane extends WrappingGlassPane {
     }
 
 
-    private final class AWTEventHandler implements AWTEventListener {
+    private final static class AWTEventHandler implements AWTEventListener {
         public void eventDispatched(AWTEvent event) {
             // PENDING: look for click on next/show
         }

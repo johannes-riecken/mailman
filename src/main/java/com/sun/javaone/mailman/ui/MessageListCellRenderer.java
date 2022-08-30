@@ -95,11 +95,11 @@ public class MessageListCellRenderer implements ListCellRenderer {
         }
     }
 
-    private int getRowCount() {
+    private static int getRowCount() {
         return 2;
     }
 
-    private class RendererPanel extends JPanel {
+    private static class RendererPanel extends JPanel {
         private final JLabel dateLabel;
         private final JLabel[] labels;
         private final JLabel fromLabel;
