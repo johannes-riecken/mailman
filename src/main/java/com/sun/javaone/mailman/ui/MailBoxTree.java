@@ -178,7 +178,7 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
         DropLocation dl = getDropLocation();
         TreePath newPath = (dl == null) ? null : dl.getPath();
 
-        if (newPath != dropPath) {
+        if (!newPath.equals(dropPath)) {
             repaint();
             dropPath = newPath;
         }
@@ -408,7 +408,7 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
 
             String countString = getCountString(row);
 
-            if (countString != "") {
+            if (!countString.equals("")) {
                 setFont(getFont().deriveFont(Font.BOLD));
             } else {
                 setFont(null);
@@ -491,7 +491,7 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
             } else {
                 setForeground(Color.WHITE);
             }
-            if (dropPath != null && tree.getPathForRow(row) == dropPath) {
+            if (dropPath != null && tree.getPathForRow(row).equals(dropPath)) {
             setFont(tree.getFont().deriveFont(Font.BOLD, tree.getFont().getSize() + 6f));
             } else {
                 setFont(tree.getFont().deriveFont(Font.BOLD));
@@ -503,7 +503,7 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
         @Override
         public void paint(Graphics g) {
             Graphics2D g2d = (Graphics2D)g.create();
-            int corn = (tree.getPathForRow(row) == dropPath) ? 35 : 20;
+            int corn = (tree.getPathForRow(row).equals(dropPath)) ? 35 : 20;
             int h = getHeight() - 2 * OUTSET;
 
             if (sel) {
@@ -512,7 +512,7 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
                 } else {
                     g2d.setPaint(new GradientPaint(0, OUTSET, Color.WHITE, 0, getHeight() - 2 * OUTSET, COLOR1, true));
                 }
-            } else if (tree.getPathForRow(row) == dropPath) {
+            } else if (tree.getPathForRow(row).equals(dropPath)) {
                 g2d.setPaint(row == overRow ? GPBR : GPB);
             } else {
                 g2d.setPaint(row == overRow ? GPR : GP);
@@ -531,7 +531,7 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
             g2d.setPaint(p2);
             g2d.drawRoundRect(1, OUTSET + 1, getWidth() - 3, h - 3, corn - 2, corn - 2);
 
-            if (tree.getPathForRow(row) != dropPath) {
+            if (!tree.getPathForRow(row).equals(dropPath)) {
                 if (showAttach) {
                     paintAttachment(g, 31, 28, 100);
                 }
@@ -546,11 +546,11 @@ public class MailBoxTree extends JTree implements TimingTarget, PropertyChangeLi
             }
 
             g2d.dispose();
-            if (tree.getPathForRow(row) == dropPath) {
+            if (tree.getPathForRow(row).equals(dropPath)) {
                 g.translate(3, 0);
             }
             super.paint(g);
-            if (tree.getPathForRow(row) == dropPath) {
+            if (tree.getPathForRow(row).equals(dropPath)) {
                 g.translate(-3, 0);
             }
         }

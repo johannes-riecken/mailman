@@ -109,7 +109,7 @@ public final class DemoParser {
             inMessage = false;
             if (inScript) {
                 addCommand(eName, attributes);
-            } else if (eName == E_STAGE) {
+            } else if (eName.equals(E_STAGE)) {
                 pushFont(attributes.getValue(T_FONT));
                 String pauseTimeString = attributes.getValue(T_PAUSE);
                 if (pauseTimeString != null) {
@@ -117,10 +117,10 @@ public final class DemoParser {
                 } else {
                     stagePauseTime = 0;
                 }
-            } else if (eName == E_MESSAGE) {
+            } else if (eName.equals(E_MESSAGE)) {
                 inMessage = true;
                 pushFont(attributes.getValue(T_FONT));
-            } else if (eName == E_SCRIPT) {
+            } else if (eName.equals(E_SCRIPT)) {
                 commands.clear();
                 inScript = true;
             }
@@ -129,7 +129,7 @@ public final class DemoParser {
         @Override
         public void endElement(String uri, String localName, String qName) throws SAXException {
             String eName = qName.intern();
-            if (eName == E_STAGE) {
+            if (eName.equals(E_STAGE)) {
                 // stage end
                 Object script = null;
                 if (commands.size() > 0) {
@@ -141,12 +141,12 @@ public final class DemoParser {
                 }
                 commands.clear();
                 popFont();
-            } else if (eName == E_MESSAGE) {
+            } else if (eName.equals(E_MESSAGE)) {
                 inMessage = false;
                 messages.add(new DemoMessage(message, getFont(), 0));
                 message = "";
                 popFont();
-            } else if (eName == E_SCRIPT) {
+            } else if (eName.equals(E_SCRIPT)) {
                 inScript = false;
             }
         }

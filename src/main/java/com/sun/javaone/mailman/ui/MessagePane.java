@@ -391,7 +391,7 @@ public class MessagePane extends JTextPane {
             int index = parent.getElementIndex(getStartOffset());
             if (index > 0) {
                 Element previousSibling = parent.getElement(index - 1);
-                if (AbstractDocument.ParagraphElementName == previousSibling.getName()) {
+                if (AbstractDocument.ParagraphElementName.equals(previousSibling.getName())) {
                     for (int i = 0; i < previousSibling.getElementCount(); i++) {
                         Element childE = previousSibling.getElement(i);
                         if (childE.getAttributes().getAttribute(StyleConstants.Foreground) != null) {
